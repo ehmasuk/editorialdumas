@@ -12,7 +12,7 @@ function App() {
                     style: {
                         border: "1px solid #fff",
                         background: "#060340",
-                        color: "#fff",
+                        color: "#fff"
                     },
                 }}
             />

@@ -2,6 +2,7 @@ import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
@@ -16,26 +17,22 @@ function Login() {
         handleSubmit,
         formState: { errors },
         reset,
-    } = useForm({
-        defaultValues: {
-            email: "eve.holt@reqres.in",
-            password: 123,
-        },
-    });
+    } = useForm();
 
     const [loginisLoading, setLoginisLoading] = useState(false);
 
-    const loginSubmit = async (info) => {
+    const loginSubmit = async (data) => {
         setLoginisLoading(true);
         try {
-            const res = await axios.post("https://reqres.in/api/login", { ...info, userId: crypto.randomUUID() });
+            const res = await axios.post("https://press.escuela-ray-bolivar-sosa.com/public/api/user/login", data);
             console.log(res);
             localStorage.setItem("isLogedin", JSON.stringify(res));
             reset();
             dispatch(authCheck());
             navigate("/");
         } catch (error) {
-            console.log(error.message);
+            toast.error(error.response.data.message);
+            console.log(error.response.data.message);
             localStorage.removeItem("isLogedin");
         } finally {
             setLoginisLoading(false);
@@ -137,7 +134,7 @@ function Login() {
                                                 <span>Login</span>
                                                 {loginisLoading && <i className="fas fa-spinner fa-spin m-l10"></i>}
                                             </button>
-                                            <a data-bs-toggle="tab" href="#forgot-password" className="m-l5">
+                                            <a href="#forgot-password" className="m-l5">
                                                 <i className="fas fa-unlock-alt" /> Forgot Password
                                             </a>
                                         </div>

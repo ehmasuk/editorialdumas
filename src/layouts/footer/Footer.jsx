@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaRegEnvelope, FaYoutube } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function Footer() {
     const [categoryOpen, setCategoryOpen] = useState(false);
@@ -133,7 +134,11 @@ function Footer() {
                             <div className="widget widget_about">
                                 <div className="footer-logo logo-white">
                                     <a href="index.html">
-                                        <img src="images/logo-white.png" alt="" />
+                                        <Link to="/">
+                                            <div className="dev-logo" style={{color:'#fff'}}>
+                                                editorial<p>dumas</p>
+                                            </div>
+                                        </Link>
                                     </a>
                                 </div>
                                 <p className="text">Bookland is a Book Store Ecommerce Website Template by DexignZone lorem ipsum dolor sit</p>

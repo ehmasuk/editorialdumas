@@ -17,9 +17,10 @@
 .right-img{
     background-image: url('./../../assets/images/waveelement.png');
     position:relative;
+    min-height: 550px;
 }
 .right-img img{
-    max-height:500px;
+    max-height:550px;
     z-index:2;
     position:relative;
 }
@@ -89,3 +90,30 @@
 }
 
 
+
+.publish-faq .ant-collapse-header{
+    background: #EAA451;
+    color: #fff !important;
+}
+.publish-faq .ant-collapse-content-box{
+    padding: 20px !important;
+}
+.publish-faq .ant-collapse-item{
+    margin-bottom: 15px;
+    background: #fff;
+    border: 1px solid #eee !important;
+}
+
+
+@media only screen and (max-width: 992px){
+    .right-img{
+        display: none;
+    }
+    .published-color{
+        min-height: auto;
+        padding: 20px;
+    }
+    .info-cards-container{
+        grid-template-columns:auto;
+    }
+}

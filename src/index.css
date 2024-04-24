@@ -4654,6 +4654,7 @@ fieldset:disabled .woocommerce #place_order,
     font-size: 25px;
     font-weight: 900;
     line-height: 1;
+    margin:0;
 }
 .dev-logo p{
     margin: 0;
@@ -32917,7 +32918,7 @@ body.woo-variation-swatches .variable-items-wrapper .variable-item:not(.radio-va
         margin-bottom: 0;
     }
     .site-header.style-1 .header-info-bar + .main-bar-wraper .main-bar .logo-header {
-        display: block;
+        display: table;
     }
 }
 

@@ -11,19 +11,24 @@ import "swiper/css/pagination";
 
 import { booksData } from "../../database/booksData";
 import { Rate } from "antd";
+import { useRef } from "react";
 
 function HomeBookSale({sectionTitle}) {
+
+
+    const swiperRef = useRef();
+
     return (
         <section className="content-inner-1">
             <div className="container">
                 <div className="section-head book-align">
                     <h2 className="title mb-0">{sectionTitle}</h2>
                     <div className="pagination-align style-1">
-                        <div className="swiper-button-prev">
+                        <div className="swiper-button-prev hol" onClick={() => swiperRef.current?.slidePrev()}>
                             <i className="fa-solid fa-angle-left" />
                         </div>
                         <div className="swiper-pagination-two" />
-                        <div className="swiper-button-next">
+                        <div className="swiper-button-next" onClick={() => swiperRef.current?.slideNext()}>
                             <i className="fa-solid fa-angle-right" />
                         </div>
                     </div>
@@ -43,6 +48,9 @@ function HomeBookSale({sectionTitle}) {
                         1024: { slidesPerView: 5, spaceBetween: 20 },
                     }}
                     loop={true}
+                    onBeforeInit={(swiper) => {
+                        swiperRef.current = swiper;
+                    }}
                 >
                     {booksData.map((item, index) => {
                         return (
@@ -50,7 +58,7 @@ function HomeBookSale({sectionTitle}) {
                                 <div key={index} className="swiper-slide">
                                     <div className="books-card style-3 wow fadeInUp" data-wow-delay="0.2s">
                                         <div className="dz-media">
-                                            <img style={{ height: "300px", objectFit: "contain", width: "100%" }} src={item.img} alt="book" />
+                                            <img style={{ height: "320px", objectFit: "cover", width: "100%" }} src={item.img} alt="book" />
                                         </div>
                                         <div className="dz-content">
                                             <h5 className="title" style={{minHeight:'45px'}}>

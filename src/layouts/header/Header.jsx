@@ -28,7 +28,7 @@ function Header() {
         setCartisOpen(false);
     };
 
-    const [smallScreenNavOpen, setSmallScreenNavOpen] = useState(false);
+    const [smallScreenNavOpen, setSmallScreenNavOpen] = useState(window.screen.width > 992);
 
     const handleSmallScreenNavbar = () => {
         setSmallScreenNavOpen(!smallScreenNavOpen);
@@ -40,7 +40,9 @@ function Header() {
                 <div className="container clearfix">
                     <div className="logo-header logo-dark">
                         <Link to="/">
-                            <div className="dev-logo">editorial<p>dumas</p></div>
+                            <div className="dev-logo">
+                                editorial<p>dumas</p>
+                            </div>
                         </Link>
                     </div>
                     <div className="extra-nav">
@@ -87,7 +89,7 @@ function Header() {
                                                         </div>
                                                     </div>
                                                 </li>
-                                                
+
                                                 <li className="cart-item text-center">
                                                     <h6 className="text-secondary">Totle = $500</h6>
                                                 </li>
@@ -166,18 +168,6 @@ function Header() {
                                 <select className="default-select header-category-select">
                                     <option>Category</option>
                                     <option>Photography </option>
-                                    <option>Arts</option>
-                                    <option>Adventure</option>
-                                    <option>Action</option>
-                                    <option>Games</option>
-                                    <option>Movies</option>
-                                    <option>Comics</option>
-                                    <option>Biographies</option>
-                                    <option>Childrens Books</option>
-                                    <option>Historical</option>
-                                    <option>Contemporary</option>
-                                    <option>Classics</option>
-                                    <option>Education</option>
                                 </select>
                                 <input type="text" className="form-control" aria-label="Text input with dropdown button" placeholder="Search Books Here" />
                                 <button className="btn" type="button">
@@ -196,7 +186,9 @@ function Header() {
                         {/* Website Logo */}
                         <div className="logo-header logo-dark">
                             <Link to="/">
-                                <img src="https://img.logoipsum.com/288.svg" alt="logo" />
+                                <div className="dev-logo">
+                                    editorial<p>dumas</p>
+                                </div>
                             </Link>
                         </div>
                         {/* Nav Toggle Button */}
@@ -223,77 +215,89 @@ function Header() {
                             </div>
                         </div>
                         {/* Main Nav */}
-                        <div className={`header-nav navbar-collapse collapse justify-content-start ${smallScreenNavOpen && "collapse show"}`}>
-                            <div className="logo-header logo-dark">
-                                <Link to="/">
-                                    <img src="https://img.logoipsum.com/288.svg" alt="logo" />
-                                </Link>
-                            </div>
-                            <div className="search-input">
-                                <div className="input-group">
-                                    <input type="text" className="form-control" aria-label="Text input with dropdown button" placeholder="Search Books Here" />
-                                    <button className="btn" type="button">
-                                        <i className="flaticon-loupe" />
-                                    </button>
-                                </div>
-                            </div>
-                            <ul className="nav navbar-nav">
-                                <li>
-                                    <Link to="/">
-                                        <span>Home</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/">
-                                        <span>Quiénes somos</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/publish">
-                                        <span>Publica con nosotros</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/">
-                                        <span>Libros</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/">
-                                        <span>Autores</span>
-                                    </Link>
-                                </li>
-                                {/* {!isLogedin && (
-                                    <li>
-                                        <Link to="/register">
-                                            <span>Register</span>
+                        <AnimatePresence>
+                            {smallScreenNavOpen && (
+                                <motion.div
+                                    initial={{ x: -500 }}
+                                    animate={{ x: 0 }}
+                                    transition={{ duration: window.screen.width > 992 ? 0 : .5 }}
+                                    exit={{ x: -500 }}
+                                    className={`header-nav navbar-collapse collapse justify-content-start ${smallScreenNavOpen && "collapse show"}`}
+                                >
+                                    <div className="logo-header logo-dark">
+                                        <Link to="/">
+                                            <div className="dev-logo">
+                                                editorial<p>dumas</p>
+                                            </div>
                                         </Link>
-                                    </li>
-                                )}
-
-                                <li>
-                                    <Link to="/contact">
-                                        <span>Contact Us</span>
-                                    </Link>
-                                </li> */}
-                            </ul>
-                            <div className="dz-social-icon">
-                                <ul>
+                                    </div>
+                                    <div className="search-input">
+                                        <div className="input-group">
+                                            <input type="text" className="form-control" placeholder="Search Books Here" />
+                                            <button className="btn" type="button">
+                                                <i className="flaticon-loupe" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <ul className="nav navbar-nav">
+                                        <li>
+                                            <Link to="/">
+                                                <span>Home</span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/">
+                                                <span>Quiénes somos</span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/publish">
+                                                <span>Publica con nosotros</span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/">
+                                                <span>Libros</span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/">
+                                                <span>Autores</span>
+                                            </Link>
+                                        </li>
+                                        {/* {!isLogedin && (
+                                        <li>
+                                            <Link to="/register">
+                                                <span>Register</span>
+                                            </Link>
+                                        </li>
+                                    )}
+    
                                     <li>
-                                        <a className="fab fa-facebook-f" target="_blank" href="#" rel="noreferrer" />
-                                    </li>
-                                    <li>
-                                        <a className="fab fa-twitter" target="_blank" href="#" rel="noreferrer" />
-                                    </li>
-                                    <li>
-                                        <a className="fab fa-linkedin-in" target="_blank" href="#" rel="noreferrer" />
-                                    </li>
-                                    <li>
-                                        <a className="fab fa-instagram" target="_blank" href="#" rel="noreferrer" />
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                                        <Link to="/contact">
+                                            <span>Contact Us</span>
+                                        </Link>
+                                    </li> */}
+                                    </ul>
+                                    <div className="dz-social-icon">
+                                        <ul>
+                                            <li>
+                                                <a className="fab fa-facebook-f" target="_blank" href="#" />
+                                            </li>
+                                            <li>
+                                                <a className="fab fa-twitter" target="_blank" href="#" />
+                                            </li>
+                                            <li>
+                                                <a className="fab fa-linkedin-in" target="_blank" href="#" />
+                                            </li>
+                                            <li>
+                                                <a className="fab fa-instagram" target="_blank" href="#" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
                 </div>
             </div>

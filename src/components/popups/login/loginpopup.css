@@ -1,0 +1,177 @@
+.lms-login-popup-wraper {
+    position: fixed;
+    min-height: 100vh;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: #00000060;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    color: #1a1668;
+    padding: 50px 0;
+    
+}
+
+.lms-login-popup {
+    width: 95%;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    margin: auto;
+    max-width: 500px;
+}
+.login-header {
+    padding: 20px;
+    text-align: center;
+}
+.dev-logo {
+    text-transform: uppercase;
+    color: #1a1668;
+    font-size: 25px;
+    font-weight: 900;
+    line-height: 1;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.dev-logo p {
+    margin: 0;
+    display: inline-block;
+    color: #eaa451;
+}
+.lms-login-popup .fa-times {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #1a1668;
+    cursor: pointer;
+    z-index: 999;
+    height: 30px;
+    width: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+}
+
+.lms-login-body {
+    padding: 40px;
+}
+
+.lms-google-login-btn {
+    width: 100%;
+    display: flex;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border: 1px solid #dddddd;
+    gap: 0.75rem;
+    color: #1a1668;
+    background-color: rgba(135, 207, 235, 0.3);
+    cursor: pointer;
+    transition: all 0.6s ease;
+    margin: auto;
+    justify-content: center;
+}
+
+.lms-google-login-btn svg {
+    height: 30px;
+}
+.lms-login-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 60px;
+    color: #17a2b8;
+    font-size: 24px;
+    font-weight: 600;
+}
+.lms-login-register-btn {
+    text-align: center;
+    color: #1a1668;
+    margin-top: 20px;
+    display: block;
+    font-size: 18px;
+}
+.lms-login-register-btn:hover {
+    color: #1a1668;
+}
+
+.lms-login-footer-new {
+    height: 40px;
+}
+
+.lms-login-or-devider {
+    position: relative;
+    text-align: center;
+    color: #1a16687a;
+    font-weight: 300;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.lms-login-or-devider::before {
+    content: "";
+    width: 30%;
+    height: 1px;
+    background: hsla(243, 65%, 25%, 0.2);
+    right: 70px;
+    top: 44%;
+    position: absolute;
+}
+
+.lms-login-or-devider::after {
+    content: "";
+    width: 30%;
+    height: 1px;
+    background: hsla(243, 65%, 25%, 0.2);
+    left: 70px;
+    top: 44%;
+    position: absolute;
+}
+
+.lms-login-form-new label {
+    font-weight: 600;
+    color: #1a1668;
+    margin-bottom: 10px;
+}
+.lms-login-form-new input {
+    display: block;
+    height: 50px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #1a1668;
+    outline: none;
+    width: 100%;
+}
+
+.lms-login-btn-wrap {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    align-items: center;
+}
+.lms-login-btn-wrap .forget-pass-btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #1a1668;
+}
+.lms-login-btn-wrap .lms-login-btn-new {
+    border: none;
+    outline: none;
+    padding: 15px 30px;
+    background-color: #1a1668;
+    border-radius: 50px;
+    color: #fff;
+    transition: 0.3s;
+}
+.lms-login-btn-wrap .lms-login-btn-new:hover {
+    background-color: #cebd00;
+}
