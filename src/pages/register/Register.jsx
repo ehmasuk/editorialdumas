@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -7,13 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
 import Base from "../../layouts/Base";
 
-const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE
-
-
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Register() {
-
-    const { register, handleSubmit, reset } = useForm();
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm();
 
     const navigate = useNavigate();
 
@@ -56,15 +59,78 @@ function Register() {
                                         <p className="font-weight-600">If you dont have an account with us, please Registration.</p>
                                         <div className="mb-4">
                                             <label className="label-title">Username </label>
-                                            <input {...register("name")} className="form-control" placeholder="Your Username" type="text" />
+                                            <input
+                                                {...register("name", {
+                                                    required: "You must enter your name",
+                                                })}
+                                                className="form-control"
+                                                placeholder="Your Username"
+                                                type="text"
+                                            />
+                                            <AnimatePresence>
+                                                {errors.name && (
+                                                    <motion.div
+                                                        exit={{ y: -10, opacity: 0 }}
+                                                        transition={{ duration: 0.3 }}
+                                                        initial={{ y: -30, opacity: 0 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        className="text-danger"
+                                                        role="alert"
+                                                    >
+                                                        {errors.name.message}
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
                                         </div>
                                         <div className="mb-4">
                                             <label className="label-title">Email address </label>
-                                            <input {...register("email")} className="form-control" placeholder="Your Email address" type="email" />
+                                            <input
+                                                {...register("email", {
+                                                    required: "You must enter your email address",
+                                                })}
+                                                className="form-control"
+                                                placeholder="Your Email address"
+                                                type="email"
+                                            />
+                                            <AnimatePresence>
+                                                {errors.email && (
+                                                    <motion.div
+                                                        exit={{ y: -10, opacity: 0 }}
+                                                        transition={{ duration: 0.3 }}
+                                                        initial={{ y: -30, opacity: 0 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        className="text-danger"
+                                                        role="alert"
+                                                    >
+                                                        {errors.email.message}
+                                                    </motion.div>
+                                                )}
+                                            </AnimatePresence>
                                         </div>
                                         <div className="mb-4">
                                             <label className="label-title">Password </label>
-                                            <input {...register("password")} className="form-control " placeholder="Type Password" type="password" />
+                                            <input
+                                                {...register("password", {
+                                                    required: "You must enter your password",
+                                                })}
+                                                className="form-control "
+                                                placeholder="Type Password"
+                                                type="password"
+                                            />
+                                            <AnimatePresence>
+                                                {errors.password && (
+                                                    <motion.p
+                                                        exit={{ y: -10, opacity: 0 }}
+                                                        transition={{ duration: 0.3 }}
+                                                        initial={{ y: -30, opacity: 0 }}
+                                                        animate={{ opacity: 1, y: 0 }}
+                                                        className="text-danger"
+                                                        role="alert"
+                                                    >
+                                                        {errors.password.message}
+                                                    </motion.p>
+                                                )}
+                                            </AnimatePresence>
                                         </div>
                                         <div className="mb-4">
                                             <label className="label-title">Confirm Password </label>

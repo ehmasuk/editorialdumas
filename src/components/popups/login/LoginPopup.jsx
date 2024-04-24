@@ -10,10 +10,7 @@ import { authCheck } from "../../../features/AuthCheckerSlice";
 import { hideLoginPopup } from "../../../features/LoginPopupSlice";
 import "./loginpopup.css";
 
-
-const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE
-
-
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function LoginPopup({ sucessredirect }) {
     const dispatch = useDispatch();
@@ -31,17 +28,22 @@ function LoginPopup({ sucessredirect }) {
     const [loginisLoading, setLoginisLoading] = useState(false);
     const [getError, setGetError] = useState(null);
 
+    const loginSucessAfterWorks = (res) => {
+        localStorage.setItem("isLogedin", JSON.stringify(res.data));
+        reset();
+        dispatch(authCheck());
+        navigate(sucessredirect);
+        dispatch(hideLoginPopup());
+    };
+
     const loginSubmit = async (data) => {
         setGetError(null);
         setLoginisLoading(true);
         try {
             const res = await axios.post(`${apiUrl}/user/login`, data);
             console.log(res);
-            localStorage.setItem("isLogedin", JSON.stringify(res));
-            reset();
-            dispatch(authCheck());
-            navigate(sucessredirect);
-            dispatch(hideLoginPopup());
+
+            loginSucessAfterWorks(res);
         } catch (error) {
             setGetError(error.response.data.message);
             console.log(error.response.data.message);
@@ -99,7 +101,7 @@ function LoginPopup({ sucessredirect }) {
                                             {...register("password", {
                                                 required: "You must enter your password",
                                             })}
-                                            type="text"
+                                            type="password"
                                             placeholder="Enter your password"
                                         />
                                         <AnimatePresence>

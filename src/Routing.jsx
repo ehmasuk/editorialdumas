@@ -5,11 +5,11 @@ import Contact from "./pages/contact/Contact";
 import Error404 from "./pages/error/Error404";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
-import MyFunds from "./pages/profile/MyFunds";
 import Profile from "./pages/profile/Profile";
 import PublishBook from "./pages/publish/PublishBook";
 import Register from "./pages/register/Register";
 import Wishlist from "./pages/wishlist/Wishlist";
+import MyFunds from "./pages/profile/myfunds/MyFunds";
 
 function Routing() {
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);

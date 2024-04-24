@@ -8,8 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
 import Base from "../../layouts/Base";
 
-
-const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Login() {
     const navigate = useNavigate();
@@ -24,15 +23,19 @@ function Login() {
 
     const [loginisLoading, setLoginisLoading] = useState(false);
 
+    const loginSucessAfterWorks = (res) => {
+        localStorage.setItem("isLogedin", JSON.stringify(res.data));
+        reset();
+        dispatch(authCheck());
+        navigate("/profile");
+    };
+
     const loginSubmit = async (data) => {
         setLoginisLoading(true);
         try {
             const res = await axios.post(`${apiUrl}/user/login`, data);
             console.log(res);
-            localStorage.setItem("isLogedin", JSON.stringify(res));
-            reset();
-            dispatch(authCheck());
-            navigate("/profile");
+            loginSucessAfterWorks(res);
         } catch (error) {
             toast.error(error.response.data.message);
             console.log(error.response.data.message);
