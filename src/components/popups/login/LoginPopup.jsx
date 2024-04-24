@@ -10,6 +10,11 @@ import { authCheck } from "../../../features/AuthCheckerSlice";
 import { hideLoginPopup } from "../../../features/LoginPopupSlice";
 import "./loginpopup.css";
 
+
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE
+
+
+
 function LoginPopup({ sucessredirect }) {
     const dispatch = useDispatch();
     const { loginPopupIsOpen } = useSelector((store) => store.LoginPopupSlice);
@@ -30,7 +35,7 @@ function LoginPopup({ sucessredirect }) {
         setGetError(null);
         setLoginisLoading(true);
         try {
-            const res = await axios.post("https://press.escuela-ray-bolivar-sosa.com/public/api/user/login", data);
+            const res = await axios.post(`${apiUrl}/user/login`, data);
             console.log(res);
             localStorage.setItem("isLogedin", JSON.stringify(res));
             reset();

@@ -7,7 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
 import Base from "../../layouts/Base";
 
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE
+
+
+
 function Register() {
+
     const { register, handleSubmit, reset } = useForm();
 
     const navigate = useNavigate();
@@ -16,25 +21,19 @@ function Register() {
 
     const [regisLoading, setRegisLoading] = useState(false);
 
-
-
-
-
-    const registerSucessAfterWorks = (res)=>{
+    const registerSucessAfterWorks = (res) => {
         localStorage.setItem("isLogedin", JSON.stringify(res));
         dispatch(authCheck());
         navigate("/profile");
-    }
-
+    };
 
     const handleRegister = async (data) => {
         setRegisLoading(true);
         try {
-            const res = await axios.post("https://press.escuela-ray-bolivar-sosa.com/public/api/user/register", data);
+            const res = await axios.post(`${apiUrl}/user/register`, data);
             console.log(res);
             reset();
-            registerSucessAfterWorks(res)
-
+            registerSucessAfterWorks(res);
         } catch (error) {
             toast.error(error.response.data.message);
             console.log(error.response.data.message);
@@ -43,11 +42,6 @@ function Register() {
             setRegisLoading(false);
         }
     };
-
-
-
-    
-
 
     return (
         <Base>

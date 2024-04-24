@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
 import Base from "../../layouts/Base";
 
+
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE
+
 function Login() {
     const navigate = useNavigate();
 
@@ -24,12 +27,12 @@ function Login() {
     const loginSubmit = async (data) => {
         setLoginisLoading(true);
         try {
-            const res = await axios.post("https://press.escuela-ray-bolivar-sosa.com/public/api/user/login", data);
+            const res = await axios.post(`${apiUrl}/user/login`, data);
             console.log(res);
             localStorage.setItem("isLogedin", JSON.stringify(res));
             reset();
             dispatch(authCheck());
-            navigate("/");
+            navigate("/profile");
         } catch (error) {
             toast.error(error.response.data.message);
             console.log(error.response.data.message);
