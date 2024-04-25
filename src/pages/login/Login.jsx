@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
+import { hideLoader, showLoader } from "../../features/CombineSlice";
 import Base from "../../layouts/Base";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
@@ -31,6 +32,7 @@ function Login() {
     };
 
     const loginSubmit = async (data) => {
+        dispatch(showLoader());
         setLoginisLoading(true);
         try {
             const res = await axios.post(`${apiUrl}/user/login`, data);
@@ -42,6 +44,7 @@ function Login() {
             localStorage.removeItem("isLogedin");
         } finally {
             setLoginisLoading(false);
+            dispatch(hideLoader());
         }
     };
 

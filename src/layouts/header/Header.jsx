@@ -3,14 +3,38 @@ import { useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 
+import axios from "axios";
 import { IoSearch } from "react-icons/io5";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
+import { hideLoader, showLoader } from "../../features/CombineSlice";
+
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Header() {
     const dispatch = useDispatch();
+
+    const handleLogout = async () => {
+        dispatch(showLoader());
+        const user = localStorage.getItem("isLogedin");
+        const token = JSON.parse(user).token;
+        try {
+            const res = await axios.post(`${apiUrl}/user/logout`, token, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            console.log(res);
+            dispatch(authUnCheck());
+        } catch (error) {
+            console.log(error);
+        } finally {
+            dispatch(hideLoader());
+        }
+    };
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
 
@@ -149,7 +173,7 @@ function Header() {
                                                         </Link>
                                                     </div>
                                                     <div className="dropdown-footer">
-                                                        <div onClick={() => dispatch(authUnCheck())} className="btn btn-primary w-100 btnhover btn-sm">
+                                                        <div onClick={handleLogout} className="btn btn-primary w-100 btnhover btn-sm">
                                                             Log Out
                                                         </div>
                                                     </div>
@@ -220,7 +244,7 @@ function Header() {
                                 <motion.div
                                     initial={{ x: -500 }}
                                     animate={{ x: 0 }}
-                                    transition={{ duration: window.screen.width > 992 ? 0 : .5 }}
+                                    transition={{ duration: window.screen.width > 992 ? 0 : 0.5 }}
                                     exit={{ x: -500 }}
                                     className={`header-nav navbar-collapse collapse justify-content-start ${smallScreenNavOpen && "collapse show"}`}
                                 >

@@ -46,7 +46,7 @@ function LoginPopup({ sucessredirect }) {
             loginSucessAfterWorks(res);
         } catch (error) {
             setGetError(error.response.data.message);
-            console.log(error.response.data.message);
+            console.log(error);
             localStorage.removeItem("isLogedin");
         } finally {
             setLoginisLoading(false);

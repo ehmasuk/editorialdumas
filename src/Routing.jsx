@@ -10,6 +10,7 @@ import PublishBook from "./pages/publish/PublishBook";
 import Register from "./pages/register/Register";
 import Wishlist from "./pages/wishlist/Wishlist";
 import MyFunds from "./pages/profile/myfunds/MyFunds";
+import AddFund from "./pages/addfund/AddFund";
 
 function Routing() {
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
@@ -24,6 +25,14 @@ function Routing() {
                     element={
                         <PrivateRoute isLogedin={isLogedin}>
                             <MyFunds />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/addfund"
+                    element={
+                        <PrivateRoute isLogedin={isLogedin}>
+                            <AddFund />
                         </PrivateRoute>
                     }
                 />
