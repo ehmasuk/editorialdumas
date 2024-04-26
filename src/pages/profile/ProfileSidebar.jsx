@@ -2,6 +2,7 @@ import { AiOutlineFund } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
+import { BsSend } from "react-icons/bs";
 
 function ProfileSidebar() {
     const dispatch = useDispatch();
@@ -37,11 +38,19 @@ function ProfileSidebar() {
                     </li>
 
                     <li>
+                        <Link to="/profile/proposal" className={`${pathname === "/profile/myfunds" && "active"}`}>
+                            <i>
+                                <BsSend />
+                            </i>
+                            <span>Send Proposals</span>
+                        </Link>
+                    </li>
+
+                    <li>
                         <Link to="/profile/myfunds" className={`${pathname === "/profile/myfunds" && "active"}`}>
                             <i>
                                 <AiOutlineFund />
                             </i>
-
                             <span>Mis fondos</span>
                         </Link>
                     </li>

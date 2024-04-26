@@ -1,4 +1,4 @@
-.loader-wraper{
+.loader-wraper {
     position: fixed;
     left: 0;
     top: 0;
@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.567);
+    background: rgb(255 255 255 / 62%);
     z-index: 9999;
 }
 
@@ -17,7 +17,7 @@
     display: grid;
     border: 4px solid #0000;
     border-radius: 50%;
-    border-right-color: #004dff;
+    border-right-color: #004cff;
     animation: spinner-a4dj62 1s infinite linear;
 }
 

@@ -11,6 +11,7 @@ import Register from "./pages/register/Register";
 import Wishlist from "./pages/wishlist/Wishlist";
 import MyFunds from "./pages/profile/myfunds/MyFunds";
 import AddFund from "./pages/addfund/AddFund";
+import Proposal from "./pages/profile/proposal/Proposal";
 
 function Routing() {
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
@@ -25,6 +26,14 @@ function Routing() {
                     element={
                         <PrivateRoute isLogedin={isLogedin}>
                             <MyFunds />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/profile/proposal"
+                    element={
+                        <PrivateRoute isLogedin={isLogedin}>
+                            <Proposal />
                         </PrivateRoute>
                     }
                 />
