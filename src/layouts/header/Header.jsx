@@ -19,18 +19,19 @@ function Header() {
 
     useEffect(()=>{
         if(localStorage.getItem("isLogedin")){
-            setUserInformations(JSON.parse(localStorage.getItem("isLogedin")).user)
+            setUserInformations(JSON.parse(localStorage.getItem("isLogedin")).data.user)
         }
     },[])
 
-    userInformations && console.log(userInformations);
+    
 
     const dispatch = useDispatch();
 
     const handleLogout = async () => {
         dispatch(showLoader());
         const user = localStorage.getItem("isLogedin");
-        const token = JSON.parse(user).token;
+        const token = JSON.parse(user).data.token;
+        console.log(token);
         try {
             const res = await axios.post(`${apiUrl}/user/logout`, token, {
                 headers: {

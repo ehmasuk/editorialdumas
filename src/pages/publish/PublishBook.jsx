@@ -28,7 +28,7 @@ function PublishBook() {
                             <div className="row align-items-center">
                                 <div className="col-md-6">
                                     <h2>
-                                        Publica con <br /> Eduitorial Dumas
+                                        Publica con <br /> Editorial Dumas
                                     </h2>
                                     <p>Te ayudamos a publicar y vender tu libro</p>
                                     <div>
