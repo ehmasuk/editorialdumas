@@ -141,7 +141,7 @@ function Footer() {
                                         </Link>
                                     </a>
                                 </div>
-                                <p className="text">Bookland is a Book Store Ecommerce Website Template by DexignZone lorem ipsum dolor sit</p>
+                                <p className="text">Editorial is a website for book creators or writers</p>
                                 <div className="dz-social-icon style-1">
                                     <ul>
                                         <li>
@@ -192,10 +192,10 @@ function Footer() {
                         </div>
                         <div className="col-xl-2 col-lg-3 col-sm-4 col-4 wow fadeInUp" data-wow-delay="0.3s">
                             <div className="widget widget_services">
-                                <h5 className="footer-title">Bookland ?</h5>
+                                <h5 className="footer-title">Editorial ?</h5>
                                 <ul>
                                     <li>
-                                        <a href="index.html">Bookland</a>
+                                        <a href="index.html">Editorial</a>
                                     </li>
                                     <li>
                                         <a href="services.html">Services</a>
@@ -256,9 +256,9 @@ function Footer() {
                                         <FaRegEnvelope />
 
                                         <span>
-                                            support@bookland.id
+                                            info@editorial.es
                                             <br />
-                                            info@bookland.id
+                                            info@editorial.com
                                         </span>
                                     </li>
                                 </ul>

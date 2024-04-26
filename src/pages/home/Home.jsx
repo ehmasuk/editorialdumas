@@ -71,7 +71,7 @@ function Home() {
                             <div className="col-lg-6 m-b30">
                                 <div className="about-content px-lg-4">
                                     <div className="section-head style-1">
-                                        <h2 className="title">Bookland Is Best Choice For Learners</h2>
+                                        <h2 className="title">Editorial Is Best Choice For Learners</h2>
                                         <p>
                                             There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration which dont look even slightly believable. It Is A
                                             Long Established Fact That A Reader Will Be Distracted

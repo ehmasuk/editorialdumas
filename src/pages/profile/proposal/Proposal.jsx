@@ -43,6 +43,7 @@ const allGenere = [
     "Teatro",
     "Fantasía Épica",
 ];
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Proposal() {
     const dispatch = useDispatch();
@@ -69,11 +70,11 @@ function Proposal() {
 
         const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
 
-        formData.append("image_url", file);
+        file && formData.append("image_url", file);
         formData.append("user_id", userId);
 
         try {
-            const res = await axios.post("https://press.escuela-ray-bolivar-sosa.com/public/api/user/proposal", formData, {
+            const res = await axios.post(`${apiUrl}/user/proposal`, formData, {
                 Accept: "multipart/form-data",
             });
             console.log(res);
@@ -82,18 +83,16 @@ function Proposal() {
             window.scrollTo(0, 0);
         } catch (error) {
             console.log(error);
-            toast.success("Something went wrong");
+            toast.error("Something went wrong");
         } finally {
             dispatch(hideLoader());
         }
-
-        console.log(formData);
     };
 
     return (
         <ProfileLayout>
             <div className="shop-bx-title clearfix">
-                <h5 className="text-uppercase">Send your proposal</h5>
+                <h5 className="text-uppercase">ENVÍA TU PROPUESTA</h5>
             </div>
             <div>
                 <form encType="multipart/form-data" onSubmit={handleSubmit(handleFormSubmit)}>
@@ -193,7 +192,7 @@ function Proposal() {
                             })}
                             className={`form-control ${errors.phone_no && "is-invalid"}`}
                             placeholder="Your phone"
-                            type="text"
+                            type="number"
                         />
                         <AnimatePresence>
                             {errors.phone_no && (
@@ -242,9 +241,9 @@ function Proposal() {
 
                     {selectedType == "already have book" && (
                         <div className="mb-5">
-                            <h5>Proposal type</h5>
-                            <p>Choose your proposal type</p>
-                            <input className="form-control" type="file" onChange={(e) => setFile(e.target.files[0])} />
+                            <h5>Upload your book</h5>
+                            <p>Upload your book</p>
+                            <input accept=".docx,.pdf" className="form-control" required type="file" onChange={(e) => setFile(e.target.files[0])} />
                         </div>
                     )}
 

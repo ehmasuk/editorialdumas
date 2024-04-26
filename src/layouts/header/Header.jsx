@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegUser } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa6";
 
@@ -14,6 +14,17 @@ import { hideLoader, showLoader } from "../../features/CombineSlice";
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Header() {
+
+    const [userInformations,setUserInformations] = useState(null) 
+
+    useEffect(()=>{
+        if(localStorage.getItem("isLogedin")){
+            setUserInformations(JSON.parse(localStorage.getItem("isLogedin")).user)
+        }
+    },[])
+
+    userInformations && console.log(userInformations);
+
     const dispatch = useDispatch();
 
     const handleLogout = async () => {
@@ -134,8 +145,8 @@ function Header() {
                                         <div className="nav-link" role="button" onClick={handleShowProfileDrop}>
                                             <img src="https://i.pravatar.cc/150?img=12" alt="/" />
                                             <div className="profile-info">
-                                                <h6 className="title">Brian</h6>
-                                                <span>info@gmail.com</span>
+                                                <h6 className="title">{userInformations ? userInformations.name : 'User'}</h6>
+                                                <span>{userInformations ? userInformations.email : 'user@example.com'}</span>
                                             </div>
                                         </div>
                                         <AnimatePresence>
@@ -149,8 +160,8 @@ function Header() {
                                                     className="dropdown-menu py-0 dropdown-menu-end d-block"
                                                 >
                                                     <div className="dropdown-header">
-                                                        <h6 className="m-0">Brian</h6>
-                                                        <span>info@gmail.com</span>
+                                                        <h6 className="m-0">{userInformations ? userInformations.name : 'User'}</h6>
+                                                        <span>{userInformations ? userInformations.email : 'user@example.com'}</span>
                                                     </div>
                                                     <div className="dropdown-body d-block">
                                                         <Link to="/profile" className="dropdown-item d-flex justify-content-between align-items-center ai-icon">
@@ -190,10 +201,10 @@ function Header() {
                         <div className="header-item-search">
                             <div className="input-group search-input">
                                 <select className="default-select header-category-select">
-                                    <option>Category</option>
+                                    <option>Categoría</option>
                                     <option>Photography </option>
                                 </select>
-                                <input type="text" className="form-control" aria-label="Text input with dropdown button" placeholder="Search Books Here" />
+                                <input type="text" className="form-control" placeholder="Buscar libros aquí" />
                                 <button className="btn" type="button">
                                     <IoSearch />
                                 </button>
