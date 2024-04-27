@@ -19,7 +19,7 @@ function Header() {
 
     useEffect(()=>{
         if(localStorage.getItem("isLogedin")){
-            setUserInformations(JSON.parse(localStorage.getItem("isLogedin")).data.user)
+            setUserInformations(JSON.parse(localStorage.getItem("isLogedin")).user)
         }
     },[])
 
@@ -30,7 +30,7 @@ function Header() {
     const handleLogout = async () => {
         dispatch(showLoader());
         const user = localStorage.getItem("isLogedin");
-        const token = JSON.parse(user).data.token;
+        const token = JSON.parse(user).token;
         console.log(token);
         try {
             const res = await axios.post(`${apiUrl}/user/logout`, token, {
@@ -46,6 +46,7 @@ function Header() {
         } finally {
             dispatch(hideLoader());
         }
+        
     };
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);

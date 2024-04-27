@@ -68,7 +68,7 @@ function Proposal() {
             formData.append(key, value);
         });
 
-        const userId = JSON.parse(localStorage.getItem("isLogedin")).data.user.id;
+        const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
 
         file && formData.append("image_url", file);
         formData.append("user_id", userId);
