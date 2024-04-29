@@ -77,13 +77,16 @@ function Proposal() {
             const res = await axios.post(`${apiUrl}/user/proposal`, formData, {
                 Accept: "multipart/form-data",
             });
-            console.log(res);
+            navigate("/thankyou/sendporposal");
             toast.success("Your request of project has been submitted");
-            navigate("/profile/myfunds/");
+            setTimeout(() => {
+                navigate("/profile/myfunds/");
+            }, 100);
+
             window.scrollTo(0, 0);
         } catch (error) {
             console.log(error);
-            toast.error("Something went wrong");
+            toast.error("Something went wrong, please try again later");
         } finally {
             dispatch(hideLoader());
         }

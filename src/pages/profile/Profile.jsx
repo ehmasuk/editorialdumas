@@ -22,23 +22,7 @@ function Profile() {
                                 <label htmlFor="formcontrolinput2" className="form-label">
                                     Professional title:
                                 </label>
-                                <input type="text" className="form-control" id="formcontrolinput2" placeholder="Web Designer" />
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-6">
-                            <div className="mb-3">
-                                <label htmlFor="formcontrolinput3" className="form-label">
-                                    Languages:
-                                </label>
-                                <input type="text" className="form-control" id="formcontrolinput3" placeholder="Language" />
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-6">
-                            <div className="mb-3">
-                                <label htmlFor="formcontrolinput4" className="form-label">
-                                    Age:
-                                </label>
-                                <input type="text" className="form-control" id="formcontrolinput4" placeholder="Age" />
+                                <input type="text" className="form-control" id="formcontrolinput2" placeholder="Writer" />
                             </div>
                         </div>
                         <div className="col-lg-12 col-md-12">

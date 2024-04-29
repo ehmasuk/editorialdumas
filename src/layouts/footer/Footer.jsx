@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaMapMarkerAlt, FaRegEnvelope, FaYoutube } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
@@ -12,10 +12,10 @@ function Footer() {
             <div className="footer-category">
                 <div className="container">
                     <div className="category-toggle">
-                        <a role="button" className="toggle-btn" onClick={() => setCategoryOpen(!categoryOpen)}>
+                        <Link to="button" className="toggle-btn" onClick={() => setCategoryOpen(!categoryOpen)}>
                             Books categories
-                        </a>
-                        <AnimatePresence>
+                        </Link>
+                        <to>
                             {categoryOpen && (
                                 <motion.div
                                     style={{ overflow: "hidden" }}
@@ -30,100 +30,100 @@ function Footer() {
                                     <div className="footer-col-book">
                                         <ul>
                                             <li>
-                                                <a href="books-grid-view.html">Architecture</a>
+                                                <Link to="books-grid-view.html">Architecture</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Art</a>
+                                                <Link to="books-grid-view.html">Art</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Action</a>
+                                                <Link to="books-grid-view.html">Action</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Biography</a>
+                                                <Link to="books-grid-view.html">Biography</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Body, Mind & Spirit</a>
+                                                <Link to="books-grid-view.html">Body, Mind & Spirit</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Business & Economics</a>
+                                                <Link to="books-grid-view.html">Business & Economics</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Children Fiction</a>
+                                                <Link to="books-grid-view.html">Children Fiction</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Children Non-Fiction</a>
+                                                <Link to="books-grid-view.html">Children Non-Fiction</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Comics & Graphics</a>
+                                                <Link to="books-grid-view.html">Comics & Graphics</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Cooking</a>
+                                                <Link to="books-grid-view.html">Cooking</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Crafts & Hobbies</a>
+                                                <Link to="books-grid-view.html">Crafts & Hobbies</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Design</a>
+                                                <Link to="books-grid-view.html">Design</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Drama</a>
+                                                <Link to="books-grid-view.html">Drama</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Education</a>
+                                                <Link to="books-grid-view.html">Education</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Family & Relationships</a>
+                                                <Link to="books-grid-view.html">Family & Relationships</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Fiction</a>
+                                                <Link to="books-grid-view.html">Fiction</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Foreign Language</a>
+                                                <Link to="books-grid-view.html">Foreign Language</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Games</a>
+                                                <Link to="books-grid-view.html">Games</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Gardening</a>
+                                                <Link to="books-grid-view.html">Gardening</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Health & Fitness</a>
+                                                <Link to="books-grid-view.html">Health & Fitness</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">History</a>
+                                                <Link to="books-grid-view.html">History</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">House & Home</a>
+                                                <Link to="books-grid-view.html">House & Home</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Humor</a>
+                                                <Link to="books-grid-view.html">Humor</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Literary Collections</a>
+                                                <Link to="books-grid-view.html">Literary Collections</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Mathematics</a>
+                                                <Link to="books-grid-view.html">Mathematics</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Medical</a>
+                                                <Link to="books-grid-view.html">Medical</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Nature</a>
+                                                <Link to="books-grid-view.html">Nature</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Performing Arts</a>
+                                                <Link to="books-grid-view.html">Performing Arts</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Pets</a>
+                                                <Link to="books-grid-view.html">Pets</Link>
                                             </li>
                                             <li>
-                                                <a href="books-grid-view.html">Show others</a>
+                                                <Link to="books-grid-view.html">Show others</Link>
                                             </li>
                                         </ul>
                                     </div>
                                 </motion.div>
                             )}
-                        </AnimatePresence>
+                        </to>
                     </div>
                 </div>
             </div>
@@ -133,36 +133,36 @@ function Footer() {
                         <div className="col-xl-3 col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
                             <div className="widget widget_about">
                                 <div className="footer-logo logo-white">
-                                    <a href="index.html">
+                                    <Link to="index.html">
                                         <Link to="/">
-                                            <div className="dev-logo" style={{color:'#fff'}}>
+                                            <div className="dev-logo" style={{ color: "#fff" }}>
                                                 editorial<p>dumas</p>
                                             </div>
                                         </Link>
-                                    </a>
+                                    </Link>
                                 </div>
                                 <p className="text">Editorial is a website for book creators or writers</p>
                                 <div className="dz-social-icon style-1">
                                     <ul>
                                         <li>
-                                            <a href="https://www.facebook.com/dexignzone" target="_blank" rel="noreferrer">
+                                            <Link to="https://www.facebook.com/dexignzone" target="_blank" rel="noreferrer">
                                                 <FaFacebookF />
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="https://www.youtube.com/channel/UCGL8V6uxNNMRrk3oZfVct1g" target="_blank" rel="noreferrer">
+                                            <Link to="https://www.youtube.com/channel/UCGL8V6uxNNMRrk3oZfVct1g" target="_blank" rel="noreferrer">
                                                 <FaYoutube />
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="https://www.linkedin.com/showcase/3686700/admin/" target="_blank" rel="noreferrer">
+                                            <Link to="https://www.linkedin.com/showcase/3686700/admin/" target="_blank" rel="noreferrer">
                                                 <FaLinkedinIn />
-                                            </a>
+                                            </Link>
                                         </li>
                                         <li>
-                                            <a href="https://www.instagram.com/website_templates__/" target="_blank" rel="noreferrer">
+                                            <Link to="https://www.instagram.com/website_templates__/" target="_blank" rel="noreferrer">
                                                 <FaInstagram />
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -173,19 +173,13 @@ function Footer() {
                                 <h5 className="footer-title">Our Links</h5>
                                 <ul>
                                     <li>
-                                        <a href="about-us.html">About us</a>
+                                        <Link to="/about">Quiénes somos</Link>
                                     </li>
                                     <li>
-                                        <a href="contact-us.html">Contact us</a>
+                                        <Link to="/contact">Contacto</Link>
                                     </li>
                                     <li>
-                                        <a href="privacy-policy.html">Privacy Policy</a>
-                                    </li>
-                                    <li>
-                                        <a href="pricing.html">Pricing Table</a>
-                                    </li>
-                                    <li>
-                                        <a href="faq.html">FAQ</a>
+                                        <Link to="/faq">FAQ</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -195,19 +189,10 @@ function Footer() {
                                 <h5 className="footer-title">Editorial ?</h5>
                                 <ul>
                                     <li>
-                                        <a href="index.html">Editorial</a>
+                                        <Link to="services.html">Services</Link>
                                     </li>
                                     <li>
-                                        <a href="services.html">Services</a>
-                                    </li>
-                                    <li>
-                                        <a href="books-detail.html">Book Details</a>
-                                    </li>
-                                    <li>
-                                        <a href="blog-detail.html">Blog Details</a>
-                                    </li>
-                                    <li>
-                                        <a href="books-grid-view.html">Shop</a>
+                                        <Link to="/publish">Book Details</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -217,24 +202,18 @@ function Footer() {
                                 <h5 className="footer-title">Resources</h5>
                                 <ul>
                                     <li>
-                                        <a href="services.html">Download</a>
+                                        <Link to="/profile">Profile</Link>
                                     </li>
                                     <li>
-                                        <a href="help-desk.html">Help Center</a>
+                                        <Link to="/login">Login</Link>
                                     </li>
                                     <li>
-                                        <a href="shop-cart.html">Shop Cart</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-login.html">Login</a>
-                                    </li>
-                                    <li>
-                                        <a href="about-us.html">Partner</a>
+                                        <Link to="/register">Register</Link>
                                     </li>
                                 </ul>
                             </div>
                         </div>
-                        <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.5s">
+                        <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12 wow fadeInUp">
                             <div className="widget widget_getintuch">
                                 <h5 className="footer-title">Get in Touch With Us</h5>
                                 <ul>
@@ -246,20 +225,12 @@ function Footer() {
                                     <li>
                                         <FaPhone />
 
-                                        <span>
-                                            +123 345123 556
-                                            <br />
-                                            +123 345123 556
-                                        </span>
+                                        <span>+123 345123 556</span>
                                     </li>
                                     <li>
                                         <FaRegEnvelope />
 
-                                        <span>
-                                            info@editorial.es
-                                            <br />
-                                            info@editorial.com
-                                        </span>
+                                        <span>info@editorial.es</span>
                                     </li>
                                 </ul>
                             </div>
@@ -275,7 +246,7 @@ function Footer() {
                         </div>
                         <div className="col-lg-6 col-md-12 text-end">
                             <p>
-                                Owned by <span className="heart" /> by <a href="#">Ray Bolivar Sosa</a>
+                                Owned by <span className="heart" /> by <Link to="#">Ray Bolivar Sosa</Link>
                             </p>
                         </div>
                     </div>

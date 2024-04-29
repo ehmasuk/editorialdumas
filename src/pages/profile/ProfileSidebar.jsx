@@ -1,8 +1,10 @@
-import { AiOutlineFund } from "react-icons/ai";
+import { BsSend } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
-import { BsSend } from "react-icons/bs";
+
+import { FaRegChartBar } from "react-icons/fa";
+import { FaWpforms } from "react-icons/fa6";
 
 function ProfileSidebar() {
     const dispatch = useDispatch();
@@ -38,6 +40,15 @@ function ProfileSidebar() {
                     </li>
 
                     <li>
+                        <Link to="/profile/myproposals" className={`${pathname === "/profile/myproposals" && "active"}`}>
+                            <i>
+                                <FaWpforms />
+                            </i>
+                            <span>My Proposals</span>
+                        </Link>
+                    </li>
+
+                    <li>
                         <Link to="/profile/proposal" className={`${pathname === "/profile/proposal" && "active"}`}>
                             <i>
                                 <BsSend />
@@ -49,7 +60,7 @@ function ProfileSidebar() {
                     <li>
                         <Link to="/profile/myfunds" className={`${pathname === "/profile/myfunds" && "active"}`}>
                             <i>
-                                <AiOutlineFund />
+                                <FaRegChartBar />
                             </i>
                             <span>Mis fondos</span>
                         </Link>

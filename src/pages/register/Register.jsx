@@ -14,7 +14,6 @@ function Register() {
     const {
         register,
         handleSubmit,
-        reset,
         formState: { errors },
     } = useForm();
 
@@ -24,19 +23,17 @@ function Register() {
 
     const [regisLoading, setRegisLoading] = useState(false);
 
-    const registerSucessAfterWorks = (res) => {
-        localStorage.setItem("isLogedin", JSON.stringify(res));
-        dispatch(authCheck());
-        navigate("/profile");
-    };
-
     const handleRegister = async (data) => {
         setRegisLoading(true);
         try {
             const res = await axios.post(`${apiUrl}/user/register`, data);
-            console.log(res);
-            reset();
-            registerSucessAfterWorks(res);
+            navigate("/thankyou/register");
+            toast.success("Registration successfull");
+            setTimeout(() => {
+                localStorage.setItem("isLogedin", JSON.stringify(res.data));
+                dispatch(authCheck());
+                navigate("/profile");
+            }, 100);
         } catch (error) {
             toast.error(error.response.data.message);
             console.log(error.response.data.message);

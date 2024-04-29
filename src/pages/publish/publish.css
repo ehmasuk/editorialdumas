@@ -92,8 +92,9 @@
 
 
 .publish-faq .ant-collapse-header{
-    background: #EAA451;
+    background: #1A1668;
     color: #fff !important;
+    border-radius: 10px;
 }
 .publish-faq .ant-collapse-content-box{
     padding: 20px !important;
@@ -101,8 +102,23 @@
 .publish-faq .ant-collapse-item{
     margin-bottom: 15px;
     background: #fff;
-    border: 1px solid #eee !important;
+    border: 1px solid #dddddd !important;
+    border-radius: 10px;
 }
+
+.custom-faq-section{
+    max-width: 800px;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+
 
 
 @media only screen and (max-width: 992px){

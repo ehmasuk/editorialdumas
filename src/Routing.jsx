@@ -12,6 +12,11 @@ import Wishlist from "./pages/wishlist/Wishlist";
 import MyFunds from "./pages/profile/myfunds/MyFunds";
 import AddFund from "./pages/addfund/AddFund";
 import Proposal from "./pages/profile/proposal/Proposal";
+import MyProposals from "./pages/profile/myproposals/MyProposals";
+import About from "./pages/about/About";
+import Faq from "./pages/faq/faq";
+import RegisterThank from "./pages/thankyoupages/registerThank";
+import SendProposalThank from "./pages/thankyoupages/SendProposalThank";
 
 function Routing() {
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
@@ -34,6 +39,14 @@ function Routing() {
                     element={
                         <PrivateRoute isLogedin={isLogedin}>
                             <Proposal />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/profile/myproposals"
+                    element={
+                        <PrivateRoute isLogedin={isLogedin}>
+                            <MyProposals />
                         </PrivateRoute>
                     }
                 />
@@ -71,9 +84,26 @@ function Routing() {
                 />
 
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/faq" element={<Faq />} />
+
 
                 <Route path="*" element={<Error404 />} />
+
+
+
+
+
+                {/* thank you pages */}
+                <Route path="/thankyou/register" element={<RegisterThank />} />
+                <Route path="/thankyou/sendporposal" element={<SendProposalThank />} />
+
+
+
+
+
+
+
             </Routes>
         </BrowserRouter>
     );

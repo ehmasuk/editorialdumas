@@ -14,16 +14,13 @@ import { hideLoader, showLoader } from "../../features/CombineSlice";
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Header() {
+    const [userInformations, setUserInformations] = useState(null);
 
-    const [userInformations,setUserInformations] = useState(null) 
-
-    useEffect(()=>{
-        if(localStorage.getItem("isLogedin")){
-            setUserInformations(JSON.parse(localStorage.getItem("isLogedin")).user)
+    useEffect(() => {
+        if (localStorage.getItem("isLogedin")) {
+            setUserInformations(JSON.parse(localStorage.getItem("isLogedin")).user);
         }
-    },[])
-
-    
+    }, []);
 
     const dispatch = useDispatch();
 
@@ -31,7 +28,6 @@ function Header() {
         dispatch(showLoader());
         const user = localStorage.getItem("isLogedin");
         const token = JSON.parse(user).token;
-        console.log(token);
         try {
             const res = await axios.post(`${apiUrl}/user/logout`, token, {
                 headers: {
@@ -39,14 +35,12 @@ function Header() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log(res);
             dispatch(authUnCheck());
         } catch (error) {
             console.log(error);
         } finally {
             dispatch(hideLoader());
         }
-        
     };
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
@@ -147,8 +141,8 @@ function Header() {
                                         <div className="nav-link" role="button" onClick={handleShowProfileDrop}>
                                             <img src="https://i.pravatar.cc/150?img=12" alt="/" />
                                             <div className="profile-info">
-                                                <h6 className="title">{userInformations ? userInformations.name : 'User'}</h6>
-                                                <span>{userInformations ? userInformations.email : 'user@example.com'}</span>
+                                                <h6 className="title">{userInformations ? userInformations.name : "User"}</h6>
+                                                <span>{userInformations ? userInformations.email : "user@example.com"}</span>
                                             </div>
                                         </div>
                                         <AnimatePresence>
@@ -162,8 +156,8 @@ function Header() {
                                                     className="dropdown-menu py-0 dropdown-menu-end d-block"
                                                 >
                                                     <div className="dropdown-header">
-                                                        <h6 className="m-0">{userInformations ? userInformations.name : 'User'}</h6>
-                                                        <span>{userInformations ? userInformations.email : 'user@example.com'}</span>
+                                                        <h6 className="m-0">{userInformations ? userInformations.name : "User"}</h6>
+                                                        <span>{userInformations ? userInformations.email : "user@example.com"}</span>
                                                     </div>
                                                     <div className="dropdown-body d-block">
                                                         <Link to="/profile" className="dropdown-item d-flex justify-content-between align-items-center ai-icon">
@@ -283,7 +277,7 @@ function Header() {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/">
+                                            <Link to="/about">
                                                 <span>Quiénes somos</span>
                                             </Link>
                                         </li>
@@ -300,6 +294,11 @@ function Header() {
                                         <li>
                                             <Link to="/">
                                                 <span>Autores</span>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/profile">
+                                                <span>Profile</span>
                                             </Link>
                                         </li>
                                         {/* {!isLogedin && (
