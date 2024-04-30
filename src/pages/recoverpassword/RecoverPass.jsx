@@ -25,7 +25,7 @@ function RecoverPass() {
 
 
         try {
-            const res = await axios.post(`https://press.escuela-ray-bolivar-sosa.com/public/api/user/reset_password`,{email:userData});
+            const res = await axios.post(`${apiUrl}/user/reset_password`,{email:userData});
             console.log(res);
             toast.success('Please check your email, we have sent you an email to reset your password')
 

@@ -6,6 +6,7 @@ import { hideLoader, showLoader } from "../../features/CombineSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { getUserData } from "../../features/UserInfoSlice";
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Profile() {
@@ -69,7 +70,8 @@ function Profile() {
             const res = await axios.post(`${apiUrl}/user/updateinfo`,formData);
             console.log(res);
             toast.success('Profile information updated')
-            navigate(0)
+            dispatch(getUserData(userId));
+
 
         } catch (error) {
             console.log(error);
@@ -86,9 +88,6 @@ function Profile() {
     }
 
 
-    useEffect(()=>{
-        console.log(file);
-    },[file])
 
 
     return (

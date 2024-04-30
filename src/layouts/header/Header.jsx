@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
 
 import axios from "axios";
@@ -11,26 +11,20 @@ import { authUnCheck } from "../../features/AuthCheckerSlice";
 import { hideLoader, showLoader } from "../../features/CombineSlice";
 
 import { FaUserPlus } from "react-icons/fa6";
-import { showLoginPopup } from "../../features/LoginPopupSlice";
 import { RiShoppingCartLine } from "react-icons/ri";
+import { showLoginPopup } from "../../features/LoginPopupSlice";
+import { Skeleton } from "antd";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Header() {
-    const [userInformations, setUserInformations] = useState(null);
-
-    useEffect(() => {
-        if (localStorage.getItem("isLogedin")) {
-            setUserInformations(JSON.parse(localStorage.getItem("isLogedin")).user);
-        }
-    }, []);
-
     const dispatch = useDispatch();
 
     const handleLogout = async () => {
         dispatch(showLoader());
         const user = localStorage.getItem("isLogedin");
         const token = JSON.parse(user).token;
+
         try {
             const res = await axios.post(`${apiUrl}/user/logout`, token, {
                 headers: {
@@ -47,6 +41,8 @@ function Header() {
     };
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
+
+    const { userInfo, isLoading } = useSelector((store) => store.UserInfoSlice);
 
     const [cartisOpen, setCartisOpen] = useState(false);
     const [profileDropisOpen, setProfileDropisOpen] = useState(false);
@@ -82,8 +78,6 @@ function Header() {
                     <div className="extra-nav">
                         <div className="extra-cell">
                             <ul className="navbar-nav header-right">
-
-
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/wishlist">
                                         <FaRegHeart color="#000" />
@@ -142,7 +136,6 @@ function Header() {
                                     </AnimatePresence>
                                 </li>
 
-
                                 {!isLogedin && (
                                     <>
                                         <li className="nav-item" onClick={() => dispatch(showLoginPopup())} style={{ marginRight: "10px" }}>
@@ -158,14 +151,19 @@ function Header() {
                                     </>
                                 )}
 
-
                                 {isLogedin && (
                                     <li className="nav-item dropdown profile-dropdown ms-4">
                                         <div className="nav-link" role="button" onClick={handleShowProfileDrop}>
-                                            <img src="https://i.pravatar.cc/150?img=12" alt="/" />
+                                            {!isLoading ?
+                                            <img src={userInfo && userInfo.images ? userInfo.images.url : "https://i.pravatar.cc/150?img=12"} alt="avatar" />
+                                            :
+                                            <Skeleton.Avatar active={true} size="large" shape="square" />
+
+                                        }
+
                                             <div className="profile-info">
-                                                <h6 className="title">{userInformations ? userInformations.name : "User"}</h6>
-                                                <span>{userInformations ? userInformations.email : "user@example.com"}</span>
+                                                <h6 className="title">{userInfo?.name}</h6>
+                                                <span>{userInfo?.email}</span>
                                             </div>
                                         </div>
                                         <AnimatePresence>
@@ -179,8 +177,8 @@ function Header() {
                                                     className="dropdown-menu py-0 dropdown-menu-end d-block"
                                                 >
                                                     <div className="dropdown-header">
-                                                        <h6 className="m-0">{userInformations ? userInformations.name : "User"}</h6>
-                                                        <span>{userInformations ? userInformations.email : "user@example.com"}</span>
+                                                        <h6 className="m-0">{userInfo?.name}</h6>
+                                                        <span>{userInfo?.email}</span>
                                                     </div>
                                                     <div className="dropdown-body d-block">
                                                         <Link to="/profile" className="dropdown-item d-flex justify-content-between align-items-center ai-icon">

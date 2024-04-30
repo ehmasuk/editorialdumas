@@ -32805,6 +32805,10 @@ body.woo-variation-swatches .variable-items-wrapper .variable-item:not(.radio-va
         line-height: 12px;
     }
 }
+.profile-avatar-skeleton span,.profile-avatar-skeleton{
+    height:100% !important;
+    width: 100% !important;
+}
 
 .profile-dropdown .nav-link {
     display: flex;
@@ -32815,6 +32819,8 @@ body.woo-variation-swatches .variable-items-wrapper .variable-item:not(.radio-va
     width: 48px;
     height: 48px;
     border-radius: var(--border-radius-base);
+    object-fit: cover;
+    object-position: top;
 }
 .profile-dropdown .nav-link .profile-info {
     margin-left: 15px;

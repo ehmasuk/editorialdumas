@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
 import Base from "../../layouts/Base";
+import { hideLoader, showLoader } from "../../features/CombineSlice";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -24,15 +25,18 @@ function Register() {
     const [regisLoading, setRegisLoading] = useState(false);
 
     const handleRegister = async (data) => {
+        dispatch(showLoader());
         setRegisLoading(true);
         try {
             const res = await axios.post(`${apiUrl}/user/register`, data);
             navigate("/thankyou/register");
+            window.scrollTo(0,0)
             toast.success("Registration successfull");
             setTimeout(() => {
                 localStorage.setItem("isLogedin", JSON.stringify(res.data));
                 dispatch(authCheck());
                 navigate("/profile");
+                
             }, 5000);
         } catch (error) {
             toast.error(error.response.data.message);
@@ -40,6 +44,7 @@ function Register() {
             localStorage.removeItem("isLogedin");
         } finally {
             setRegisLoading(false);
+            dispatch(hideLoader());
         }
     };
 

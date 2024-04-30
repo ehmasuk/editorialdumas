@@ -1,42 +1,18 @@
 import { BsSend } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
 
 import { FaRegChartBar } from "react-icons/fa";
 import { FaWpforms } from "react-icons/fa6";
 
-import axios from "axios";
-import { useEffect, useState } from "react";
-const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
+import { Avatar, Skeleton } from "antd";
+import { FaRegUser } from "react-icons/fa6";
 
 function ProfileSidebar() {
-    const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
-
-    const [userData, setUserData] = useState(null);
-
-    const [isLoading, setIsLoading] = useState(true);
-
-    const getData = async () => {
-        setIsLoading(true);
-        try {
-            const res = await axios.get(`${apiUrl}/user/info/${userId}`);
-            setUserData(res.data.user);
-        } catch (error) {
-            console.log(error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        getData();
-        
-    }, []);
-
-    userData && console.log(userData);
-
     const dispatch = useDispatch();
+
+    const { userInfo, isLoading } = useSelector((store) => store.UserInfoSlice);
 
     const { pathname } = useLocation();
 
@@ -46,16 +22,22 @@ function ProfileSidebar() {
                 <div className="account-detail text-center">
                     <div className="my-image">
                         <a href="#">
-                            <img alt="" src={userData?.images?.url} />
+                            {!isLoading ? (
+                                <img src={userInfo && userInfo.images ? userInfo.images.url : "https://i.pravatar.cc/150?img=12"} alt="avatar" />
+                            ) : (
+                                <Skeleton.Avatar className="profile-avatar-skeleton" active={true} />
+                            )}
+                            
+
                         </a>
                     </div>
                     <div className="account-title">
                         <div className="">
                             <h4 className="m-b5">
-                                <Link to="/profile">{userData?.name}</Link>
+                                <Link to="/profile">{userInfo?.name}</Link>
                             </h4>
                             <p className="m-b0">
-                            <Link to="/profile">{userData?.profession}</Link>
+                                <Link to="/profile">{userInfo?.profession}</Link>
                             </p>
                         </div>
                     </div>
