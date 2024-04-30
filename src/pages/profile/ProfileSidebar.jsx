@@ -6,7 +6,36 @@ import { authUnCheck } from "../../features/AuthCheckerSlice";
 import { FaRegChartBar } from "react-icons/fa";
 import { FaWpforms } from "react-icons/fa6";
 
+import axios from "axios";
+import { useEffect, useState } from "react";
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
+
 function ProfileSidebar() {
+    const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
+
+    const [userData, setUserData] = useState(null);
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const getData = async () => {
+        setIsLoading(true);
+        try {
+            const res = await axios.get(`${apiUrl}/user/info/${userId}`);
+            setUserData(res.data.user);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getData();
+        
+    }, []);
+
+    userData && console.log(userData);
+
     const dispatch = useDispatch();
 
     const { pathname } = useLocation();
@@ -17,16 +46,16 @@ function ProfileSidebar() {
                 <div className="account-detail text-center">
                     <div className="my-image">
                         <a href="#">
-                            <img alt="" src="https://i.pravatar.cc/150?img=12" />
+                            <img alt="" src={userData?.images?.url} />
                         </a>
                     </div>
                     <div className="account-title">
                         <div className="">
                             <h4 className="m-b5">
-                                <a href="#">David Matin</a>
+                                <Link to="/profile">{userData?.name}</Link>
                             </h4>
                             <p className="m-b0">
-                                <a href="#">Web developer</a>
+                            <Link to="/profile">{userData?.profession}</Link>
                             </p>
                         </div>
                     </div>

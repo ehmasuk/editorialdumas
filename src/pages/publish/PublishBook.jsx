@@ -131,7 +131,6 @@ function PublishBook() {
 
     return (
         <Base>
-            {loginPopupIsOpen && <LoginPopup sucessredirect="/profile/myfunds" />}
             <scetion className="publish-hero">
                 <div className="content-inner-1">
                     <div className="container">
@@ -425,7 +424,7 @@ function PublishBook() {
                 <div className="content-inner-1">
                     <FaqSection faqContents={faqContents} />
                     <div className="text-center">
-                        <Link to="/faq" className="btn btn-primary btnhover mb-5">See all faq</Link>
+                        <Link to="/faq" className="btn btn-primary btnhover mb-5">Ver todas las preguntas frecuentes</Link>
                     </div>
                 </div>
             </div>

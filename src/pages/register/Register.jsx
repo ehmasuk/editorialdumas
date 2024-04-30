@@ -33,7 +33,7 @@ function Register() {
                 localStorage.setItem("isLogedin", JSON.stringify(res.data));
                 dispatch(authCheck());
                 navigate("/profile");
-            }, 100);
+            }, 5000);
         } catch (error) {
             toast.error(error.response.data.message);
             console.log(error.response.data.message);

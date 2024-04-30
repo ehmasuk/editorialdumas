@@ -2,6 +2,7 @@ import Base from "../../layouts/Base";
 import ProfileSidebar from "./ProfileSidebar";
 
 function ProfileLayout({ children }) {
+    
     return (
         <Base>
             <div className="page-content bg-white">

@@ -17,6 +17,8 @@ import About from "./pages/about/About";
 import Faq from "./pages/faq/faq";
 import RegisterThank from "./pages/thankyoupages/registerThank";
 import SendProposalThank from "./pages/thankyoupages/SendProposalThank";
+import RecoverPass from "./pages/recoverpassword/RecoverPass";
+import RecoverPassLast from "./pages/recoverpassword/RecoverPassLast";
 
 function Routing() {
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
@@ -89,6 +91,8 @@ function Routing() {
 
 
                 <Route path="*" element={<Error404 />} />
+                <Route path="/recoverpass" element={<RecoverPass />} />
+                <Route path="/recoverpasslast" element={<RecoverPassLast />} />
 
 
 
@@ -96,6 +100,8 @@ function Routing() {
 
                 {/* thank you pages */}
                 <Route path="/thankyou/register" element={<RegisterThank />} />
+
+
                 <Route path="/thankyou/sendporposal" element={<SendProposalThank />} />
 
 

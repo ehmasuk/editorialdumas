@@ -1,4 +1,4 @@
-import { Skeleton } from "antd";
+import { Empty, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import ProfileLayout from "../ProfileLayout";
@@ -53,7 +53,7 @@ function MyProposals() {
                                             <p>{proposal.description}</p>
                                             <div className="product-bottom-details">
                                                 <div className="d-flex align-items-center">
-                                                    <SlCalender className="mr-2" /> 29,april
+                                                    <SlCalender style={{marginRight:'5px'}} /> <span>29,april</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,6 +61,10 @@ function MyProposals() {
                                 </div>
                             );
                         })}
+
+                    {
+                        myProposals && myProposals.length === 0 && <Empty />
+                    }
 
                     {isLoading && (
                         <>

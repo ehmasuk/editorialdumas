@@ -75,10 +75,10 @@ function LoginPopup({ sucessredirect }) {
                                         <label>Email:</label>
                                         <input
                                             {...register("email", {
-                                                required: "You must enter your email address",
+                                                required: "Debes ingresar tu email",
                                             })}
                                             type="text"
-                                            placeholder="Enter your email"
+                                            placeholder="Ingresa tu email"
                                         />
                                         <AnimatePresence>
                                             {errors.email && (
@@ -99,10 +99,10 @@ function LoginPopup({ sucessredirect }) {
                                         <label>Password:</label>
                                         <input
                                             {...register("password", {
-                                                required: "You must enter your password",
+                                                required: "Debes ingresar tu password",
                                             })}
                                             type="password"
-                                            placeholder="Enter your password"
+                                            placeholder="Ingresa tu password"
                                         />
                                         <AnimatePresence>
                                             {errors.password && (
@@ -120,9 +120,9 @@ function LoginPopup({ sucessredirect }) {
                                         </AnimatePresence>
                                     </div>
                                     <div className="lms-login-btn-wrap">
-                                        <button className="forget-pass-btn">Recordar contraseña</button>
+                                        <Link className="forget-pass-btn" onClick={()=>dispatch(hideLoginPopup())} to="/recoverpass">Recordar contraseña</Link>
                                         <button disabled={loginisLoading} className="btn btn-primary btnhover me-2">
-                                            <span>Login</span>
+                                            <span>Acceder</span>
                                             {loginisLoading && <i className="fas fa-spinner fa-spin m-l10"></i>}
                                         </button>
                                     </div>

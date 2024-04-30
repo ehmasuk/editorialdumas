@@ -81,7 +81,7 @@ function Proposal() {
             toast.success("Your request of project has been submitted");
             setTimeout(() => {
                 navigate("/profile/myfunds/");
-            }, 100);
+            }, 5000);
 
             window.scrollTo(0, 0);
         } catch (error) {

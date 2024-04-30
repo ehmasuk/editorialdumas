@@ -1,15 +1,18 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { FaRegUser } from "react-icons/fa";
-import { FaRegHeart } from "react-icons/fa6";
+import { FaRegHeart, FaRegUser } from "react-icons/fa";
 
 import axios from "axios";
 import { IoSearch } from "react-icons/io5";
-import { RiShoppingCartLine } from "react-icons/ri";
+import { LuLogIn } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
 import { hideLoader, showLoader } from "../../features/CombineSlice";
+
+import { FaUserPlus } from "react-icons/fa6";
+import { showLoginPopup } from "../../features/LoginPopupSlice";
+import { RiShoppingCartLine } from "react-icons/ri";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -79,16 +82,18 @@ function Header() {
                     <div className="extra-nav">
                         <div className="extra-cell">
                             <ul className="navbar-nav header-right">
+
+
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/wishlist">
                                         <FaRegHeart color="#000" />
-                                        <span className="badge">21</span>
+                                        <span className="badge">0</span>
                                     </Link>
                                 </li>
                                 <li className="nav-item" onClick={(e) => e.stopPropagation()}>
                                     <button type="button" className="nav-link box cart-btn" onClick={() => setCartisOpen(!cartisOpen)}>
                                         <RiShoppingCartLine color="#000" />
-                                        <span className="badge">5</span>
+                                        <span className="badge">0</span>
                                     </button>
                                     <AnimatePresence>
                                         {cartisOpen && (
@@ -136,6 +141,24 @@ function Header() {
                                         )}
                                     </AnimatePresence>
                                 </li>
+
+
+                                {!isLogedin && (
+                                    <>
+                                        <li className="nav-item" onClick={() => dispatch(showLoginPopup())} style={{ marginRight: "10px" }}>
+                                            <Link>
+                                                <LuLogIn fontSize={25} color="#000" />
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/register">
+                                                <FaUserPlus fontSize={25} color="#000" />
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
+
+
                                 {isLogedin && (
                                     <li className="nav-item dropdown profile-dropdown ms-4">
                                         <div className="nav-link" role="button" onClick={handleShowProfileDrop}>
@@ -163,10 +186,10 @@ function Header() {
                                                         <Link to="/profile" className="dropdown-item d-flex justify-content-between align-items-center ai-icon">
                                                             <div>
                                                                 <FaRegUser fontSize="18px" />
-                                                                <span className="ms-2">Profile</span>
+                                                                <span className="ms-2">Perfil</span>
                                                             </div>
                                                         </Link>
-                                                        <Link to="/user/cart" className="dropdown-item d-flex justify-content-between align-items-center ai-icon">
+                                                        {/* <Link to="/user/cart" className="dropdown-item d-flex justify-content-between align-items-center ai-icon">
                                                             <div>
                                                                 <RiShoppingCartLine fontSize="18px" />
                                                                 <span className="ms-2">My Order</span>
@@ -177,11 +200,11 @@ function Header() {
                                                                 <FaRegHeart fontSize="18px" />
                                                                 <span className="ms-2">Wishlist</span>
                                                             </div>
-                                                        </Link>
+                                                        </Link> */}
                                                     </div>
                                                     <div className="dropdown-footer">
                                                         <div onClick={handleLogout} className="btn btn-primary w-100 btnhover btn-sm">
-                                                            Log Out
+                                                            Cerrar sesión
                                                         </div>
                                                     </div>
                                                 </motion.div>
@@ -264,7 +287,7 @@ function Header() {
                                     </div>
                                     <div className="search-input">
                                         <div className="input-group">
-                                            <input type="text" className="form-control" placeholder="Search Books Here" />
+                                            <input type="text" className="form-control" placeholder="Buscar libros aquí" />
                                             <button className="btn" type="button">
                                                 <i className="flaticon-loupe" />
                                             </button>
@@ -296,41 +319,25 @@ function Header() {
                                                 <span>Autores</span>
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link to="/profile">
-                                                <span>Profile</span>
-                                            </Link>
-                                        </li>
+
                                         {/* {!isLogedin && (
-                                        <li>
-                                            <Link to="/register">
-                                                <span>Register</span>
-                                            </Link>
-                                        </li>
-                                    )}
-    
-                                    <li>
-                                        <Link to="/contact">
-                                            <span>Contact Us</span>
-                                        </Link>
-                                    </li> */}
+                                            <>
+                                                <li>
+                                                    <Link to="/login">Entrar</Link>
+                                                </li>
+                                                <li>
+                                                    <Link to="/register">Regístrate</Link>
+                                                </li>
+                                            </>
+                                        )}
+                                        {isLogedin && (
+                                            <>
+                                                <li>
+                                                    <Link to="/profile">Perfil</Link>
+                                                </li>
+                                            </>
+                                        )} */}
                                     </ul>
-                                    <div className="dz-social-icon">
-                                        <ul>
-                                            <li>
-                                                <a className="fab fa-facebook-f" target="_blank" href="#" />
-                                            </li>
-                                            <li>
-                                                <a className="fab fa-twitter" target="_blank" href="#" />
-                                            </li>
-                                            <li>
-                                                <a className="fab fa-linkedin-in" target="_blank" href="#" />
-                                            </li>
-                                            <li>
-                                                <a className="fab fa-instagram" target="_blank" href="#" />
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </motion.div>
                             )}
                         </AnimatePresence>

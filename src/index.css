@@ -30049,6 +30049,9 @@ pre {
     width: 100%;
     background-color: #fff;
     padding: 5px;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
 }
 .shop-account .account-detail .account-title {
     margin-top: 25px;
