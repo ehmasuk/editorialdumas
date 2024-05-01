@@ -1,12 +1,14 @@
-import { Skeleton } from "antd";
+import { Skeleton, Tooltip } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ProfileLayout from "./ProfileLayout";
-import { hideLoader, showLoader } from "../../features/CombineSlice";
-import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import { GoQuestion } from "react-icons/go";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { hideLoader, showLoader } from "../../features/CombineSlice";
 import { getUserData } from "../../features/UserInfoSlice";
+import ProfileLayout from "./ProfileLayout";
+
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Profile() {
@@ -18,15 +20,14 @@ function Profile() {
 
     const [file, setFile] = useState(null);
 
-
     const getData = async () => {
         setIsLoading(true);
         try {
             const res = await axios.get(`${apiUrl}/user/info/${userId}`);
-            setUserData(res.data.user)
+            setUserData(res.data.user);
         } catch (error) {
             console.log(error);
-            toast.error('Something went wrong, please try again later')
+            toast.error("Something went wrong, please try again later");
         } finally {
             setIsLoading(false);
         }
@@ -36,58 +37,61 @@ function Profile() {
         getData();
     }, []);
 
-    // const [isNotUpdateAble,setIsNotUpdateAble] = useState(true)
-
-    const navigate = useNavigate()
+    const [isNotUpdateAble,setIsNotUpdateAble] = useState(true)
 
 
-    const [updatedData,setUpdatedData] = useState(null)
 
-    const handleChange = (e)=>{
+    const [updatedData, setUpdatedData] = useState(null);
+
+    const handleChange = (e) => {
         const name = e.target.name;
-        setUpdatedData({...updatedData,[name]:e.target.value});
-        // setIsNotUpdateAble(false)
+        setUpdatedData({ ...updatedData, [name]: e.target.value });
+        setIsNotUpdateAble(false)
         console.log(updatedData);
-
-    }
+    };
 
     const dispatch = useDispatch();
 
-    const handleSubmit = async (e)=>{
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         dispatch(showLoader());
         const formData = new FormData();
 
         file && formData.append("image_url", file);
         formData.append("id", userId);
 
-        updatedData && Object.entries(updatedData).forEach(([key, value]) => {
-            formData.append(key, value);
-        });
-
+        updatedData &&
+            Object.entries(updatedData).forEach(([key, value]) => {
+                formData.append(key, value);
+            });
 
         try {
-            const res = await axios.post(`${apiUrl}/user/updateinfo`,formData);
+            const res = await axios.post(`${apiUrl}/user/updateinfo`, formData);
             console.log(res);
-            toast.success('Profile information updated')
+            toast.success("Profile information updated");
             dispatch(getUserData(userId));
-
-
         } catch (error) {
             console.log(error);
-            toast.error('Something went wrong, please try again later')
+            toast.error("Something went wrong, please try again later");
         } finally {
             dispatch(hideLoader());
         }
 
         for (var pair of formData.entries()) {
-            console.log(pair[0]+ ', ' + pair[1]); 
+            console.log(pair[0] + ", " + pair[1]);
         }
+    };
 
 
-    }
+    useEffect(()=>{
+        if(file){
+            setIsNotUpdateAble(false)
+        }
+    },[file])
 
 
+
+    
 
 
     return (
@@ -110,26 +114,43 @@ function Profile() {
                             <div className="col-lg-6 col-md-6">
                                 <div className="mb-3">
                                     <label htmlFor="formcontrolinput1" className="form-label">
-                                        Profile image:
+                                        Profile image:{" "}
+                                        <Tooltip title="Your profile picture that can make your brand strong" >
+                                            <GoQuestion fontSize={16} style={{ marginTop: "-2px" }} />
+                                        </Tooltip>
                                     </label>
-                                    <input type="file" name="image_url" onChange={(e)=>setFile(e.target.files[0])} className="form-control" />
+                                    <input type="file" name="image_url" onChange={(e) => setFile(e.target.files[0])} className="form-control" />
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-6">
                                 <div className="mb-3">
                                     <label htmlFor="formcontrolinput2" className="form-label">
-                                        Professional title:
+                                        Professional title:{" "}
+                                        <Tooltip title="Your professional title" >
+                                            <GoQuestion fontSize={16} style={{ marginTop: "-2px" }} />
+                                        </Tooltip>
                                     </label>
-                                    <input type="profession" name="profession" onChange={handleChange} className="form-control" placeholder="Enter your profession" defaultValue={userData.profession} />
+                                    <input
+                                        type="profession"
+                                        name="profession"
+                                        onChange={handleChange}
+                                        className="form-control"
+                                        placeholder="Enter your profession"
+                                        defaultValue={userData.profession}
+                                    />
                                 </div>
                             </div>
                             <div className="col-lg-12 col-md-12">
                                 <div className="mb-3">
                                     <label htmlFor="exampleFormControlTextarea" className="form-label">
-                                        Description:
+                                        Description:{" "}
+                                        <Tooltip title="Tell us a little bit about your biography to know you better" >
+                                            <GoQuestion fontSize={16} style={{ marginTop: "-2px" }} />
+                                        </Tooltip>
                                     </label>
                                     <textarea
-                                    name="description" onChange={handleChange}
+                                        name="description"
+                                        onChange={handleChange}
                                         className="form-control"
                                         id="exampleFormControlTextarea"
                                         rows={5}
@@ -184,7 +205,7 @@ function Profile() {
                                 </div>
                             </div>
                         </div>
-                        <button className="btn btn-primary btnhover">Save Setting</button>
+                        <button disabled={isNotUpdateAble} className="btn btn-primary btnhover">Save Setting</button>
                     </form>
                 )}
 

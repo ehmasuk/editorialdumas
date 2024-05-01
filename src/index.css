@@ -31822,10 +31822,15 @@ body.woo-variation-swatches .variable-items-wrapper .variable-item:not(.radio-va
 .dz-quik-search.On {
     top: 0;
 }
+.profile-image>.ant-image,.profile-image,.ant-image-mask{
+    height:100%;
+    width: 100%;
+    border-radius:50%;
+}
 
 .site-header {
     position: relative;
-    z-index: 9999;
+    z-index: 99;
 }
 .site-header .main-bar {
     background: #ffffff;

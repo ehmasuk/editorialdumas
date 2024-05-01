@@ -6,8 +6,7 @@ import { authUnCheck } from "../../features/AuthCheckerSlice";
 import { FaRegChartBar } from "react-icons/fa";
 import { FaWpforms } from "react-icons/fa6";
 
-import { Avatar, Skeleton } from "antd";
-import { FaRegUser } from "react-icons/fa6";
+import { Image, Skeleton } from "antd";
 
 function ProfileSidebar() {
     const dispatch = useDispatch();
@@ -23,12 +22,18 @@ function ProfileSidebar() {
                     <div className="my-image">
                         <a href="#">
                             {!isLoading ? (
-                                <img src={userInfo && userInfo.images ? userInfo.images.url : "https://i.pravatar.cc/150?img=12"} alt="avatar" />
+                                <div className="profile-image">
+                                    <Image
+                                        src={
+                                            userInfo && userInfo.images
+                                                ? userInfo.images.url
+                                                : "https://cdn-icons-png.flaticon.com/128/14987/14987727.pnghttps://cdn-icons-png.flaticon.com/128/14987/14987727.png"
+                                        }
+                                    />
+                                </div>
                             ) : (
                                 <Skeleton.Avatar className="profile-avatar-skeleton" active={true} />
                             )}
-                            
-
                         </a>
                     </div>
                     <div className="account-title">

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
 import { hideLoader, showLoader } from "../../features/CombineSlice";
 import Base from "../../layouts/Base";
@@ -76,9 +76,9 @@ function Login() {
                                         By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your
                                         orders in your account and more.
                                     </p>
-                                    <a className="btn btn-primary btnhover m-r5 button-lg radius-no" href="shop-registration.html">
+                                    <Link className="btn btn-primary btnhover m-r5 button-lg radius-no" to="/register">
                                         CREATE AN ACCOUNT
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -143,25 +143,12 @@ function Login() {
                                                 <span>Login</span>
                                                 {loginisLoading && <i className="fas fa-spinner fa-spin m-l10"></i>}
                                             </button>
-                                            <a href="#forgot-password" className="m-l5">
+                                            <Link to="/recoverpass" className="m-l5">
                                                 <i className="fas fa-unlock-alt" /> Forgot Password
-                                            </a>
+                                            </Link>
                                         </div>
                                     </form>
-                                    <form id="forgot-password" className="tab-pane fade  col-12">
-                                        <h4 className="text-secondary">FORGET PASSWORD ?</h4>
-                                        <p className="font-weight-600">We will send you an email to reset your password. </p>
-                                        <div className="mb-3">
-                                            <label className="label-title">E-MAIL *</label>
-                                            <input name="dzName" required="" className="form-control" placeholder="Your Email Id" type="email" />
-                                        </div>
-                                        <div className="text-left">
-                                            <a className="btn btn-outline-secondary btnhover m-r10" data-bs-toggle="tab" href="#login">
-                                                Back
-                                            </a>
-                                            <button className="btn btn-primary btnhover">Submit</button>
-                                        </div>
-                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>

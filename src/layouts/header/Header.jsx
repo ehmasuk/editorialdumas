@@ -10,10 +10,10 @@ import { Link } from "react-router-dom";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
 import { hideLoader, showLoader } from "../../features/CombineSlice";
 
+import { Skeleton, Tooltip } from "antd";
 import { FaUserPlus } from "react-icons/fa6";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { showLoginPopup } from "../../features/LoginPopupSlice";
-import { Skeleton } from "antd";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -138,14 +138,18 @@ function Header() {
 
                                 {!isLogedin && (
                                     <>
-                                        <li className="nav-item" onClick={() => dispatch(showLoginPopup())} style={{ marginRight: "10px" }}>
-                                            <Link>
-                                                <LuLogIn fontSize={25} color="#000" />
+                                        <li className="nav-item" onClick={() => dispatch(showLoginPopup())}>
+                                            <Link className="nav-link">
+                                                <Tooltip title="Entrar">
+                                                    <LuLogIn fontSize={25} color="#000" />
+                                                </Tooltip>
                                             </Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="/register">
-                                                <FaUserPlus fontSize={25} color="#000" />
+                                            <Link className="nav-link" to="/register">
+                                                <Tooltip title="Regístrate">
+                                                    <FaUserPlus fontSize={25} color="#000" />
+                                                </Tooltip>
                                             </Link>
                                         </li>
                                     </>
@@ -154,12 +158,18 @@ function Header() {
                                 {isLogedin && (
                                     <li className="nav-item dropdown profile-dropdown ms-4">
                                         <div className="nav-link" role="button" onClick={handleShowProfileDrop}>
-                                            {!isLoading ?
-                                            <img src={userInfo && userInfo.images ? userInfo.images.url : "https://i.pravatar.cc/150?img=12"} alt="avatar" />
-                                            :
-                                            <Skeleton.Avatar active={true} size="large" shape="square" />
-
-                                        }
+                                            {!isLoading ? (
+                                                <img
+                                                    src={
+                                                        userInfo && userInfo.images
+                                                            ? userInfo.images.url
+                                                            : "https://cdn-icons-png.flaticon.com/128/14987/14987727.pnghttps://cdn-icons-png.flaticon.com/128/14987/14987727.png"
+                                                    }
+                                                    alt="avatar"
+                                                />
+                                            ) : (
+                                                <Skeleton.Avatar active={true} size="large" shape="square" />
+                                            )}
 
                                             <div className="profile-info">
                                                 <h6 className="title">{userInfo?.name}</h6>
@@ -187,18 +197,6 @@ function Header() {
                                                                 <span className="ms-2">Perfil</span>
                                                             </div>
                                                         </Link>
-                                                        {/* <Link to="/user/cart" className="dropdown-item d-flex justify-content-between align-items-center ai-icon">
-                                                            <div>
-                                                                <RiShoppingCartLine fontSize="18px" />
-                                                                <span className="ms-2">My Order</span>
-                                                            </div>
-                                                        </Link>
-                                                        <Link href="/user/wishlist" className="dropdown-item d-flex justify-content-between align-items-center ai-icon">
-                                                            <div>
-                                                                <FaRegHeart fontSize="18px" />
-                                                                <span className="ms-2">Wishlist</span>
-                                                            </div>
-                                                        </Link> */}
                                                     </div>
                                                     <div className="dropdown-footer">
                                                         <div onClick={handleLogout} className="btn btn-primary w-100 btnhover btn-sm">
