@@ -100,14 +100,14 @@ function Proposal() {
             <div>
                 <form encType="multipart/form-data" onSubmit={handleSubmit(handleFormSubmit)}>
                     <div className="mb-5">
-                        <h5>Title</h5>
-                        <p>Enter title of the project</p>
+                        <h5>Título</h5>
+                        <p>Escribe el título del proyecto</p>
                         <input
                             {...register("title", {
-                                required: "You must enter your project title",
+                                required: "Este campo es obligatorio",
                             })}
                             className={`form-control ${errors.title && "is-invalid"}`}
-                            placeholder="Your title Id"
+                            
                             type="text"
                         />
                         <AnimatePresence>
@@ -127,20 +127,20 @@ function Proposal() {
                     </div>
 
                     <div className="mb-5">
-                        <h5>Select your type</h5>
-                        <p>Choose your proposal type</p>
+                        <h5>Elige una opción</h5>
+                        <p>¿Ya tienes la obra o piensas escribirla?</p>
                         <select
                             className="form-control"
                             {...register("type", {
-                                required: "You must select type",
+                                required: "Este campo es obligatorio",
                                 onChange: (e) => {
                                     setSelectedType(e.target.value);
                                 },
                             })}
                         >
-                            <option value="">Select...</option>
-                            <option value="already have book">I already have a book</option>
-                            <option value="thinking to write book">I am thinking to write a book</option>
+                            <option value="">Selecciona...</option>
+                            <option value="already have book">Tengo un libro y quiero publicarlo</option>
+                            <option value="thinking to write book">Estoy escribiendo un libro o me gustaría escribirlo</option>
                         </select>
                         <AnimatePresence>
                             {errors.type && (
@@ -159,15 +159,14 @@ function Proposal() {
                     </div>
 
                     <div className="mb-5">
-                        <h5>Summary</h5>
-                        <p>Enter clear narrative summary of 5 lines</p>
+                        <h5>Resumen</h5>
+                        <p>Introduce un breve resumen no mayor de 5 líneas de tu proyecto.</p>
                         <textarea
                             rows="5"
                             {...register("description", {
-                                required: "You must enter your description",
+                                required: "Este campo es obligatorio",
                             })}
                             className={`form-control ${errors.description && "is-invalid"}`}
-                            placeholder="Your description"
                             type="text"
                         ></textarea>
                         <AnimatePresence>
@@ -187,14 +186,13 @@ function Proposal() {
                     </div>
 
                     <div className="mb-5">
-                        <h5>Phone</h5>
-                        <p>Choose your phone number</p>
+                        <h5>Teléfono</h5>
+                        <p>Ingresa tu número de teléfono activo</p>
                         <input
                             {...register("phone_no", {
-                                required: "You must enter your phone",
+                                required: "Este campo es obligatorio",
                             })}
                             className={`form-control ${errors.phone_no && "is-invalid"}`}
-                            placeholder="Your phone"
                             type="number"
                         />
                         <AnimatePresence>
@@ -214,10 +212,10 @@ function Proposal() {
                     </div>
 
                     <div className="mb-5">
-                        <h5>Select your book genre</h5>
-                        <p>Choose your book genre</p>
-                        <select className="form-control" {...register("genre", { required: "You must select genre" })}>
-                            <option value="">Select...</option>
+                        <h5>Selecciona el género de tu libro</h5>
+                        <p>Elige un género de libro que coincida con tu libro</p>
+                        <select className="form-control" {...register("genre", { required: "Este campo es obligatorio" })}>
+                            <option value="">Selecciona...</option>
                             {allGenere.map((genere, index) => {
                                 return (
                                     <option key={index} value={genere}>
@@ -244,22 +242,21 @@ function Proposal() {
 
                     {selectedType == "already have book" && (
                         <div className="mb-5">
-                            <h5>Upload your book</h5>
-                            <p>Upload your book</p>
+                            <h5>Sube tu libro</h5>
+                            <p>Recuerda subir el archivo en formato Word New Roman Times a doble espacio. Los archivos que no cumplan este requisito no serán atendidos.</p>
                             <input accept=".docx,.pdf" className="form-control" required type="file" onChange={(e) => setFile(e.target.files[0])} />
                         </div>
                     )}
 
                     <div className="mb-5">
-                        <h5>A brief summary of why your project is different.</h5>
-                        <p>A brief summary of why your project is different.</p>
+                        <h5>Un breve resumen de por qué tu proyecto es diferente.</h5>
                         <textarea
                             rows="5"
                             {...register("long_description", {
-                                required: "You must enter your brief",
+                                required: "Este campo es obligatorio",
                             })}
                             className={`form-control ${errors.brief && "is-invalid"}`}
-                            placeholder="Your description"
+                            placeholder="Resumen"
                             type="text"
                         ></textarea>
                         <AnimatePresence>
@@ -279,7 +276,7 @@ function Proposal() {
                     </div>
 
                     <button type="submit" className="btn btn-primary btnhover">
-                        Submit
+                    Enviar
                     </button>
                 </form>
             </div>

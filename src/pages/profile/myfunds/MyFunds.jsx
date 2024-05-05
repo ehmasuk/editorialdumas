@@ -1,10 +1,54 @@
-import { Progress } from "antd";
+import { Progress, Skeleton } from "antd";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { IoIosAddCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import ProfileLayout from "../ProfileLayout";
 import "./myfunds.css";
-
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 function MyFunds() {
+    const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
+
+    const [allProjects, setAllProjects] = useState(null);
+    const [isLoading, setIsLoading] = useState(null);
+
+    const getData = async () => {
+        setIsLoading(true);
+        try {
+            const res = await axios.get(`${apiUrl}/user/project?user_id=${userId}`);
+            console.log(res.data.user_projects);
+
+            const validData = res.data.user_projects.filter((project)=>{
+                return project.packs.length > 0
+            })
+
+
+            setAllProjects(validData);
+
+
+            console.log(res.data.user_projects);
+        } catch (error) {
+            console.log(error);
+            toast.error("Something went wrong, please try again later");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+
+
+
+
+
+
+
+
+
     return (
         <ProfileLayout>
             <div className="shop-bx-title clearfix">
@@ -12,50 +56,68 @@ function MyFunds() {
             </div>
 
             <div className="row">
-                <div className="col-md-4">
-                    <div className="card single-funds">
-                        <img
-                            className="card-img-top"
-                            style={{ height: "150px" }}
-                            src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/234784665/original/b963d77f0897a1fd1c25ece785c7bec93eb9fbbb/create-your-fiverr-gig-image.jpg"
-                            alt="Card image cap"
-                        />
-                        <div className="card-body">
-                            <p className="card-title">Calima</p>
-                            <Progress percent={20} steps={10} strokeColor={["pink", "pink", "pink", "skyblue", "skyblue", "skyblue", "skyblue", "#9EE71F", "#9EE71F", "#9EE71F"]} />
-                            <p className="mt-3 mb-0">
-                                Objetivo de <b>5.000€</b>
-                            </p>
-                            <p className="mt-3 mb-0">Quedan <b>80 días</b></p>
+                {allProjects?.map((project, index) => {
+                    return (
+                        <div key={index} className="col-md-4">
+                            <Link to={`/project/${project?.id}`}>
+                            <div className="card single-funds">
+                                <img
+                                    className="card-img-top"
+                                    style={{ height: "150px",objectFit: "cover" }}
+                                    src={project?.images[0].url}
+                                    alt="Card image cap"
+                                />
+                                <div className="card-body">
+                                    <p className="card-title">{project?.title}</p>
+                                    <p className="mt-3 mb-0">
+                                        Objetivo de <b>{project?.project_id}€</b>
+                                    </p>
+                                    <p className="mt-3 mb-0">
+                                        Quedan <b>{project?.target_date.substring(0, project.target_date.length - 12)}</b>
+                                    </p>
+                                </div>
+                            </div>
+                            </Link>
+                        </div>
+                    );
+                })}
+
+                {isLoading && (
+                    <div className="row">
+                        <div className="col-md-4 mb-5">
+                            <Skeleton active />
+                        </div>
+                        <div className="col-md-4 mb-5">
+                            <Skeleton active />
+                        </div>
+                        <div className="col-md-4 mb-5">
+                            <Skeleton active />
+                        </div>
+                        <div className="col-md-4 mb-5">
+                            <Skeleton active />
+                        </div>
+                        <div className="col-md-4 mb-5">
+                            <Skeleton active />
+                        </div>
+                        <div className="col-md-4 mb-5">
+                            <Skeleton active />
+                        </div>
+                        <div className="col-md-4 mb-5">
+                            <Skeleton active />
                         </div>
                     </div>
-                </div>
-                <div className="col-md-4">
-                    <div className="card single-funds">
-                        <img
-                            className="card-img-top"
-                            style={{ height: "150px" }}
-                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdJByM76G8Ugu3O2tTjyEqJwOIAT0cOhCbfg&s"
-                            alt="Card image cap"
-                        />
-                        <div className="card-body">
-                            <p className="card-title">El arte de automatizar</p>
-                            <Progress percent={90} steps={10} strokeColor={["pink", "pink", "pink", "skyblue", "skyblue", "skyblue", "skyblue", "#9EE71F", "#9EE71F", "#9EE71F"]} />
-                            <p className="mt-3 mb-0">
-                                Objetivo de <b>5.000€</b>
-                            </p>
-                            <p className="mt-3 mb-0">Quedan <b>9 días</b></p>
-                        </div>
+                )}
+
+                {!isLoading && (
+                    <div className="col-md-4">
+                        <Link to="/addfund">
+                            <div className="add-funds">
+                                <IoIosAddCircle />
+                                <p>Create a new fund</p>
+                            </div>
+                        </Link>
                     </div>
-                </div>
-                <div className="col-md-4">
-                    <Link to="/addfund">
-                        <div className="add-funds">
-                            <IoIosAddCircle />
-                            <p>Create a new fund</p>
-                        </div>
-                    </Link>
-                </div>
+                )}
             </div>
         </ProfileLayout>
     );

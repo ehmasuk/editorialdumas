@@ -424,7 +424,7 @@ function PublishBook() {
                 <div className="content-inner-1">
                     <FaqSection faqContents={faqContents} />
                     <div className="text-center">
-                        <Link to="/faq" className="btn btn-primary btnhover mb-5">Ver todas las preguntas frecuentes</Link>
+                        <Link to="/faq" className="btn btn-primary btnhover mb-5">Consultar</Link>
                     </div>
                 </div>
             </div>

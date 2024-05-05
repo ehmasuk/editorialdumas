@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authCheck } from "../../features/AuthCheckerSlice";
-import Base from "../../layouts/Base";
 import { hideLoader, showLoader } from "../../features/CombineSlice";
+import Base from "../../layouts/Base";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -30,13 +30,12 @@ function Register() {
         try {
             const res = await axios.post(`${apiUrl}/user/register`, data);
             navigate("/thankyou/register");
-            window.scrollTo(0,0)
+            window.scrollTo(0, 0);
             toast.success("Registration successfull");
             setTimeout(() => {
                 localStorage.setItem("isLogedin", JSON.stringify(res.data));
                 dispatch(authCheck());
                 navigate("/profile");
-                
             }, 5000);
         } catch (error) {
             toast.error(error.response.data.message);

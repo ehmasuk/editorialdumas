@@ -1,13 +1,26 @@
 import { Steps } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Base from "../../layouts/Base";
 import AddFundInfo from "./AddFundInfo";
 import ChooseFundPackage from "./ChooseFundPackage";
 import CreateFundPack from "./CreateFundPack";
 import "./addfund.css";
+import PublishFund from "./PublishFund";
 
 function AddFund() {
     const [currentStep, setCurrentStep] = useState(0);
+
+    const [dataFromGet,setDataFromGet] = useState(null)
+
+    useEffect(() => {
+        window.onbeforeunload = () => true;
+        return () => {
+            window.onbeforeunload = null;
+        };
+    }, []);
+
+
+    
 
     return (
         <Base>
@@ -16,23 +29,24 @@ function AddFund() {
                     current={currentStep}
                     items={[
                         {
-                            title: "Choose your package",
+                            title: "Elige tu paquete",
                         },
                         {
-                            title: "Fund informations",
+                            title: "Información sobre fondos",
                         },
                         {
-                            title: "Create packs",
+                            title: "Crear paquetes",
                         },
                         {
-                            title: "Publish your fund",
-                        },
+                            title: "Publicar",
+                        }
                     ]}
                 />
                 <div className="fund-wraper">
-                    {currentStep === 0 && <ChooseFundPackage currentStep={currentStep} setCurrentStep={setCurrentStep} />}
-                    {currentStep === 1 && <AddFundInfo currentStep={currentStep} setCurrentStep={setCurrentStep} />}
-                    {currentStep === 2 && <CreateFundPack currentStep={currentStep} setCurrentStep={setCurrentStep} />}
+                    {currentStep === 0 && <ChooseFundPackage dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
+                    {currentStep === 1 && <AddFundInfo dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
+                    {currentStep === 2 && <CreateFundPack dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
+                    {currentStep === 3 && <PublishFund />}
                 </div>
             </div>
         </Base>

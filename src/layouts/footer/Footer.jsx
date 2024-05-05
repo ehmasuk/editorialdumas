@@ -18,7 +18,7 @@ function Footer() {
                         <div role="button" className="toggle-btn" onClick={() => setCategoryOpen(!categoryOpen)}>
                             Categorías de libros
                         </div>
-                        <to>
+                        <div>
                             <AnimatePresence>
                                 {categoryOpen && (
                                     <motion.div
@@ -37,131 +37,43 @@ function Footer() {
                                                 <li>
                                                     <Link to="books-grid-view.html">Architecture</Link>
                                                 </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Art</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Action</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Biography</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Body, Mind & Spirit</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Business & Economics</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Children Fiction</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Children Non-Fiction</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Comics & Graphics</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Cooking</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Crafts & Hobbies</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Design</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Drama</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Education</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Family & Relationships</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Fiction</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Foreign Language</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Games</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Gardening</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Health & Fitness</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">History</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">House & Home</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Humor</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Literary Collections</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Mathematics</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Medical</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Nature</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Performing Arts</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Pets</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Show others</Link>
-                                                </li>
                                             </ul>
                                         </div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </to>
+                        </div>
                     </div>
                 </div>
             </div>
             <div className="footer-top">
                 <div className="container">
                     <div className="row">
-                        <div className="col-xl-3 col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
+                        <div className="col-xl-3 col-lg-12 wow fadeInUp" >
                             <div className="widget widget_about">
                                 <div className="footer-logo logo-white">
-                                    <Link to="index.html">
+                                    
                                         <Link to="/">
                                             <div className="dev-logo" style={{ color: "#fff", textAlign: "left" }}>
                                                 editorial<p>dumas</p>
                                             </div>
                                         </Link>
-                                    </Link>
                                 </div>
                                 <p className="text">Editorial especializada en crowdfunding. Todos tenemos una historia que contar.</p>
                             </div>
                         </div>
-                        <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4 wow fadeInUp" data-wow-delay="0.2s">
+                        <div className="col-xl-2 col-lg-3 col-md-4 col-sm-4 col-4 wow fadeInUp">
                             <div className="widget widget_services">
                                 <h5 className="footer-title">Editorial</h5>
                                 <ul>
                                     <li>
-                                        <Link to="/about">Quiénes somos</Link>
+                                        <Link to="/about" onClick={window.scrollTo(0, 0)}>Quiénes somos</Link>
                                     </li>
                                     <li>
-                                        <Link to="/contact">Contacto</Link>
+                                        <Link to="/contact" onClick={window.scrollTo(0, 0)}>Contacto</Link>
                                     </li>
                                     <li>
-                                        <Link to="/faq">Preguntas Frecuentes</Link>
+                                        <Link to="/faq" onClick={window.scrollTo(0, 0)}>Preguntas Frecuentes</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -171,10 +83,10 @@ function Footer() {
                                 <h5 className="footer-title">Servicios</h5>
                                 <ul>
                                     <li>
-                                        <Link to="/publish">Publica con nosotros</Link>
+                                        <Link to="/publish" onClick={window.scrollTo(0, 0)}>Publica con nosotros</Link>
                                     </li>
                                     <li>
-                                        <Link to="/">Servicios</Link>
+                                        <Link to="/" onClick={window.scrollTo(0, 0)}>Servicios</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -186,10 +98,10 @@ function Footer() {
                                     {!isLogedin && (
                                         <>
                                             <li>
-                                                <Link to="/login">Entrar</Link>
+                                                <Link to="/login" onClick={window.scrollTo(0, 0)}>Entrar</Link>
                                             </li>
                                             <li>
-                                                <Link to="/register">Regístrate</Link>
+                                                <Link to="/register" onClick={window.scrollTo(0, 0)}>Regístrate</Link>
                                             </li>
                                         </>
                                     )}
@@ -236,7 +148,7 @@ function Footer() {
                         </div>
                         <div className="col-lg-6 col-md-12 text-end">
                             <p>
-                            Grupo <Link to="#">Ray Bolívar Sosa</Link>
+                            Grupo <Link to="/">Ray Bolívar Sosa</Link>
                             </p>
                         </div>
                     </div>

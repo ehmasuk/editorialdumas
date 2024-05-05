@@ -1,0 +1,69 @@
+.author{
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top:10px;
+}
+.author *{
+    line-height: 1;
+}
+.author p{
+    margin-right: 10px;
+}
+.price{
+    font-size: 40px;
+    font-weight: 600;
+    color: #1677FF;
+    margin: 10px 0;
+}
+.donate-btn{
+    font-size: 1.5em !important;
+    text-transform: uppercase !important;
+    width: 100% !important;
+    border-color: #1A1668 !important;
+    background-color: #1A1668 !important;
+}
+
+.ant-progress-text{
+    font-weight: 600 !important;
+    color: #1677FF !important;
+}
+
+
+.user-pack{
+    padding: 20px;
+    border: 1px solid #62646a38;
+}
+.user-pack .header{
+    font-size: 20px;
+    font-weight: 500;
+    color: #1A1668;
+    display: grid;
+    grid-template-columns: auto 100px;
+    margin-bottom: 15px;
+}
+.user-pack .header p{
+    margin: 0;
+}
+.user-pack .header p:nth-child(2){
+    text-align: right;
+}
+
+.ant-tabs-tab-btn{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.ant-tabs-ink-bar{
+    height: 4px !important;
+}
+
+.ant-tabs-nav-wrap{
+    margin-bottom: 50px;
+}
+
+.ant-tabs-nav-list{
+    width: 100%;
+    justify-content: space-evenly;
+}

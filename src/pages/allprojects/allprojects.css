@@ -1,0 +1,104 @@
+.single-project{
+    border-radius: 10px;
+    overflow: hidden;
+    transition: .3s;
+    background: #fff;
+    border: 1px solid #dee2e6;
+}
+.single-project:hover{
+    transform: translateY(-10px);
+}
+.single-project .header{
+    width: 100%;
+    height: 230px;
+}
+.single-project .header img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+.single-project .body{
+    padding: 20px;
+}
+
+.single-project .body .user{
+    margin: auto;
+    margin-top: -50px;
+    height: 100px;
+    width: 100px;
+
+
+}
+.single-project .body .user img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    object-position: top;
+}
+.single-project .body .name{
+    color: #1A1668;
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin: 5px 0;
+}
+.single-project .body .title{
+    color: #1A1668;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.single-project .ant-statistic-content{
+    font-size: 16px !important;
+    font-weight: 600;
+}
+
+.single-project .body .allfund-info{
+    display: flex;
+    color: #000;
+    font-size: 14px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0;
+
+}
+.single-project .body .allfund-info .value{
+    font-weight: 600;
+    margin-left: 5px;
+    color: #207DFF;
+}
+.single-project .body .author-wrappper{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 50px auto;
+    margin-top: 20px;
+    align-items: center;
+}
+.single-project .body .author-wrappper .author-media{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    
+}
+.single-project .body .author-wrappper .author-media img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+.single-project .body .author-wrappper .author-content{
+    text-align: left;
+}
+.single-project .body .author-wrappper .author-meta{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #000;
+    font-size: 14px;
+}
+.single-project .body .author-wrappper .author-meta p{
+    margin: 0;
+}

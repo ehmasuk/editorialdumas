@@ -51,7 +51,7 @@ function ProfileSidebar() {
                     <li>
                         <Link to="/profile" className={`${pathname === "/profile" && "active"}`}>
                             <i className="far fa-user" aria-hidden="true" />
-                            <span>Profile</span>
+                            <span>Perfil</span>
                         </Link>
                     </li>
 
@@ -60,7 +60,7 @@ function ProfileSidebar() {
                             <i>
                                 <FaWpforms />
                             </i>
-                            <span>My Proposals</span>
+                            <span>Propuesta</span>
                         </Link>
                     </li>
 
@@ -69,7 +69,7 @@ function ProfileSidebar() {
                             <i>
                                 <BsSend />
                             </i>
-                            <span>Send Proposals</span>
+                            <span>Enviar propuesta</span>
                         </Link>
                     </li>
 
@@ -85,7 +85,7 @@ function ProfileSidebar() {
                     <li onClick={() => dispatch(authUnCheck())}>
                         <a href="#">
                             <i className="fas fa-sign-out-alt" aria-hidden="true" />
-                            <span>Log Out</span>
+                            <span>Salir</span>
                         </a>
                     </li>
                 </ul>

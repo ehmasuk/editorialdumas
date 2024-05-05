@@ -250,15 +250,6 @@ function Header() {
                         {/* EXTRA NAV */}
                         <div className="extra-nav">
                             <div className="extra-cell">
-                                {/* {!isLogedin ? (
-                                    <Link to="/login" className="btn btn-primary btnhover">
-                                        Login
-                                    </Link>
-                                ) : (
-                                    <Link to="/profile" className="btn btn-primary btnhover">
-                                        Profile
-                                    </Link>
-                                )} */}
                                 <Link to="/publish" className="btn btn-primary btnhover">
                                     Publica con nosotros
                                 </Link>
