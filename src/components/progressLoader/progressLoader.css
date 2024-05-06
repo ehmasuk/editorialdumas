@@ -1,0 +1,20 @@
+.loader-wraper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.62);
+    z-index: 9999;
+}
+
+.percent-wrap{
+    width: 300px;
+    margin: auto;
+}
+.percent-wrap .ant-progress-text{
+    color: #fff !important;
+}

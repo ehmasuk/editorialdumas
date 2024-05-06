@@ -35,6 +35,21 @@
 .editor .editor-body {
     padding: 20px;
 }
+.editor .editor-footer{
+    position: relative;
+    font-size: 13px;
+    margin-top: 20px;
+}
+.editor .editor-footer p{
+    margin-bottom: 0;
+    padding: 10px;
+    text-align: right;
+    font-weight: 600;
+    color: #828282;
+}
+.editor .editor-footer b{
+    color: #1a1668;
+}
 
 .tiptap p.is-editor-empty:first-child::before {
     color: #adb5bd;
@@ -74,3 +89,4 @@
     list-style: disc !important;
     padding-left: 2rem !important;
 }
+

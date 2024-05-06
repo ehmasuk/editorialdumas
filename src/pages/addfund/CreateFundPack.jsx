@@ -172,7 +172,7 @@ function CreateFundPack({dataFromGet,setCurrentStep}) {
                                             <div className="mb-4">
                                                 <label className="bolden">Pack description</label>
                                                 <p className="tiny">This title is provisional, you can change it later if you want.</p>
-                                                <TipTap getEditorData={(data) => handlePackDes(data, index)} />
+                                                <TipTap maxCharacter={300} getEditorData={(data) => handlePackDes(data, index)} />
                                             </div>
                                         </motion.div>
                                     );

@@ -7,13 +7,17 @@ import "./tiptap.css";
 import { Tooltip } from "antd";
 import { GoListOrdered } from "react-icons/go";
 import { PiListBullets } from "react-icons/pi";
+import CharacterCount from "@tiptap/extension-character-count";
 
-function TipTap({ getEditorData, defaultValue }) {
+function TipTap({ getEditorData, defaultValue , maxCharacter }) {
     const handleTiptapData = () => {
         const html = editor.getHTML();
         console.log(html);
         getEditorData(html);
+        console.log(maxCharacter);
     };
+
+    
 
     const editor = useEditor({
         extensions: [
@@ -21,6 +25,9 @@ function TipTap({ getEditorData, defaultValue }) {
             Placeholder.configure({
                 placeholder: "Escribe algo …",
             }),
+            CharacterCount.configure({
+                limit: maxCharacter,
+            })
         ],
         content: defaultValue || "",
     });
@@ -67,6 +74,9 @@ function TipTap({ getEditorData, defaultValue }) {
 
             <div className="editor-body">
                 <EditorContent editor={editor} />
+            </div>
+            <div className="editor-footer">
+                <p className="total-character">Characters : <b>{editor.storage.characterCount.characters()}</b></p>
             </div>
         </div>
     );

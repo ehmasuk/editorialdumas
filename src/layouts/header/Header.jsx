@@ -15,6 +15,10 @@ import { FaUserPlus } from "react-icons/fa6";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { showLoginPopup } from "../../features/LoginPopupSlice";
 
+import defaultAvatar from './../../assets/images/defaultAvatar.png'
+
+
+
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Header() {
@@ -163,7 +167,7 @@ function Header() {
                                                     src={
                                                         userInfo && userInfo.images
                                                             ? userInfo.images.url
-                                                            : "https://cdn-icons-png.flaticon.com/128/14987/14987727.pnghttps://cdn-icons-png.flaticon.com/128/14987/14987727.png"
+                                                            : defaultAvatar
                                                     }
                                                     alt="avatar"
                                                 />

@@ -3,14 +3,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaCoins } from "react-icons/fa6";
-import { SlCalender } from "react-icons/sl";
+import { VscTarget } from "react-icons/vsc";
 import { Link } from "react-router-dom";
 import Base from "../../layouts/Base";
 import "./allprojects.css";
-import { VscTarget } from "react-icons/vsc";
 
-
-
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -30,7 +28,7 @@ function AllProjects() {
 
             // setAllProjects(validData);
             setAllProjects(res.data);
-            console.log(res.data);
+            
         } catch (error) {
             console.log(error);
             toast.error("Something went wrong, please try again later");
@@ -79,7 +77,6 @@ function AllProjects() {
                                                 <img className="img-fluid" src={project?.images[0]?.url} alt="" />
                                             </div>
                                             <div className="body">
-                                                
                                                 <div className="title">{project?.title}</div>
                                                 <Progress percent={90} style={{ width: "100%" }} status="active" />
                                                 <div className="allfund-info">
@@ -99,15 +96,15 @@ function AllProjects() {
 
                                                 <div className="author-wrappper">
                                                     <div className="author-media">
-                                                        <img src={project?.user?.images?.url} alt="avatar" />
+                                                        <img src={project && project.user.images ? project?.user?.images?.url : defaultAvatar} alt="avatar" />
                                                     </div>
                                                     <div className="author-content">
                                                         <div className="author-head">
-                                                            <h5 className="author-name">Adam Jordon</h5>
+                                                            <h5 className="author-name">{project?.user?.name}</h5>
                                                         </div>
                                                         <div className="author-meta">
                                                             <p className="campaign">12 project</p>
-                                                            <p className="campaign">Restante: {`${countdowns[project.id] < 0 ? "0" : countdowns[project.id]} days`}</p>
+                                                            <p className="campaign">Restante: {`${countdowns[project.id] < 0 ? "0" : countdowns[project.id]} días`}</p>
                                                         </div>
                                                     </div>
                                                 </div>

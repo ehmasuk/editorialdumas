@@ -8,6 +8,8 @@ import { FaWpforms } from "react-icons/fa6";
 
 import { Image, Skeleton } from "antd";
 
+import defaultAvatar from "../../assets/images/defaultAvatar.png";
+
 function ProfileSidebar() {
     const dispatch = useDispatch();
 
@@ -23,13 +25,7 @@ function ProfileSidebar() {
                         <a href="#">
                             {!isLoading ? (
                                 <div className="profile-image">
-                                    <Image
-                                        src={
-                                            userInfo && userInfo.images
-                                                ? userInfo.images.url
-                                                : "https://cdn-icons-png.flaticon.com/128/14987/14987727.pnghttps://cdn-icons-png.flaticon.com/128/14987/14987727.png"
-                                        }
-                                    />
+                                    <Image src={userInfo && userInfo.images ? userInfo.images.url : defaultAvatar} />
                                 </div>
                             ) : (
                                 <Skeleton.Avatar className="profile-avatar-skeleton" active={true} />

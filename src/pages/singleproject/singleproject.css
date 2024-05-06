@@ -49,6 +49,11 @@
 .user-pack .header p:nth-child(2){
     text-align: right;
 }
+.pack-cover-img{
+    max-height: 200px !important;
+    object-fit: cover;
+    width: 100%;
+}
 
 .ant-tabs-tab-btn{
     font-size: 20px;
@@ -66,4 +71,14 @@
 .ant-tabs-nav-list{
     width: 100%;
     justify-content: space-evenly;
+}
+
+
+.project-el-libro{
+    text-align: justify;
+    max-width: 800px;
+    margin: auto;
+}
+.project-el-libro .strong{
+    color: #1A1668;
 }

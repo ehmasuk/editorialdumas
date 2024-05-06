@@ -1,4 +1,4 @@
-import { Button, DatePicker, Upload } from "antd";
+import { Button, DatePicker, Progress, Upload } from "antd";
 import { useState } from "react";
 import { LuUpload } from "react-icons/lu";
 import TipTap from "../../components/editor/TipTap";
@@ -8,6 +8,7 @@ import { hideLoader, showLoader } from "../../features/CombineSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { AnimatePresence,motion } from "framer-motion";
+import ProgressLoader from "../../components/progressLoader/ProgressLoader";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -43,6 +44,9 @@ function AddFundInfo({ dataFromGet,setDataFromGet, setCurrentStep }) {
         formState: { errors },
     } = useForm();
 
+    const [progressPercentage,setProgressPercentage] = useState(0);
+    const [isLoading,setIsLoading] = useState(null);
+
 
     const [imageFile,setImageFile] = useState(null)
     const [videoFile,setVideoFile] = useState(null)
@@ -77,24 +81,38 @@ function AddFundInfo({ dataFromGet,setDataFromGet, setCurrentStep }) {
     }
 
     const postData = async (formData)=>{
-        dispatch(showLoader());
+
+
+        const config = {
+            onUploadProgress: (progressEvent) => {
+                setProgressPercentage(Math.floor(progressEvent.progress*100))
+                if(progressEvent.progress == 1){
+                    setIsLoading(false);
+                    setCurrentStep(2)
+                }
+            }
+        }
+
+
+        setIsLoading(true);
         try{
-            const res = await axios.post(`${apiUrl}/user/project`, formData);
+            const res = await axios.post(`${apiUrl}/user/project`, formData,config);
             console.log(res);
             setDataFromGet(res.data)
         }catch (error) {
             console.log(error);
             toast.error("Something went wrong, please try again later");
-        } finally {
-            dispatch(hideLoader());
-            setCurrentStep(2)
         }
+        
     }
 
 
 
     return (
         <div className="addfund">
+
+            {isLoading && <ProgressLoader percentage={progressPercentage} />}
+
             <div className="container">
                 <div className="fund-form">
                     <h4 className="mb-3">Basic informations funds</h4>
