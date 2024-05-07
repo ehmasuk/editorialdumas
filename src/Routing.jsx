@@ -21,6 +21,7 @@ import RecoverPass from "./pages/recoverpassword/RecoverPass";
 import RecoverPassLast from "./pages/recoverpassword/RecoverPassLast";
 import AllProjects from "./pages/allprojects/AllProjects";
 import SingleProject from "./pages/singleproject/SingleProject";
+import EditFund from "./pages/editfund/editfund";
 
 function Routing() {
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
@@ -83,6 +84,14 @@ function Routing() {
                     element={
                         <PrivateRoute isLogedin={isLogedin}>
                             <Profile />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/editproject/:editid"
+                    element={
+                        <PrivateRoute isLogedin={isLogedin}>
+                            <EditFund />
                         </PrivateRoute>
                     }
                 />

@@ -12,9 +12,7 @@ import CharacterCount from "@tiptap/extension-character-count";
 function TipTap({ getEditorData, defaultValue , maxCharacter }) {
     const handleTiptapData = () => {
         const html = editor.getHTML();
-        console.log(html);
         getEditorData(html);
-        console.log(maxCharacter);
     };
 
     

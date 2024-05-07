@@ -65,7 +65,7 @@ function AllProjects() {
         <Base>
             <div className="all-projects content-inner-1">
                 <div className="container">
-                    <h5>BOOKS IN FINANCING PHASE</h5>
+                    <h5>LIBROS EN FASE DE FINANCIACIÓN</h5>
                     <hr />
                     <div className="row">
                         {allProjects?.map((project, index) => {

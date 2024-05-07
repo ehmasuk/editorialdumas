@@ -1,42 +1,24 @@
-import { Button, DatePicker, Progress, Upload } from "antd";
+import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { LuUpload } from "react-icons/lu";
-import TipTap from "../../components/editor/TipTap";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { hideLoader, showLoader } from "../../features/CombineSlice";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { AnimatePresence,motion } from "framer-motion";
+import TipTap from "../../components/editor/TipTap";
 import ProgressLoader from "../../components/progressLoader/ProgressLoader";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
-function AddFundInfo({ dataFromGet,setDataFromGet, setCurrentStep }) {
-
+function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
     const [des, setDes] = useState(null);
-    const [date, setDate] = useState(null);
-
-
-
 
     const dispatch = useDispatch();
 
-
     const handleBookDes = (data) => {
-        setDes(data)
+        setDes(data);
     };
-
-    const handleFinishDate = (data) => {
-        setDate(data)
-        console.log(data);
-    };
-
-
 
     const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
-
-
 
     const {
         register,
@@ -44,73 +26,61 @@ function AddFundInfo({ dataFromGet,setDataFromGet, setCurrentStep }) {
         formState: { errors },
     } = useForm();
 
-    const [progressPercentage,setProgressPercentage] = useState(0);
-    const [isLoading,setIsLoading] = useState(null);
+    const [progressPercentage, setProgressPercentage] = useState(0);
+    const [isLoading, setIsLoading] = useState(null);
 
+    const [imageFile, setImageFile] = useState(null);
+    const [videoFile, setVideoFile] = useState(null);
 
-    const [imageFile,setImageFile] = useState(null)
-    const [videoFile,setVideoFile] = useState(null)
-
-    const handleFormSubmit = (data)=>{
-        const formData = new FormData()
+    const handleFormSubmit = (data) => {
+        const formData = new FormData();
 
         Object.entries(data).forEach(([key, value]) => {
             formData.set(key, value);
         });
-        formData.set('user_id', userId);
-        formData.set('image_url', data.image_url[0]);
-        formData.set('video_url', data.video_url[0]);
+        formData.set("user_id", userId);
+        formData.set("image_url", data.image_url[0]);
+        formData.set("video_url", data.video_url[0]);
 
-        
-        if(des && date){
-            formData.set('target_date', date);
-            formData.set('book_description', des);
-            formData.set('book_id', dataFromGet.id);
-            formData.set('project_id', dataFromGet.project_id);
-            formData.set('project_name', dataFromGet.project_name);
-            
+        if (des) {
+            formData.set("book_description", des);
+            formData.set("book_id", dataFromGet.id);
+            formData.set("project_id", dataFromGet.project_id);
+            formData.set("project_name", dataFromGet.project_name);
 
-            postData(formData)
+            postData(formData);
             for (var pair of formData.entries()) {
                 console.log(pair[0] + ", " + pair[1]);
             }
-        }else{
+        } else {
             toast.error("Please fillup all informations");
         }
+    };
 
-    }
-
-    const postData = async (formData)=>{
-
-
+    const postData = async (formData) => {
         const config = {
             onUploadProgress: (progressEvent) => {
-                setProgressPercentage(Math.floor(progressEvent.progress*100))
-                if(progressEvent.progress == 1){
+                setProgressPercentage(Math.floor(progressEvent.progress * 100));
+                if (progressEvent.progress == 1) {
                     setIsLoading(false);
-                    setCurrentStep(2)
+                    setCurrentStep(2);
                 }
-            }
-        }
-
+            },
+        };
 
         setIsLoading(true);
-        try{
-            const res = await axios.post(`${apiUrl}/user/project`, formData,config);
+        try {
+            const res = await axios.post(`${apiUrl}/user/project`, formData, config);
             console.log(res);
-            setDataFromGet(res.data)
-        }catch (error) {
+            setDataFromGet(res.data);
+        } catch (error) {
             console.log(error);
             toast.error("Something went wrong, please try again later");
         }
-        
-    }
-
-
+    };
 
     return (
         <div className="addfund">
-
             {isLoading && <ProgressLoader percentage={progressPercentage} />}
 
             <div className="container">
@@ -184,7 +154,7 @@ function AddFundInfo({ dataFromGet,setDataFromGet, setCurrentStep }) {
                                 <label className="bolden">Book video</label>
                                 <p className="tiny">This title is provisional, you can change it later if you want.</p>
                                 <input
-                                accept=".mp4"
+                                    accept=".mp4"
                                     type="file"
                                     {...register("video_url", {
                                         required: "Este campo es obligatorio",
@@ -205,11 +175,6 @@ function AddFundInfo({ dataFromGet,setDataFromGet, setCurrentStep }) {
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
-                            </div>
-                            <div className="mb-4">
-                                <label className="bolden">Finish date</label>
-                                <p className="tiny">This title is provisional, you can change it later if you want.</p>
-                                <DatePicker needConfirm onChange={handleFinishDate} />
                             </div>
                         </div>
                         <div className="d-flex justify-content-end">

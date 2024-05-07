@@ -9,6 +9,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ProjectPacks from "./ProjectPacks";
+import ProjectComments from "./ProjectComments";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -62,6 +63,11 @@ function SingleProject() {
             key: "4",
             label: "Mecenas",
             children: "Content of Tab Pane 3",
+        },
+        {
+            key: "5",
+            label: "Comunidad",
+            children: <ProjectComments/>,
         },
     ];
 

@@ -301,6 +301,11 @@ function Header() {
                                             </Link>
                                         </li>
                                         <li>
+                                            <Link to="/allprojects">
+                                                <span>Libros en campaña</span>
+                                            </Link>
+                                        </li>
+                                        <li>
                                             <Link to="/">
                                                 <span>Libros</span>
                                             </Link>

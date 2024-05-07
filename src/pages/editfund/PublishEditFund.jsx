@@ -1,7 +1,7 @@
 import { Result } from "antd";
 import { useNavigate } from "react-router-dom";
 
-function PublishFund() {
+function PublishEditFund() {
 
     const navigate = useNavigate()
 
@@ -12,9 +12,10 @@ function PublishFund() {
 
     return (
         <div style={{minHeight:'70vh'}}>
-            <Result status="success" title="¡Ya hemos terminado, tu proyecto ha sido publicado!" />
+            <Result status="success" title="¡Tu proyecto se actualizó exitosamente!" />
         </div>
     );
 }
 
-export default PublishFund;
+
+export default PublishEditFund
