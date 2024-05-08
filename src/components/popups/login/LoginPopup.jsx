@@ -12,7 +12,7 @@ import "./loginpopup.css";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
-function LoginPopup({ sucessredirect }) {
+function LoginPopup() {
     const dispatch = useDispatch();
     const { loginPopupIsOpen } = useSelector((store) => store.LoginPopupSlice);
 
@@ -22,7 +22,6 @@ function LoginPopup({ sucessredirect }) {
         register,
         handleSubmit,
         formState: { errors },
-        reset,
     } = useForm();
 
     const [loginisLoading, setLoginisLoading] = useState(false);
@@ -30,9 +29,7 @@ function LoginPopup({ sucessredirect }) {
 
     const loginSucessAfterWorks = (res) => {
         localStorage.setItem("isLogedin", JSON.stringify(res.data));
-        reset();
         dispatch(authCheck());
-        navigate(sucessredirect);
         dispatch(hideLoginPopup());
     };
 

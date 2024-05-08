@@ -17,6 +17,7 @@ const AuthCheckerSlice = createSlice({
     reducers: {
         authCheck: (state) => {
             state.isLogedin = true;
+            toast.success("Loged in");
         },
         authUnCheck: (state) => {
             localStorage.removeItem("isLogedin");

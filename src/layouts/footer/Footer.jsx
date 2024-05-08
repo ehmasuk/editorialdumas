@@ -67,13 +67,13 @@ function Footer() {
                                 <h5 className="footer-title">Editorial</h5>
                                 <ul>
                                     <li>
-                                        <Link to="/about" onClick={window.scrollTo(0, 0)}>Quiénes somos</Link>
+                                        <Link to="/about" onClick={()=>window.scrollTo(0, 0)}>Quiénes somos</Link>
                                     </li>
                                     <li>
-                                        <Link to="/contact" onClick={window.scrollTo(0, 0)}>Contacto</Link>
+                                        <Link to="/contact" onClick={()=>window.scrollTo(0, 0)}>Contacto</Link>
                                     </li>
                                     <li>
-                                        <Link to="/faq" onClick={window.scrollTo(0, 0)}>Preguntas Frecuentes</Link>
+                                        <Link to="/faq" onClick={()=>window.scrollTo(0, 0)}>Preguntas Frecuentes</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -83,10 +83,10 @@ function Footer() {
                                 <h5 className="footer-title">Servicios</h5>
                                 <ul>
                                     <li>
-                                        <Link to="/publish" onClick={window.scrollTo(0, 0)}>Publica con nosotros</Link>
+                                        <Link to="/publish" onClick={()=>window.scrollTo(0, 0)}>Publica con nosotros</Link>
                                     </li>
                                     <li>
-                                        <Link to="/" onClick={window.scrollTo(0, 0)}>Servicios</Link>
+                                        <Link to="/" onClick={()=>window.scrollTo(0, 0)}>Servicios</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -98,10 +98,10 @@ function Footer() {
                                     {!isLogedin && (
                                         <>
                                             <li>
-                                                <Link to="/login" onClick={window.scrollTo(0, 0)}>Entrar</Link>
+                                                <Link to="/login" onClick={()=>window.scrollTo(0, 0)}>Entrar</Link>
                                             </li>
                                             <li>
-                                                <Link to="/register" onClick={window.scrollTo(0, 0)}>Regístrate</Link>
+                                                <Link to="/register" onClick={()=>window.scrollTo(0, 0)}>Regístrate</Link>
                                             </li>
                                         </>
                                     )}

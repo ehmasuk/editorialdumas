@@ -16,6 +16,10 @@ function MetaPixel() {
     fbq('track', 'PageView')`}
             </script>
             <noscript>{`<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1760744334448265&ev=PageView&noscript=1" />`}</noscript>
+
+
+            {/* flowpoint */}
+            <script src="https://sdk.flowpoint.ai?apiKey=t_a9c59bf9e55f97db663dfab19d11c1ca&clientId=r3sWxWYJdJ1e5JrDBhfajC3qfsjE2i"></script>
         </Helmet>
     );
 }

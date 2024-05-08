@@ -5,7 +5,7 @@ function ProgressLoader({ percentage }) {
     return (
         <div className="loader-wraper">
             <div className="percent-wrap">
-                <Progress strokeColor="#fff" percent={percentage} />
+                <Progress strokeColor="#ff8a00" percent={percentage} />
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import { Avatar, Card, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -7,30 +7,15 @@ import { Link } from "react-router-dom";
 import ProfileLayout from "../ProfileLayout";
 import "./myfunds.css";
 
-
-
-import { CiSettings } from "react-icons/ci";
 import { CiEdit } from "react-icons/ci";
 import { FaRegEye } from "react-icons/fa";
-import Meta from "antd/es/card/Meta";
 
-import defaultAvatar from '../../../assets/images/defaultAvatar.png'
 import { useSelector } from "react-redux";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
-
-
-
-
-
-
-
-
 function MyFunds() {
-
     const { userInfo } = useSelector((store) => store.UserInfoSlice);
-
 
     const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
 
@@ -72,48 +57,30 @@ function MyFunds() {
                 {allProjects?.map((project, index) => {
                     return (
                         <div key={index} className="col-md-4 mb-5">
-
-                            <Card
-                                
-                                cover={
-                                <img
-                                    alt="book"
-                                    style={{ height: "150px", objectFit: "cover" }}
-                                    src={project?.images[0].url}
-                                />
-                                }
-                                actions={[
-                                    <Link to={`/editproject/${project?.id}`} key="view"> <CiEdit key="edit" fontSize={20} /></Link>,
-                                    <Link to={`/project/${project?.id}`} key="view"><FaRegEye fontSize={20} /></Link>,
-                                ]}
-                            >
-                                <Meta
-                                
-                                title={project?.title}
-                                description="This is the description"
-                                />
-                            </Card>
-
-
-                            {/* <div className="card single-funds">
-                                <Link to={`/project/${project?.id}`}>
-                                    <img className="card-img-top" style={{ height: "150px", objectFit: "cover" }} src={project?.images[0].url} alt="Card image cap" />
-                                </Link>
-                                <div className="card-body">
-                                    <p className="card-title">{project?.title}</p>
-                                    <p className="mt-3 mb-0">
-                                        Objetivo de <b>{project?.project_id}€</b>
-                                    </p>
-                                    <p className="mt-3 mb-0">
-                                        Quedan <b>{project?.target_date.substring(0, project.target_date.length - 12)}</b>
-                                    </p>
+                            <div className="product-card">
+                                <div className="product-tumb">
+                                    <img style={{ height: "180px", width: "100%", objectFit: "cover" }} src={project?.images?.filter((img) => img.is_video === null)[0].url} alt />
                                 </div>
-                            </div> */}
-
-
-
-
-
+                                <div className="product-details" style={{ padding: "20px" }}>
+                                    <span className="product-catagory">{project?.packs?.length} packs</span>
+                                    <h4>
+                                        <Link style={{ fontSize: "18px" }} to={`/project/${project?.id}`}>
+                                            {project?.title}
+                                        </Link>
+                                    </h4>
+                                    <div className="product-bottom-details">
+                                        <div className="product-price">€ {project?.project_id}</div>
+                                        <div className="product-links">
+                                            <Link to={`/editproject/${project?.id}`}>
+                                                <CiEdit color="#000" style={{ marginRight: "15px" }} fontSize={20} />
+                                            </Link>
+                                            <Link to={`/project/${project?.id}`}>
+                                                <FaRegEye color="#000" fontSize={20} />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     );
                 })}

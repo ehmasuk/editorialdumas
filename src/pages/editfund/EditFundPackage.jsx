@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-import { Badge, Radio } from "antd";
+import { Badge, Radio, Skeleton } from "antd";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 
-import "./editfund.css";
 import { hideLoader, showLoader } from "../../features/CombineSlice";
+import "./editfund.css";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -50,26 +50,22 @@ const packPoints = [
     ],
 ];
 
-function EditFundPackage({ prevContent,dataFromGet, setDataFromGet, setCurrentStep }) {
+function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentStep }) {
+    const [userData, setUserData] = useState(null);
 
+    useEffect(() => {
+        prevContent &&
+            setUserData({
+                project_id: prevContent?.project_id,
+                project_name: prevContent?.project_name,
+                user_id: prevContent?.user?.id,
+                book_id: prevContent?.id,
+                book_description: prevContent?.book_description,
+                title: prevContent?.title,
+            });
+    }, [prevContent]);
 
-    const [selectedPackage, setSelectedPackage] = useState(null);
-
-    const [userData, setUserData] = useState({ book_id: null });
-
-
-    useEffect(()=>{
-        setSelectedPackage(Number(prevContent?.project_id))
-        setUserData({ book_id: prevContent?.id })
-    },[prevContent])
-
-
-
-
-
-    
     const handleChange = (e) => {
-        setSelectedPackage(e.target.value);
         if (e.target.value == 599) {
             setUserData({ ...userData, project_id: e.target.value, project_name: "Writing and Publishing of a Novel 599€" });
         }
@@ -86,131 +82,147 @@ function EditFundPackage({ prevContent,dataFromGet, setDataFromGet, setCurrentSt
 
     const dispatch = useDispatch();
 
-    const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
-
     const handleStep = async () => {
-        if (selectedPackage) {
-            dispatch(showLoader());
-            try {
-                const res = await axios.post(`${apiUrl}/user/project`, { ...userData, user_id: userId });
-                setDataFromGet(res.data);
-                setCurrentStep(1);
-            } catch (error) {
-                console.log(error);
-                toast.error("Something went wrong, please try again later");
-            } finally {
-                dispatch(hideLoader());
-            }
-        } else {
-            toast.error("No package selected");
+        dispatch(showLoader());
+
+        try {
+            const res = await axios.post(`${apiUrl}/user/project`, userData);
+            setDataFromGet(res.data);
+            setCurrentStep(1);
+        } catch (error) {
+            console.log(error);
+            toast.error("Algo salió mal, por favor inténtalo de nuevo más tarde");
+        } finally {
+            dispatch(hideLoader());
         }
     };
 
     return (
-        
-        <div style={{ marginTop: "50px" }}>
-            <Radio.Group className="w-100 fund-package-select" onChange={handleChange} value={selectedPackage}>
+        <div style={{ marginTop: "20px" }}>
+            <h5>Seleccione el paquete perfecto para su libro y haga clic en Siguiente</h5>
+            <hr />
+            {userData && (
+                <>
+                    <Radio.Group className="w-100 fund-package-select" onChange={handleChange} value={Number(userData?.project_id)}>
+                        <div className="row">
+                            <div className="col-md-3">
+                                <Radio value={599} className="pack-radio-1">
+                                    <div className="package-card">
+                                        <div className="header">
+                                            <p className="title">Inicial</p>
+                                            <p className="price">599€</p>
+                                        </div>
+                                        <p className="desc">Escritura y publicación de una novela</p>
+                                        <ul className="lists">
+                                            {packPoints[0].map((point, index) => {
+                                                return (
+                                                    <li key={index} className="list">
+                                                        <FaRegCircleCheck />
+                                                        <p>{point}</p>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
+                                </Radio>
+                            </div>
+
+                            <div className="col-md-3">
+                                <Radio value={699} className="pack-radio-2">
+                                    <Badge.Ribbon text="Mejor vendido" color="orange">
+                                        <div className="package-card">
+                                            <div className="header">
+                                                <p className="title">Básico</p>
+                                                <p className="price">699€</p>
+                                            </div>
+                                            <p className="desc">Publicación básica</p>
+                                            <ul className="lists">
+                                                {packPoints[1].map((point, index) => {
+                                                    return (
+                                                        <li key={index} className="list">
+                                                            <FaRegCircleCheck />
+                                                            <p>{point}</p>
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        </div>
+                                    </Badge.Ribbon>
+                                </Radio>
+                            </div>
+                            <div className="col-md-3">
+                                <Radio value={899} className="pack-radio-3">
+                                    <Badge.Ribbon text="Popular" color="pink">
+                                        <div className="package-card">
+                                            <div className="header">
+                                                <p className="title">Avanzado</p>
+                                                <p className="price">899€</p>
+                                            </div>
+                                            <p className="desc">Publicación de alcance medio</p>
+                                            <ul className="lists">
+                                                {packPoints[2].map((point, index) => {
+                                                    return (
+                                                        <li key={index} className="list">
+                                                            <FaRegCircleCheck />
+                                                            <p>{point}</p>
+                                                        </li>
+                                                    );
+                                                })}
+                                            </ul>
+                                        </div>
+                                    </Badge.Ribbon>
+                                </Radio>
+                            </div>
+                            <div className="col-md-3">
+                                <Radio value={1499} className="pack-radio-4">
+                                    <div className="package-card">
+                                        <div className="header">
+                                            <p className="title">Profesional</p>
+                                            <p className="price">1499€</p>
+                                        </div>
+                                        <p className="desc">Publicación de alcance ampliado</p>
+                                        <ul className="lists">
+                                            {packPoints[3].map((point, index) => {
+                                                return (
+                                                    <li key={index} className="list">
+                                                        <FaRegCircleCheck />
+                                                        <p>{point}</p>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </div>
+                                </Radio>
+                            </div>
+                        </div>
+                    </Radio.Group>
+
+                    <div className="d-flex justify-content-end">
+                        <button onClick={handleStep} className="btn btn-primary btnhover mt-3">
+                            Siguiente
+                        </button>
+                    </div>
+                </>
+            )}
+
+            {!userData && (
                 <div className="row">
                     <div className="col-md-3">
-                        <Radio value={599} className="pack-radio-1">
-                            <div className="package-card">
-                                <div className="header">
-                                    <p className="title">Inicial</p>
-                                    <p className="price">599€</p>
-                                </div>
-                                <p className="desc">Escritura y publicación de una novela</p>
-                                <ul className="lists">
-                                    {packPoints[0].map((point, index) => {
-                                        return (
-                                            <li key={index} className="list">
-                                                <FaRegCircleCheck />
-                                                <p>{point}</p>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            </div>
-                        </Radio>
-                    </div>
-
-                    <div className="col-md-3">
-                        <Radio value={699} className="pack-radio-2">
-                            <Badge.Ribbon text="Mejor vendido" color="orange">
-                                <div className="package-card">
-                                    <div className="header">
-                                        <p className="title">Básico</p>
-                                        <p className="price">699€</p>
-                                    </div>
-                                    <p className="desc">Publicación básica</p>
-                                    <ul className="lists">
-                                        {packPoints[1].map((point, index) => {
-                                            return (
-                                                <li key={index} className="list">
-                                                    <FaRegCircleCheck />
-                                                    <p>{point}</p>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </div>
-                            </Badge.Ribbon>
-                        </Radio>
+                        <Skeleton paragraph={{ rows: 20 }} active />
                     </div>
                     <div className="col-md-3">
-                        <Radio value={899} className="pack-radio-3">
-                            <Badge.Ribbon text="Popular" color="pink">
-                                <div className="package-card">
-                                    <div className="header">
-                                        <p className="title">Avanzado</p>
-                                        <p className="price">899€</p>
-                                    </div>
-                                    <p className="desc">Publicación de alcance medio</p>
-                                    <ul className="lists">
-                                        {packPoints[2].map((point, index) => {
-                                            return (
-                                                <li key={index} className="list">
-                                                    <FaRegCircleCheck />
-                                                    <p>{point}</p>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </div>
-                            </Badge.Ribbon>
-                        </Radio>
+                        <Skeleton paragraph={{ rows: 20 }} active />
                     </div>
                     <div className="col-md-3">
-                        <Radio value={1499} className="pack-radio-4">
-                            <div className="package-card">
-                                <div className="header">
-                                    <p className="title">Profesional</p>
-                                    <p className="price">1499€</p>
-                                </div>
-                                <p className="desc">Publicación de alcance ampliado</p>
-                                <ul className="lists">
-                                    {packPoints[3].map((point, index) => {
-                                        return (
-                                            <li key={index} className="list">
-                                                <FaRegCircleCheck />
-                                                <p>{point}</p>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            </div>
-                        </Radio>
+                        <Skeleton paragraph={{ rows: 20 }} active />
+                    </div>
+                    <div className="col-md-3">
+                        <Skeleton paragraph={{ rows: 20 }} active />
                     </div>
                 </div>
-            </Radio.Group>
-
-            <div className="d-flex justify-content-end">
-                <button onClick={handleStep} className="btn btn-primary btnhover mt-3">
-                    Siguiente
-                </button>
-            </div>
+            )}
         </div>
     );
 }
 
-
-export default EditFundPackage
+export default EditFundPackage;

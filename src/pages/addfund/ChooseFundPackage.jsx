@@ -93,7 +93,11 @@ function ChooseFundPackage({ dataFromGet, setDataFromGet, setCurrentStep }) {
     };
 
     return (
-        <div style={{ marginTop: "50px" }}>
+        <div style={{ marginTop: "20px" }}>
+            <h5>Seleccione el paquete perfecto para su libro y haga clic en Siguiente</h5>
+            <hr />
+
+
             <Radio.Group className="w-100 fund-package-select" onChange={handleChange}>
                 <div className="row">
                     <div className="col-md-3">

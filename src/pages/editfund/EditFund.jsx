@@ -72,7 +72,7 @@ function EditFund() {
                 />
                 <div className="fund-wraper">
                     {currentStep === 0 && <EditFundPackage prevContent={prevContent} dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
-                    {currentStep === 1 && <EditFundInfo prevContent={prevContent} dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
+                    {currentStep === 1 && <EditFundInfo getData={getData} prevContent={prevContent} dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
                     {currentStep === 2 && <EditFundPack prevContent={prevContent} dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
                     {currentStep === 3 && <PublishEditFund />}
                 </div>

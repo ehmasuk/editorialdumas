@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.62);
+    background: rgba(255, 255, 255, 0.704);
     z-index: 9999;
 }
 
@@ -16,5 +16,9 @@
     margin: auto;
 }
 .percent-wrap .ant-progress-text{
-    color: #fff !important;
+    color: #1A1668 !important;
+}
+.percent-wrap .ant-progress-inner{
+    background: #1A1668 !important;
+    border: 3px solid #1A1668;
 }

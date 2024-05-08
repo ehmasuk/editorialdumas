@@ -67,7 +67,7 @@ function SingleProject() {
         {
             key: "5",
             label: "Comunidad",
-            children: <ProjectComments/>,
+            children: <ProjectComments getData={getData} userproject={userproject && userproject} />,
         },
     ];
 
@@ -93,9 +93,9 @@ function SingleProject() {
                                                     <IoMdPlay fontSize={35} />
                                                 </button>
                                             }
-                                            light={userproject?.images[0]?.url}
+                                            light={userproject?.images.filter(img=>img.is_video === null)[0].url}
                                             controls={true}
-                                            url={userproject?.images[1]?.url}
+                                            url={userproject?.images.filter(img=>img.is_video === '1')[0].url}
                                         />
                                     </div>
                                 </div>

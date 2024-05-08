@@ -74,7 +74,7 @@ function AllProjects() {
                                     <Link to={`/project/${project?.id}`}>
                                         <div className="single-project">
                                             <div className="header">
-                                                <img className="img-fluid" src={project?.images[0]?.url} alt="" />
+                                                <img className="img-fluid" src={project?.images.filter(img=>img.is_video === null)[0].url}  alt="" />
                                             </div>
                                             <div className="body">
                                                 <div className="title">{project?.title}</div>

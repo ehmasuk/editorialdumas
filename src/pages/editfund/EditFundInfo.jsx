@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import TipTap from "../../components/editor/TipTap";
@@ -39,13 +38,8 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
 
     // preValues && console.log(preValues);
 
-
     const [progressPercentage, setProgressPercentage] = useState(0);
     const [isLoading, setIsLoading] = useState(null);
-
-
-
-
 
     const postData = async (formData) => {
         const config = {
@@ -85,7 +79,7 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
     };
 
     const handleFormSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const formData = new FormData();
 
         Object.entries(allData).forEach(([key, value]) => {
@@ -118,18 +112,15 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
             {preValues && (
                 <div className="container">
                     <div className="fund-form">
-                        <h4 className="mb-3">Basic informations funds</h4>
+                        <h4 className="mb-3">Información básica sobre tu libro</h4>
                         <div className="mb-5">
-                            <p className="basic">At this point we ask you to complete the information about your book. The more detailed it is, the easier it will be for our team to evaluate it.</p>
-                            <p className="basic">
-                                Dont worry if your project is in a very early stage, remember that your project will have to complete a crowdfunding campaign before being published.
-                            </p>
+                            <p className="basic">En este punto te pedimos que completes la información sobre tu libro. Cuanto más detallado sea, más fácil será para nuestro equipo evaluarlo.</p>
                         </div>
                         <form onSubmit={handleFormSubmit}>
                             <div className="mt-5">
                                 <div className="mb-4">
-                                    <label className="bolden">Title of the book</label>
-                                    <p className="tiny">This title is provisional, you can change it later if you want.</p>
+                                    <label className="bolden">Titulo del libro</label>
+                                    <p className="tiny">Este título es provisional, puedes cambiarlo más adelante si lo deseas.</p>
                                     <input defaultValue={preValues.title} name="title" onChange={handleChange} type="text" className="form-control" />
                                 </div>
                                 <div className="mb-4">
@@ -147,7 +138,7 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
                                         </div>
 
                                         <div className="col-md-4">
-                                            <img className="img-fluid" style={{ maxHeight: "115px" }} src={preValues.images[0].url} alt="" />
+                                            <img className="img-fluid" style={{ maxHeight: "115px" }} src={preValues?.images?.filter((img) => img.is_video === null)[0].url} alt="" />
                                         </div>
                                     </div>
                                 </div>
@@ -158,9 +149,7 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
                                             <p className="tiny">This title is provisional, you can change it later if you want.</p>
                                             <input onChange={handleChange} accept=".mp4" name="video_url" type="file" className="form-control" />
                                         </div>
-                                        <div className="col-md-6">
-                                            
-                                        </div>
+                                        <div className="col-md-6"></div>
                                     </div>
                                 </div>
                             </div>

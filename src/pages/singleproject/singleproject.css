@@ -1,7 +1,6 @@
 .author{
     line-height: 1;
     display: flex;
-    align-items: center;
     margin-bottom: 20px;
     margin-top:10px;
 }
@@ -97,85 +96,92 @@
 
 
 
-.author {
+.comment-wraper .author {
     display: flex;
     margin-top: 30px;
 }
-.author img,.replay-box img {
+.comment-wraper .author img,.replay-box img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     padding: 2px;
     margin-right: 10px;
+    object-fit: cover;
 }
-.comment-box {
+.comment-wraper .comment-box {
     width: 100%;
 }
-.author .comment-box textarea {
+.comment-wraper .author .comment-box textarea {
     padding: 10px 50px 5px 15px;
     box-shadow: none !important;
     outline: none !important;
     display: block;
     width: 100%;
-    border: 1px solid #eee;
+    border: 1px solid #EAA451;
 }
-.author .comment-box .submit-btn {
-    background-color: #794eda;
+.comment-wraper .author .comment-box .submit-btn {
+    background-color: #EAA451;
     color: #fff;
     border: none;
     border-radius: 3px;
     margin-left: auto;
-    padding: 5px 20px;
-    float: right;
+    padding: 10px 20px;
     margin-top: 5px;
-    display: none;
+    margin-top: 10px;
+    float: right;
 }
 
 
-.replay-box{
+.comment-wraper .replay-box{
     display: flex;
     padding: 0 10px;
     margin-top: 30px;
     font-size: 14px;
 }
-.replay-box-right{
+.comment-wraper .replay-box-right{
     width: 100%;
 }
-.replay-box .top, .replay-box .bottom{
+.comment-wraper .replay-box .top, .replay-box .bottom{
     display: flex;
     width: 100%;
     justify-content: space-between;
 }
-.replay-box .bottom{
+.comment-wraper .replay-box .bottom{
     align-items: flex-end;
 }
-.replay-box .top .fa-ellipsis-h{
+.comment-wraper .replay-box .top .fa-ellipsis-h{
     cursor: pointer;
     font-size: 18px;
 }
-.replay-box .top .name{
+.comment-wraper .replay-box .top .name{
     font-weight: 600;
+    margin: 0;
 }
-.replay-box .bottom{
-    margin: 10px 0;
-}
-.replay-box .bottom .comment{
+
+.comment-wraper .replay-box .bottom .comment{
     padding-right: 20px;
     text-align: justify;
+    margin-bottom: 5px;
 }
-.replay-box .bottom .fas{
+.comment-wraper .replay-box .bottom .fas{
     color: #794eda !important;
 }
-.replay-box .bottom .fa-heart{
+.comment-wraper .replay-box .bottom .fa-heart{
     cursor: pointer;
     color: #000;
     font-size: 18px;
 }
-.replay-box .rest span{
+
+.comment-wraper .date{
     font-size: 13px;
     color: rgba(18, 18, 18, 0.64);
     margin-right: 10px;
 }
-.replay-box .rest strong{
-    color: #794eda;
+.comment-wraper .replay-box .rest{
+    color: #EAA451;
+    cursor: pointer;
+}
+.comment-wraper{
+    max-width: 800px;
+    margin: auto;
 }

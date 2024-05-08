@@ -12,7 +12,7 @@ function ProjectPacks({ userproject }) {
                                 <p className="text-right">{pack?.pack_amount}€</p>
                             </div>
                             <div className="pack-img mb-3">
-                                <img className="pack-cover-img" src={userproject?.images[0]?.url} alt="" />
+                                <img className="pack-cover-img" src={userproject?.images.filter(img=>img.is_video === null)[0].url} alt="" />
                             </div>
                             <div className="body" dangerouslySetInnerHTML={{ __html: pack?.pack_description }}></div>
                             <div className="footer">

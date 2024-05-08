@@ -10,7 +10,7 @@ function Base({ children }) {
     return (
         <>
             <Header />
-            {loginPopupIsOpen && <LoginPopup sucessredirect="/profile/myfunds" />}
+            {loginPopupIsOpen && <LoginPopup />}
             {loaderIsOpen && <Loader />}
             {children}
             <Footer />

@@ -85,16 +85,15 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
 
             <div className="container">
                 <div className="fund-form">
-                    <h4 className="mb-3">Basic informations funds</h4>
-                    <div className="mb-5">
-                        <p className="basic">At this point we ask you to complete the information about your book. The more detailed it is, the easier it will be for our team to evaluate it.</p>
-                        <p className="basic">Dont worry if your project is in a very early stage, remember that your project will have to complete a crowdfunding campaign before being published.</p>
-                    </div>
+                <h4 className="mb-3">Información básica sobre tu libro</h4>
+                        <div className="mb-5">
+                            <p className="basic">En este punto te pedimos que completes la información sobre tu libro. Cuanto más detallado sea, más fácil será para nuestro equipo evaluarlo.</p>
+                        </div>
                     <form onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="mt-5">
                             <div className="mb-4">
-                                <label className="bolden">Title of the book</label>
-                                <p className="tiny">This title is provisional, you can change it later if you want.</p>
+                            <label className="bolden">Titulo del libro</label>
+                                    <p className="tiny">Este título es provisional, puedes cambiarlo más adelante si lo deseas.</p>
                                 <input
                                     name="title"
                                     {...register("title", {
