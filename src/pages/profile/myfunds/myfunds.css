@@ -33,3 +33,9 @@
     margin-top: 10px;
     font-weight: 500;
 }
+.my-fund-wraper .product-card{
+    transition: .3s;
+}
+.my-fund-wraper .product-card:hover{
+    transform: translateY(-5px);
+}

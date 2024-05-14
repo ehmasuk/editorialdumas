@@ -29,8 +29,7 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
     const [progressPercentage, setProgressPercentage] = useState(0);
     const [isLoading, setIsLoading] = useState(null);
 
-    const [imageFile, setImageFile] = useState(null);
-    const [videoFile, setVideoFile] = useState(null);
+
 
     const handleFormSubmit = (data) => {
         const formData = new FormData();
@@ -79,21 +78,27 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
         }
     };
 
+
+
+
+
+
+
     return (
         <div className="addfund">
             {isLoading && <ProgressLoader percentage={progressPercentage} />}
 
             <div className="container">
                 <div className="fund-form">
-                <h4 className="mb-3">Información básica sobre tu libro</h4>
-                        <div className="mb-5">
-                            <p className="basic">En este punto te pedimos que completes la información sobre tu libro. Cuanto más detallado sea, más fácil será para nuestro equipo evaluarlo.</p>
-                        </div>
+                    <h4 className="mb-3">Información básica sobre tu libro</h4>
+                    <div className="mb-5">
+                        <p className="basic">En este punto te pedimos que completes la información sobre tu libro. Cuanto más detallado sea, más fácil será para nuestro equipo evaluarlo.</p>
+                    </div>
                     <form onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="mt-5">
                             <div className="mb-4">
-                            <label className="bolden">Titulo del libro</label>
-                                    <p className="tiny">Este título es provisional, puedes cambiarlo más adelante si lo deseas.</p>
+                                <label className="bolden">Titulo del libro</label>
+                                <p className="tiny">Este título es provisional, puedes cambiarlo más adelante si lo deseas.</p>
                                 <input
                                     name="title"
                                     {...register("title", {
@@ -118,13 +123,13 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
                                 </AnimatePresence>
                             </div>
                             <div className="mb-4">
-                                <label className="bolden">Book description</label>
-                                <p className="tiny">Give a brief description of the book you are going to send us</p>
+                                <label className="bolden">Descripción del libro</label>
+                                <p className="tiny">Dé una breve descripción del libro que nos va a enviar</p>
                                 <TipTap getEditorData={handleBookDes} />
                             </div>
                             <div className="mb-4">
-                                <label className="bolden">Book image</label>
-                                <p className="tiny">This title is provisional, you can change it later if you want.</p>
+                                <label className="bolden">Imagen de libro</label>
+                                <p className="tiny">Sube tu imagen de portada de tu libro</p>
 
                                 <input
                                     accept=".png,.jpg,.jpeg"
@@ -150,10 +155,10 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
                                 </AnimatePresence>
                             </div>
                             <div className="mb-4">
-                                <label className="bolden">Book video</label>
-                                <p className="tiny">This title is provisional, you can change it later if you want.</p>
+                                <label className="bolden">Video de libro</label>
+                                <p className="tiny">Sube tu video para la publicación del libro</p>
                                 <input
-                                    accept=".mp4"
+                                    accept=".mp4,.mov,.avi,.wmv,.webm,.flv"
                                     type="file"
                                     {...register("video_url", {
                                         required: "Este campo es obligatorio",
@@ -177,7 +182,7 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
                             </div>
                         </div>
                         <div className="d-flex justify-content-end">
-                            <button className="btn btn-primary btnhover mt-3">Next</button>
+                            <button className="btn btn-primary btnhover mt-3">Guardar y continuar</button>
                         </div>
                     </form>
                 </div>

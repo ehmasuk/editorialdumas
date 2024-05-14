@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaCoins } from "react-icons/fa6";
 import { VscTarget } from "react-icons/vsc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Base from "../../layouts/Base";
 import "./allprojects.css";
 
@@ -12,9 +12,15 @@ import defaultAvatar from "../../assets/images/defaultAvatar.png";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
+
+
 function AllProjects() {
+
+
     const [allProjects, setAllProjects] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
+
+
 
     const getData = async () => {
         setIsLoading(true);
@@ -32,6 +38,7 @@ function AllProjects() {
         } catch (error) {
             console.log(error);
             toast.error("Something went wrong, please try again later");
+
         } finally {
             setIsLoading(false);
         }
@@ -61,6 +68,34 @@ function AllProjects() {
         calculateCountdowns();
     }, [allProjects]);
 
+
+
+
+    const calculateCompletion = (currentAmount, targetAmount)=>{
+        var completionPercentage = (currentAmount / targetAmount) * 100;
+        return Math.floor(completionPercentage);
+    }
+
+    const totalAmountGathered = (donations)=>{
+        var result
+        if(donations){
+            result = donations.reduce((acc,item)=>{
+                acc = acc + Number(item.donation_amount);
+                return acc
+            },0)
+        }else{
+            result = 0
+        }
+        return result
+    }
+
+
+
+
+
+
+
+
     return (
         <Base>
             <div className="all-projects content-inner-1">
@@ -78,13 +113,18 @@ function AllProjects() {
                                             </div>
                                             <div className="body">
                                                 <div className="title">{project?.title}</div>
-                                                <Progress percent={90} style={{ width: "100%" }} status="active" />
+                                                <Progress percent={
+                                                    calculateCompletion(
+                                                        totalAmountGathered(project?.donations),
+                                                        Number(project?.project_id) || 0
+                                                    )
+                                                    } style={{ width: "100%" }} status="active" />
                                                 <div className="allfund-info">
                                                     <div className="d-flex">
                                                         <div className="mr-2">
                                                             <FaCoins fontSize={15} /> Recaudó:
                                                         </div>
-                                                        <div className="value">{`${project?.project_id}€`}</div>
+                                                        <div className="value">{totalAmountGathered(project?.donations)}€</div>
                                                     </div>
                                                     <div className="d-flex">
                                                         <div className="mr-2">
@@ -103,7 +143,7 @@ function AllProjects() {
                                                             <h5 className="author-name">{project?.user?.name}</h5>
                                                         </div>
                                                         <div className="author-meta">
-                                                            <p className="campaign">12 project</p>
+                                                            <p className="campaign">1 Proyecto</p>
                                                             <p className="campaign">Restante: {`${countdowns[project.id] < 0 ? "0" : countdowns[project.id]} días`}</p>
                                                         </div>
                                                     </div>

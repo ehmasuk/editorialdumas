@@ -65,8 +65,8 @@ function ChooseFundPackage({ dataFromGet, setDataFromGet, setCurrentStep }) {
         if (e.target.value == 899) {
             setUserData({ ...userData, project_id: e.target.value, project_name: "Medium Reach Publication 899€" });
         }
-        if (e.target.value == 1499) {
-            setUserData({ ...userData, project_id: e.target.value, project_name: "Extended Reach Publication 1499€" });
+        if (e.target.value == 1699) {
+            setUserData({ ...userData, project_id: e.target.value, project_name: "Extended Reach Publication 1699€" });
         }
     };
 
@@ -169,11 +169,11 @@ function ChooseFundPackage({ dataFromGet, setDataFromGet, setCurrentStep }) {
                         </Radio>
                     </div>
                     <div className="col-md-3">
-                        <Radio value={1499} className="pack-radio-4">
+                        <Radio value={1699} className="pack-radio-4">
                             <div className="package-card">
                                 <div className="header">
                                     <p className="title">Profesional</p>
-                                    <p className="price">1499€</p>
+                                    <p className="price">1699€</p>
                                 </div>
                                 <p className="desc">Publicación de alcance ampliado</p>
                                 <ul className="lists">

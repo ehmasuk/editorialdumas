@@ -80,6 +80,7 @@
     grid-template-columns: 60px auto;
     gap: 2em;
     place-items: center;
+    justify-content: flex-start;
 }
 
 
@@ -109,6 +110,10 @@
 .custom-faq-section{
     max-width: 800px;
     margin: auto;
+}
+
+.publish-normal-infos p{
+    text-align: justify;
 }
 
 

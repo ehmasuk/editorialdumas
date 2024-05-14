@@ -124,17 +124,17 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
                                     <input defaultValue={preValues.title} name="title" onChange={handleChange} type="text" className="form-control" />
                                 </div>
                                 <div className="mb-4">
-                                    <label className="bolden">Book description</label>
-                                    <p className="tiny">Give a brief description of the book you are going to send us</p>
+                                    <label className="bolden">Descripción del libro</label>
+                                    <p className="tiny">Dé una breve descripción del libro que nos va a enviar</p>
 
                                     <TipTap defaultValue={preValues.book_description} getEditorData={handleBookDes} />
                                 </div>
                                 <div className="mb-4">
                                     <div className="row">
                                         <div className="col-md-8">
-                                            <label className="bolden">Book image</label>
-                                            <p className="tiny">This title is provisional, you can change it later if you want.</p>
-                                            <input onChange={handleChange} accept=".png, .jpg" name="image_url" type="file" className="form-control" />
+                                            <label className="bolden">Imagen de libro</label>
+                                            <p className="tiny">Sube tu imagen de portada de tu libro</p>
+                                            <input onChange={handleChange} accept=".png,.jpg,.jpeg" name="image_url" type="file" className="form-control" />
                                         </div>
 
                                         <div className="col-md-4">
@@ -145,16 +145,16 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
                                 <div className="mb-4">
                                     <div className="row">
                                         <div className="col-md-8">
-                                            <label className="bolden">Book video</label>
-                                            <p className="tiny">This title is provisional, you can change it later if you want.</p>
-                                            <input onChange={handleChange} accept=".mp4" name="video_url" type="file" className="form-control" />
+                                            <label className="bolden">Video de libro</label>
+                                            <p className="tiny">Sube tu video para la publicación del libro</p>
+                                            <input onChange={handleChange} accept=".mp4,.mov,.avi,.wmv,.webm,.flv" name="video_url" type="file" className="form-control" />
                                         </div>
                                         <div className="col-md-6"></div>
                                     </div>
                                 </div>
                             </div>
                             <div className="d-flex justify-content-end">
-                                <button className="btn btn-primary btnhover mt-3">Next</button>
+                                <button className="btn btn-primary btnhover mt-3">Próxima</button>
                             </div>
                         </form>
                     </div>

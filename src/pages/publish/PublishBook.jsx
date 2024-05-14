@@ -4,7 +4,6 @@ import "./publish.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import FaqSection from "../../components/FaqSection";
-import LoginPopup from "../../components/popups/login/LoginPopup";
 import { showLoginPopup } from "../../features/LoginPopupSlice";
 import author_landing from "./../../assets/images/author_landing.png";
 import faq1 from "./../../assets/images/faq1.png";
@@ -177,7 +176,7 @@ function PublishBook() {
                             </div>
                             <div className="message-container">
                                 <div className="title">Involúcrate</div>
-                                <div className="message">Participa en una gran comunidad de autores y lectores</div>
+                                <div className="message">Participa en una gran comunidad de autores y lectores.</div>
                             </div>
                         </div>
                         <div className="info-card">
@@ -186,7 +185,7 @@ function PublishBook() {
                             </div>
                             <div className="message-container">
                                 <div className="title">Aprende</div>
-                                <div className="message">Conoce a fondo el sector editorial desde el realismo y la experiencia profesional</div>
+                                <div className="message">Conoce a fondo el sector editorial desde el realismo y la experiencia profesional.</div>
                             </div>
                         </div>
                         <div className="info-card">
@@ -195,7 +194,7 @@ function PublishBook() {
                             </div>
                             <div className="message-container">
                                 <div className="title">Crece</div>
-                                <div className="message">Desarrolla tu potencial como autor compartiendo la experiencia con autores y lectores</div>
+                                <div className="message">Desarrolla tu potencial como autor compartiendo la experiencia con autores y lectores.</div>
                             </div>
                         </div>
                         <div className="info-card">
@@ -204,9 +203,31 @@ function PublishBook() {
                             </div>
                             <div className="message-container">
                                 <div className="title">Toma el control</div>
-                                <div className="message">Disfruta de tu propia plataforma de autor con acceso a los datos de tus libros</div>
+                                <div className="message">Disfruta de tu propia plataforma de autor con acceso a los datos de tus libros.</div>
                             </div>
                         </div>
+                        <div className="info-card">
+                            <div className="icon">
+                                <img src="https://cdn-icons-png.flaticon.com/128/8912/8912792.png" alt />
+                            </div>
+                            <div className="message-container">
+                                <div className="title">Gana el 98% de regalías</div>
+                                <div className="message">En ebook y en papel el 40 % cada mes en tu cuenta.</div>
+                            </div>
+                        </div>
+                        <div className="info-card">
+                            <div className="icon">
+                                <img src="https://cdn-icons-png.flaticon.com/128/1460/1460537.png" alt />
+                            </div>
+                            <div className="message-container">
+                                <div className="title">Tus ventas crecen</div>
+                                <div className="message">A diario porque fomentamos tu marca.</div>
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                 </div>
                 <div className="text-center">
@@ -226,7 +247,7 @@ function PublishBook() {
                 </div>
             </div>
 
-            <section className="content-inner">
+            <section className="content-inner publish-normal-infos">
                 <div style={{ background: "#F3F4F6" }}>
                     <div className="py-4 container">
                         <h4>Cómo funciona</h4>
@@ -243,12 +264,11 @@ function PublishBook() {
                 <div>
                     <div className="py-4 container">
                         <h4>¿Cómo ocurre la magia?</h4>
-                        <h5>Convertimos tus mejores ideas en grandes libros</h5>
+                        <h5>Te acompañamos en todas las etapas de este emocionante viaje</h5>
                         <p>
-                            En Editorial Dumas convertimos tus ideas en realidad a través de campañas de crowdfunding o mecenazgo. Te acompañamos en cada paso del camino, brindándote las herramientas
-                            necesarias para involucrar a tu comunidad. Familiares, amigos, colegas, organizaciones y seguidores en redes sociales conforman la base de este apoyo invaluable. Exploramos
-                            junto contigo el potencial de tu proyecto y compartimos la experiencia de nuestros autores, allanando el camino para alcanzar una audiencia más amplia. Te respaldamos en
-                            cada fase de esta emocionante travesía.
+                            Una vez que tu proyecto está financiado, nos ponemos manos a la obra para convertirlo en un libro excepcional. Nuestro equipo de expertos coordina las distintas etapas del
+                            proceso editorial, desde la recepción del manuscrito hasta la entrega del libro en tus manos. Trabajamos codo a codo en la edición, corrección, maquetación y diseño de tu
+                            obra. Además, nos encargamos de la impresión y la logística, como plataforma editorial especializada que somos.
                         </p>
                     </div>
                 </div>
@@ -263,6 +283,18 @@ function PublishBook() {
                             lo presentamos en las librerías de nuestra comunidad. Tendrás acceso al seguimiento de tus ventas en tu panel personal y compartiremos contigo las experiencias de otros
                             autores que han ampliado su comunidad para llegar a más lectores.
                         </p>
+                    </div>
+                </div>
+                <div>
+                    <div className="py-4 container">
+                        <h4>¿Por qué conseguiré más ventas con la editorial Dumas?</h4>
+                        <h5>Creamos una estrategia de promoción manejada por nuestros expertos</h5>
+                        <p>
+                        Publicar es una cosa y vender es otra muy distinta. Para la tranquilidad de nuestros autores, nos encargamos de construir y fortalecer la marca personal de nuestros autores. Triunfar no es publicar, triunfar es publicar e influir a los lectores a través de ideas originales, con una obra única capaz de conectar a un nivel profundo con el lector.
+                        </p>
+                        <p>Desarrollamos una estrategia única para cada libro publicado en nuestra editorial para que encuentre a los lectores perfectos. Esto incluye la promoción y distribución del libro a través de diferentes canales. De media, los autores que publican con nuestra editorial pueden esperar entre un 20 – 35 % más de ventas que con los canales tradicionales.</p>
+                        <h5>¿Cómo lo hacemos?</h5>
+                        <p>Utilizando las técnicas más avanzadas de marketing, con una estrategia sólida, pero sobre todo, con libros originales y bien escritos.</p>
                     </div>
                 </div>
                 <div className="text-center">
@@ -317,9 +349,9 @@ function PublishBook() {
                                     <div className="section-head">
                                         <h2>Prepara tu campaña de crowdfunding</h2>
                                         <ul>
-                                            <li>· Recibe formación sobre marketing y comunicación editorial</li>
-                                            <li>· Define la estrategia de campaña con nuestro equipo de crowdfunding</li>
-                                            <li>· Crea el contenido necesario para difundir tu campaña</li>
+                                            <li>Recibe formación sobre marketing y comunicación editorial</li>
+                                            <li>Define la estrategia de campaña con nuestro equipo de crowdfunding</li>
+                                            <li>Crea el contenido necesario para difundir tu campaña</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -346,9 +378,9 @@ function PublishBook() {
                                         <h2 className="title">Lanza tu campaña</h2>
 
                                         <ul>
-                                            <li>· Comparte el proyecto con tu comunidad durante 30 días</li>
-                                            <li>· Recibe asesoría semanal de tu coordinador de campaña</li>
-                                            <li>· Consigue tu objetivo de campaña para financiar tu libro</li>
+                                            <li>Comparte el proyecto con tu comunidad durante 30 días</li>
+                                            <li>Recibe asesoría semanal de tu coordinador de campaña</li>
+                                            <li>Consigue tu objetivo de campaña para financiar tu libro</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -364,9 +396,9 @@ function PublishBook() {
                                     <div className="section-head">
                                         <h2>Editorial Dumas edita tu libro</h2>
                                         <ul>
-                                            <li>· El equipo editorial empieza a trabajar con tu manuscrito.</li>
-                                            <li>· Los profesionales especializados en corrección, maquetación y diseño hacen su parte.</li>
-                                            <li>· Te mostramos el libro antes de publicarlo.</li>
+                                            <li>El equipo editorial empieza a trabajar con tu manuscrito.</li>
+                                            <li>Los profesionales especializados en corrección, maquetación y diseño hacen su parte.</li>
+                                            <li>Te mostramos el libro antes de publicarlo.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -393,11 +425,11 @@ function PublishBook() {
                                     <div className="section-head">
                                         <h2>Empieza a vender tu libro</h2>
                                         <ul>
-                                            <li>· Los mecenas reciben los ejemplares de tu libro.</li>
-                                            <li>· ¡Tu libro publicado!</li>
-                                            <li>· Llega a nuevos lectores.</li>
-                                            <li>· Haz el seguimiento de tus ventas.</li>
-                                            <li>· Gana dinero con tu libro.</li>
+                                            <li>Los mecenas reciben los ejemplares de tu libro.</li>
+                                            <li>¡Tu libro publicado!</li>
+                                            <li>Llega a nuevos lectores.</li>
+                                            <li>Haz el seguimiento de tus ventas.</li>
+                                            <li>Gana dinero con tu libro.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -424,7 +456,9 @@ function PublishBook() {
                 <div className="content-inner-1">
                     <FaqSection faqContents={faqContents} />
                     <div className="text-center">
-                        <Link to="/faq" className="btn btn-primary btnhover mb-5">Consultar</Link>
+                        <Link to="/faq" className="btn btn-primary btnhover mb-5">
+                            Consultar
+                        </Link>
                     </div>
                 </div>
             </div>

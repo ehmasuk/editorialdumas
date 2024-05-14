@@ -87,7 +87,7 @@ function Profile() {
 
     return (
         <ProfileLayout>
-            <div className="shop-bx shop-profile">
+            <div className="shop-bx shop-profile p-0">
                 <div className="shop-bx-title clearfix">
                     <h5 className="text-uppercase">Tu perfil</h5>
                 </div>

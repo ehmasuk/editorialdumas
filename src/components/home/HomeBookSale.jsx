@@ -12,6 +12,7 @@ import "swiper/css/pagination";
 import { booksData } from "../../database/booksData";
 import { Rate } from "antd";
 import { useRef } from "react";
+import toast from "react-hot-toast";
 
 function HomeBookSale({sectionTitle}) {
 
@@ -55,18 +56,18 @@ function HomeBookSale({sectionTitle}) {
                     {booksData.map((item, index) => {
                         return (
                             <SwiperSlide key={index}>
-                                <div key={index} className="swiper-slide">
-                                    <div className="books-card style-3 wow fadeInUp" data-wow-delay="0.2s">
+                                <div key={index} className="swiper-slide" >
+                                    <div onClick={()=>toast('Estamos trabajando en ello, gracias por su interés',{icon: '📣',})} className="books-card style-3 wow fadeInUp" data-wow-delay="0.2s">
                                         <div className="dz-media">
                                             <img style={{ height: "320px", objectFit: "cover", width: "100%" }} src={item.img} alt="book" />
                                         </div>
                                         <div className="dz-content">
                                             <h5 className="title" style={{minHeight:'45px'}}>
-                                                <a href="books-grid-view.html">{item.title}</a>
+                                                <a href="#">{item.title}</a>
                                             </h5>
                                             <ul className="dz-tags">
                                                 <li>
-                                                    <a href="books-grid-view.html">de {item.authorName}</a>
+                                                    <a href="#">de {item.authorName}</a>
                                                 </li>
                                             </ul>
                                             <div className="book-footer">

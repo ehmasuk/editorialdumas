@@ -25,7 +25,7 @@ function App() {
         <main>
             <MetaPixel/>
             <Toaster
-                position="bottom-center"
+                position="top-center"
                 toastOptions={{
                     duration: 5000,
                     style: {

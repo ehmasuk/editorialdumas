@@ -4,6 +4,7 @@ import { FaMapMarkerAlt, FaRegEnvelope } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { allGenere } from "../../database/globalDatas";
 
 function Footer() {
     const [categoryOpen, setCategoryOpen] = useState(false);
@@ -34,9 +35,13 @@ function Footer() {
                                     >
                                         <div className="footer-col-book">
                                             <ul>
-                                                <li>
-                                                    <Link to="books-grid-view.html">Architecture</Link>
-                                                </li>
+                                                {allGenere.map((genere, index) => {
+                                                    return (
+                                                        <li key={index}>
+                                                            <Link to="/">{genere}</Link>
+                                                        </li>
+                                                    );
+                                                })}
                                             </ul>
                                         </div>
                                     </motion.div>
@@ -49,15 +54,14 @@ function Footer() {
             <div className="footer-top">
                 <div className="container">
                     <div className="row">
-                        <div className="col-xl-3 col-lg-12 wow fadeInUp" >
+                        <div className="col-xl-3 col-lg-12 wow fadeInUp">
                             <div className="widget widget_about">
                                 <div className="footer-logo logo-white">
-                                    
-                                        <Link to="/">
-                                            <div className="dev-logo" style={{ color: "#fff", textAlign: "left" }}>
-                                                editorial<p>dumas</p>
-                                            </div>
-                                        </Link>
+                                    <Link to="/">
+                                        <div className="dev-logo" style={{ color: "#fff", textAlign: "left" }}>
+                                            editorial<p>dumas</p>
+                                        </div>
+                                    </Link>
                                 </div>
                                 <p className="text">Editorial especializada en crowdfunding. Todos tenemos una historia que contar.</p>
                             </div>
@@ -67,13 +71,19 @@ function Footer() {
                                 <h5 className="footer-title">Editorial</h5>
                                 <ul>
                                     <li>
-                                        <Link to="/about" onClick={()=>window.scrollTo(0, 0)}>Quiénes somos</Link>
+                                        <Link to="/about" onClick={() => window.scrollTo(0, 0)}>
+                                            Quiénes somos
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/contact" onClick={()=>window.scrollTo(0, 0)}>Contacto</Link>
+                                        <Link to="/contact" onClick={() => window.scrollTo(0, 0)}>
+                                            Contacto
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/faq" onClick={()=>window.scrollTo(0, 0)}>Preguntas Frecuentes</Link>
+                                        <Link to="/faq" onClick={() => window.scrollTo(0, 0)}>
+                                            Preguntas Frecuentes
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -83,10 +93,14 @@ function Footer() {
                                 <h5 className="footer-title">Servicios</h5>
                                 <ul>
                                     <li>
-                                        <Link to="/publish" onClick={()=>window.scrollTo(0, 0)}>Publica con nosotros</Link>
+                                        <Link to="/publish" onClick={() => window.scrollTo(0, 0)}>
+                                            Publica con nosotros
+                                        </Link>
                                     </li>
                                     <li>
-                                        <Link to="/" onClick={()=>window.scrollTo(0, 0)}>Servicios</Link>
+                                        <Link to="/" onClick={() => window.scrollTo(0, 0)}>
+                                            Servicios
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -98,10 +112,14 @@ function Footer() {
                                     {!isLogedin && (
                                         <>
                                             <li>
-                                                <Link to="/login" onClick={()=>window.scrollTo(0, 0)}>Entrar</Link>
+                                                <Link to="/login" onClick={() => window.scrollTo(0, 0)}>
+                                                    Entrar
+                                                </Link>
                                             </li>
                                             <li>
-                                                <Link to="/register" onClick={()=>window.scrollTo(0, 0)}>Regístrate</Link>
+                                                <Link to="/register" onClick={() => window.scrollTo(0, 0)}>
+                                                    Regístrate
+                                                </Link>
                                             </li>
                                         </>
                                     )}
@@ -148,7 +166,7 @@ function Footer() {
                         </div>
                         <div className="col-lg-6 col-md-12 text-end">
                             <p>
-                            Grupo <Link to="/">Ray Bolívar Sosa</Link>
+                                Grupo <Link to="/">Ray Bolívar Sosa</Link>
                             </p>
                         </div>
                     </div>

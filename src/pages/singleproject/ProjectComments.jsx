@@ -130,7 +130,7 @@ function ProjectComments({ getData, userproject }) {
     };
 
     return (
-        <Spin spinning={isDeleting} tip="Loading">
+        <Spin spinning={isDeleting} tip="Cargando...">
             <div className="comment-wraper">
                 <Spin spinning={isCommenting} tip="Adding your comment">
                     <div className="author">
@@ -143,6 +143,9 @@ function ProjectComments({ getData, userproject }) {
                         </div>
                     </div>
                 </Spin>
+
+                <h4>{userComments?.length} comentarios</h4>
+                <hr />
 
                 <AnimatePresence>
                     {userComments &&
@@ -174,9 +177,11 @@ function ProjectComments({ getData, userproject }) {
                                                 <div className="d-flex">
                                                     <span className="date">{calculateDaysAgo(comment.created_at) > 0 ? `Hace ${calculateDaysAgo(comment.created_at)} día` : "Hoy"}</span>
 
-                                                    <div className="rest" onClick={() => handleShowReplayInput(comment.id)}>
-                                                        Responder
-                                                    </div>
+                                                    {userInfo.id !== Number(comment?.user_id) && (
+                                                        <div className="rest" onClick={() => handleShowReplayInput(comment.id)}>
+                                                            Responder
+                                                        </div>
+                                                    )}
                                                 </div>
 
                                                 {showReplayInput && showReplayInputId == comment.id && (

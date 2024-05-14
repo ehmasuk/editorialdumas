@@ -4,28 +4,32 @@ import StarterKit from "@tiptap/starter-kit";
 import { GoBold } from "react-icons/go";
 import "./tiptap.css";
 
-import { Tooltip } from "antd";
-import { GoListOrdered } from "react-icons/go";
-import { PiListBullets } from "react-icons/pi";
 import CharacterCount from "@tiptap/extension-character-count";
+import TextAlign from "@tiptap/extension-text-align";
+import { Tooltip } from "antd";
+import { CiAlignCenterH, CiAlignLeft, CiAlignRight, CiTextAlignJustify } from "react-icons/ci";
+import { GoListOrdered } from "react-icons/go";
+import { PiListBullets, PiTextItalic } from "react-icons/pi";
 
-function TipTap({ getEditorData, defaultValue , maxCharacter }) {
+function TipTap({ getEditorData, defaultValue, maxCharacter }) {
     const handleTiptapData = () => {
         const html = editor.getHTML();
         getEditorData(html);
     };
 
-    
-
     const editor = useEditor({
         extensions: [
             StarterKit,
+            TextAlign.configure({
+                defaultAlignment: "left",
+                types: ["heading", "paragraph"],
+            }),
             Placeholder.configure({
                 placeholder: "Escribe algo …",
             }),
             CharacterCount.configure({
                 limit: maxCharacter,
-            })
+            }),
         ],
         content: defaultValue || "",
     });
@@ -50,6 +54,16 @@ function TipTap({ getEditorData, defaultValue , maxCharacter }) {
                         <GoBold />
                     </div>
                 </Tooltip>
+                <Tooltip title="Itálica" mouseEnterDelay={1}>
+                    <div
+                        onClick={() => editor.chain().focus().toggleItalic().run()}
+                        disabled={!editor.can().chain().focus().toggleItalic().run()}
+                        className={`single-button ${editor.isActive("italic") ? "is-active" : ""}`}
+                    >
+                        <PiTextItalic />
+                    </div>
+                </Tooltip>
+
                 <Tooltip title="Lista con viñetas" mouseEnterDelay={1}>
                     <div onClick={() => editor.chain().focus().toggleBulletList().run()} className={`single-button ${editor.isActive("bulletList") ? "is-active" : ""}`}>
                         <PiListBullets />
@@ -58,6 +72,45 @@ function TipTap({ getEditorData, defaultValue , maxCharacter }) {
                 <Tooltip title="Lista ordenada" mouseEnterDelay={1}>
                     <div onClick={() => editor.chain().focus().toggleOrderedList().run()} className={`single-button ${editor.isActive("orderedList") ? "is-active" : ""}`}>
                         <GoListOrdered />
+                    </div>
+                </Tooltip>
+
+                {/* alignments */}
+
+                <Tooltip title="Align text left" mouseEnterDelay={1}>
+                    <div
+                        onClick={() => editor.chain().focus().setTextAlign("left").run()}
+                        disabled={!editor.can().chain().focus().setTextAlign("left").run()}
+                        className={`single-button ${editor.isActive("left") ? "is-active" : ""}`}
+                    >
+                        <CiAlignLeft />
+                    </div>
+                </Tooltip>
+                <Tooltip title="Align text center" mouseEnterDelay={1}>
+                    <div
+                        onClick={() => editor.chain().focus().setTextAlign("center").run()}
+                        disabled={!editor.can().chain().focus().setTextAlign("center").run()}
+                        className={`single-button ${editor.isActive("center") ? "is-active" : ""}`}
+                    >
+                        <CiAlignCenterH />
+                    </div>
+                </Tooltip>
+                <Tooltip title="Align text right" mouseEnterDelay={1}>
+                    <div
+                        onClick={() => editor.chain().focus().setTextAlign("right").run()}
+                        disabled={!editor.can().chain().focus().setTextAlign("right").run()}
+                        className={`single-button ${editor.isActive("right") ? "is-active" : ""}`}
+                    >
+                        <CiAlignRight />
+                    </div>
+                </Tooltip>
+                <Tooltip title="Align text justify" mouseEnterDelay={1}>
+                    <div
+                        onClick={() => editor.chain().focus().setTextAlign("justify").run()}
+                        disabled={!editor.can().chain().focus().setTextAlign("justify").run()}
+                        className={`single-button ${editor.isActive("justify") ? "is-active" : ""}`}
+                    >
+                        <CiTextAlignJustify />
                     </div>
                 </Tooltip>
 
@@ -74,7 +127,9 @@ function TipTap({ getEditorData, defaultValue , maxCharacter }) {
                 <EditorContent editor={editor} />
             </div>
             <div className="editor-footer">
-                <p className="total-character">Characters : <b>{editor.storage.characterCount.characters()}</b></p>
+                <p className="total-character">
+                    Characters : <b>{editor.storage.characterCount.characters()}</b>
+                </p>
             </div>
         </div>
     );

@@ -22,7 +22,7 @@
 }
 
 .product-details {
-    padding: 30px;
+    padding: 20px;
     position: relative;
 }
 
@@ -38,8 +38,7 @@
 .product-details h4 a {
     font-weight: 500;
     display: block;
-    margin-bottom: 18px;
-    text-transform: uppercase;
+    margin-bottom: 16px;
     color: #363636;
     text-decoration: none;
     transition: 0.3s;

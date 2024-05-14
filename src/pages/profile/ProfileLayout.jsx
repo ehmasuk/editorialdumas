@@ -1,8 +1,61 @@
+import { Link, useLocation } from "react-router-dom";
 import Base from "../../layouts/Base";
 import ProfileSidebar from "./ProfileSidebar";
 
+import { Menu } from "antd";
+import { useState } from "react";
+import { BsSend } from "react-icons/bs";
+import { FaRegChartBar } from "react-icons/fa";
+import { FaWpforms } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+import { authUnCheck } from "../../features/AuthCheckerSlice";
+
 function ProfileLayout({ children }) {
-    
+    const { pathname } = useLocation();
+    const dispatch = useDispatch();
+
+
+    const menuItems = [
+        {
+            label: (
+                <Link to="/profile">
+                    <span>Perfil</span>
+                </Link>
+            ),
+            key: "/profile",
+            icon: <i className="far fa-user" />,
+        },
+        {
+            label: (
+                <Link to="/profile/proposal">
+                    <span>Enviar propuesta</span>
+                </Link>
+            ),
+            key: "/profile/proposal",
+            icon: <BsSend />,
+        },
+        {
+            label: (
+                <Link to="/profile/myproposals">
+                    <span>Propuesta</span>
+                </Link>
+            ),
+            key: "/profile/myproposals",
+            icon: <FaWpforms />,
+        },
+        {
+            label: (
+                <Link to="/profile/myfunds">
+                    <span>Mis fondos</span>
+                </Link>
+            ),
+            key: "/profile/myfunds",
+            icon: <FaRegChartBar />,
+        },
+    ];
+
+
+
     return (
         <Base>
             <div className="page-content bg-white">
@@ -14,6 +67,9 @@ function ProfileLayout({ children }) {
                                     <ProfileSidebar />
                                 </div>
                                 <div className="col-xl-9 col-lg-8 m-b30">
+                                    <div className="px-2 mb-4">
+                                        <Menu selectedKeys={[pathname]} mode="horizontal" items={menuItems} />
+                                    </div>
                                     <div className="shop-bx shop-profile">{children}</div>
                                 </div>
                             </div>

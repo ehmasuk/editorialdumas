@@ -18,8 +18,38 @@ function MetaPixel() {
             <noscript>{`<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1760744334448265&ev=PageView&noscript=1" />`}</noscript>
 
 
-            {/* flowpoint */}
-            <script src="https://sdk.flowpoint.ai?apiKey=t_a9c59bf9e55f97db663dfab19d11c1ca&clientId=r3sWxWYJdJ1e5JrDBhfajC3qfsjE2i"></script>
+{/* <!-- Google tag (gtag.js) --> */}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2BKRK7W3QG"></script>
+<script>
+{
+    `window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2BKRK7W3QG');`
+}
+</script>
+
+
+
+{/* <!-- Matomo --> */}
+<script>
+{
+    `  var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://escuelaraybolivarsosa.matomo.cloud/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '5']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src='https://cdn.matomo.cloud/escuelaraybolivarsosa.matomo.cloud/matomo.js'; s.parentNode.insertBefore(g,s);
+    })();`
+}
+</script>
+{/* <!-- End Matomo Code --> */}
+
+
         </Helmet>
     );
 }

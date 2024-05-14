@@ -1,14 +1,16 @@
 import { Result } from "antd";
 import { useEffect } from "react";
 import Base from "../../layouts/Base";
+import { useNavigate } from "react-router-dom";
 
 function SendProposalThank() {
-    useEffect(() => {
-        console.log("SendProposalThank");
-    }, []);
+    const navigate = useNavigate();
+    setTimeout(() => {
+        navigate("/");
+    }, 5000);
     return (
         <Base>
-            <Result status="success" title="Successfull" subTitle="Thank you for your proposal" />;
+            <Result status="success" title="Exitoso" subTitle="Gracias por su propuesta" />;
         </Base>
     );
 }

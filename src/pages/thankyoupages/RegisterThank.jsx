@@ -1,14 +1,17 @@
 import { Result } from "antd";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Base from "../../layouts/Base";
 
 function RegisterThank() {
-    useEffect(() => {
-        console.log("registerThank");
-    }, []);
+    const navigate = useNavigate();
+
+    setTimeout(() => {
+        navigate("/");
+    }, 5000);
+
     return (
         <Base>
-            <Result status="success" title="Successfully registered" subTitle="Thank you for register" />;
+            <Result status="success" title="Registrado exitosamente" subTitle="Gracias por registrarse" />;
         </Base>
     );
 }

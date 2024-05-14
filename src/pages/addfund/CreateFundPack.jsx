@@ -136,7 +136,7 @@ function CreateFundPack({dataFromGet,setCurrentStep}) {
             <div className="container">
                 <div className="fund-form">
                     <form onSubmit={handleSubmit}>
-                        <h4>Pack informations</h4>
+                        <h5>Agregue sus paquetes información, puede crear varios paquetes. <br /> Le sugerimos que cree al menos tres paquetes</h5>
                         <hr />
                         <div className="mt-5">
                             <div className="packs">
@@ -148,30 +148,26 @@ function CreateFundPack({dataFromGet,setCurrentStep}) {
                                                 {index > 0 && <PiTrashLight onClick={() => handlePackDelete(index)} color="red" fontSize={18} cursor="pointer" />}
                                             </h5>
                                             <div className="mb-4">
-                                                <label className="bolden">Pack amount</label>
-                                                <p className="tiny">This title is provisional, you can change it later if you want.</p>
+                                                <label className="bolden">Monto del paquete</label>
+                                                <p className="tiny">Ingrese el monto de su paquete, mínimo de 4 euros</p>
                                                 <InputNumber
                                                 value={item.pack_amount}
                                                     onChange={(data) => handlePriceChange(data, index)}
                                                     addonBefore={<IoLogoEuro />}
                                                     size="large"
-                                                    min={10}
+                                                    min={4}
                                                     formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                                 />
                                             </div>
                                             <div className="mb-4">
-                                                <label className="bolden">Pack title</label>
-                                                <p className="tiny">This title is provisional, you can change it later if you want.</p>
+                                                <label className="bolden">Título de paquete</label>
+                                                <p className="tiny">Ingrese un título de paquete atractivo</p>
                                                 <input name="pack_title" value={item.pack_title} onChange={(e) => handleChange(e, index)} className="form-control" type="test" />
                                             </div>
-                                            {/* <div className="mb-4">
-                                                <label className="bolden">Pack image</label>
-                                                <p className="tiny">This title is provisional, you can change it later if you want.</p>
-                                                <input name="packimage_url" onChange={(e) => handleChange(e, index)} className="form-control" type="file" />
-                                            </div> */}
+                                            
                                             <div className="mb-4">
-                                                <label className="bolden">Pack description</label>
-                                                <p className="tiny">This title is provisional, you can change it later if you want.</p>
+                                                <label className="bolden">Descripción del paquete</label>
+                                                <p className="tiny">Máximo 300 charachter permitido por paquete, sugerimos resaltar puntos importantes del paquete</p>
                                                 <TipTap maxCharacter={300} getEditorData={(data) => handlePackDes(data, index)} />
                                             </div>
                                         </motion.div>
@@ -179,11 +175,11 @@ function CreateFundPack({dataFromGet,setCurrentStep}) {
                                 })}
                             </div>
                             
-                                <div onClick={handleAddPacks} className="btn btn-primary btnhover mt-3">Add new pack</div>
+                                <div onClick={handleAddPacks} className="btn btn-primary btnhover mt-3">Agregar nuevo paquete</div>
                             
                         </div>
                         <div className="d-flex justify-content-end">
-                            <button className="btn btn-primary btnhover mt-3">Next</button>
+                            <button className="btn btn-primary btnhover mt-3">Próxima</button>
                         </div>
                     </form>
                 </div>

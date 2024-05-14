@@ -31,7 +31,7 @@ function Register() {
             const res = await axios.post(`${apiUrl}/user/register`, data);
             navigate("/thankyou/register");
             window.scrollTo(0, 0);
-            toast.success("Registration successfull");
+            toast.success("Registro exitoso");
             setTimeout(() => {
                 localStorage.setItem("isLogedin", JSON.stringify(res.data));
                 dispatch(authCheck());
@@ -56,16 +56,16 @@ function Register() {
                             <div className="col-lg-6 col-md-6 mb-4">
                                 <div className="login-area">
                                     <form onSubmit={handleSubmit(handleRegister)}>
-                                        <h4 className="text-secondary">Registration</h4>
-                                        <p className="font-weight-600">If you dont have an account with us, please Registration.</p>
+                                        <h4 className="text-secondary">Registro</h4>
+                                        <p className="font-weight-600">Si no tiene una cuenta con nosotros, por favor registre.</p>
                                         <div className="mb-4">
-                                            <label className="label-title">Username </label>
+                                            <label className="label-title">Nombre de usuario </label>
                                             <input
                                                 {...register("name", {
-                                                    required: "You must enter your name",
+                                                    required: "Debes ingresar tu nombre",
                                                 })}
                                                 className="form-control"
-                                                placeholder="Your Username"
+                                                placeholder="Su nombre de usuario"
                                                 type="text"
                                             />
                                             <AnimatePresence>
@@ -84,13 +84,13 @@ function Register() {
                                             </AnimatePresence>
                                         </div>
                                         <div className="mb-4">
-                                            <label className="label-title">Email address </label>
+                                            <label className="label-title">Dirección de email </label>
                                             <input
                                                 {...register("email", {
-                                                    required: "You must enter your email address",
+                                                    required: "Debe ingresar su dirección de email",
                                                 })}
                                                 className="form-control"
-                                                placeholder="Your Email address"
+                                                placeholder="Su dirección de email"
                                                 type="email"
                                             />
                                             <AnimatePresence>
@@ -109,13 +109,13 @@ function Register() {
                                             </AnimatePresence>
                                         </div>
                                         <div className="mb-4">
-                                            <label className="label-title">Password </label>
+                                            <label className="label-title">Contraseña </label>
                                             <input
                                                 {...register("password", {
-                                                    required: "You must enter your password",
+                                                    required: "Debe ingresar su contraseña",
                                                 })}
                                                 className="form-control "
-                                                placeholder="Type Password"
+                                                placeholder="Escriba contraseña"
                                                 type="password"
                                             />
                                             <AnimatePresence>
@@ -134,18 +134,17 @@ function Register() {
                                             </AnimatePresence>
                                         </div>
                                         <div className="mb-4">
-                                            <label className="label-title">Confirm Password </label>
-                                            <input {...register("password_confirmation")} className="form-control " placeholder="Type Password" type="password" />
+                                            <label className="label-title">Confirmar Contraseña </label>
+                                            <input {...register("password_confirmation")} className="form-control " placeholder="Escriba contraseña" type="password" />
                                         </div>
                                         <div className="mb-5">
                                             <small>
-                                                Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described
-                                                in our <a href="privacy-policy.html">privacy policy</a>.
+Sus datos personales se utilizarán para apoyar su experiencia en este sitio web, para administrar el acceso a su cuenta y para otros fines descritos en nuestra Política de privacidad
                                             </small>
                                         </div>
                                         <div className="text-left">
                                             <button disabled={regisLoading} className="btn btn-primary btnhover w-100 me-2">
-                                                <span>Register</span>
+                                                <span>Registro</span>
                                                 {regisLoading && <i className="fas fa-spinner fa-spin m-l10"></i>}
                                             </button>
                                         </div>

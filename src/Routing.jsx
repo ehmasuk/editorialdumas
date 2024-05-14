@@ -88,7 +88,7 @@ function Routing() {
                     }
                 />
                 <Route
-                    path="/editproject/:editid"
+                    path="/editproject"
                     element={
                         <PrivateRoute isLogedin={isLogedin}>
                             <EditFund />
@@ -113,8 +113,6 @@ function Routing() {
 
                 {/* thank you pages */}
                 <Route path="/thankyou/register" element={<RegisterThank />} />
-
-
                 <Route path="/thankyou/sendporposal" element={<SendProposalThank />} />
 
 

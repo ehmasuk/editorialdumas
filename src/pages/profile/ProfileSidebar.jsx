@@ -51,14 +51,7 @@ function ProfileSidebar() {
                         </Link>
                     </li>
 
-                    <li>
-                        <Link to="/profile/myproposals" className={`${pathname === "/profile/myproposals" && "active"}`}>
-                            <i>
-                                <FaWpforms />
-                            </i>
-                            <span>Propuesta</span>
-                        </Link>
-                    </li>
+
 
                     <li>
                         <Link to="/profile/proposal" className={`${pathname === "/profile/proposal" && "active"}`}>
@@ -68,6 +61,18 @@ function ProfileSidebar() {
                             <span>Enviar propuesta</span>
                         </Link>
                     </li>
+
+
+                    <li>
+                        <Link to="/profile/myproposals" className={`${pathname === "/profile/myproposals" && "active"}`}>
+                            <i>
+                                <FaWpforms />
+                            </i>
+                            <span>Propuesta</span>
+                        </Link>
+                    </li>
+
+
 
                     <li>
                         <Link to="/profile/myfunds" className={`${pathname === "/profile/myfunds" && "active"}`}>

@@ -8,41 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { hideLoader, showLoader } from "../../../features/CombineSlice";
 import ProfileLayout from "../ProfileLayout";
 
-const allGenere = [
-    "Fantasía",
-    "Ciencia Ficción",
-    "Misterio",
-    "Suspenso",
-    "Terror",
-    "Romance",
-    "Ficción Histórica",
-    "Biografía",
-    "Autoayuda",
-    "Humor",
-    "Juvenil",
-    "Poesía",
-    "Distópico",
-    "Aventura",
-    "Crimen",
-    "No Ficción",
-    "Sátira",
-    "Oeste",
-    "Memorias",
-    "Novela Gráfica",
-    "Ensayo",
-    "Filosofía",
-    "Religión",
-    "Política",
-    "Economía",
-    "Arte",
-    "Ciencia",
-    "Viajes",
-    "Cocina",
-    "Manga",
-    "Cómic",
-    "Teatro",
-    "Fantasía Épica",
-];
+import { allGenere } from "../../../database/globalDatas";
+
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Proposal() {
@@ -107,7 +74,6 @@ function Proposal() {
                                 required: "Este campo es obligatorio",
                             })}
                             className={`form-control ${errors.title && "is-invalid"}`}
-                            
                             type="text"
                         />
                         <AnimatePresence>
@@ -276,7 +242,7 @@ function Proposal() {
                     </div>
 
                     <button type="submit" className="btn btn-primary btnhover">
-                    Enviar
+                        Enviar
                     </button>
                 </form>
             </div>

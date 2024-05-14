@@ -11,6 +11,7 @@ import HomeRecom from "../../components/home/HomeRecom";
 import HomeSpecialOffer from "../../components/home/HomeSpecialOffer";
 import HomeTestimonial from "../../components/home/HomeTestimonial";
 import Base from "../../layouts/Base";
+import HomeAllProjects from "../../components/home/HomeAllProjects";
 
 function Home() {
     return (
@@ -204,6 +205,7 @@ function Home() {
                 <HomeRecom />
                 <HomeBookSale sectionTitle="Lo más vendido"/>
                 <HomeBookSale sectionTitle="Próximos lanzamientos"/>
+                <HomeAllProjects sectionTitle="Libros en campaña"/>
 
                 {/* Testimonial2 */}
                 {/* <HomeTestimonial /> */}

@@ -10,10 +10,11 @@
 }
 .single-project .header{
     width: 100%;
-    height: 230px;
+    height: 250px;
 }
 .single-project .header img{
-    object-fit: cover;
+    object-fit: contain;
+    background: #eef4ff;
     width: 100%;
     height: 100%;
 }

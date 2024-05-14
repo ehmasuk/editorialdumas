@@ -14,7 +14,7 @@ function ScrollTop() {
 
     return (
         <BackTop>
-            <Tooltip placement="left" title="Back to top">
+            <Tooltip placement="left" title="Volver arriba">
                 <button className={`scroltop ${showScroll && "d-block"}`} type="button">
                     <i className="fas fa-arrow-up"></i>
                 </button>

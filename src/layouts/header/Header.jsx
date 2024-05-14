@@ -15,11 +15,12 @@ import { FaUserPlus } from "react-icons/fa6";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { showLoginPopup } from "../../features/LoginPopupSlice";
 
-import defaultAvatar from './../../assets/images/defaultAvatar.png'
+import defaultAvatar from "./../../assets/images/defaultAvatar.png";
 
-
+import { allGenere } from "../../database/globalDatas";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
+
 
 function Header() {
     const dispatch = useDispatch();
@@ -108,13 +109,13 @@ function Header() {
                                                 <li className="cart-item">
                                                     <div className="media">
                                                         <div className="media-left">
-                                                            <a href="books-detail.html">
+                                                            <a href="#">
                                                                 <img alt="" className="media-object" src="https://picsum.photos/500/300?random=1" />
                                                             </a>
                                                         </div>
                                                         <div className="media-body">
                                                             <h6 className="dz-title">
-                                                                <a href="books-detail.html" className="media-heading">
+                                                                <a href="#" className="media-heading">
                                                                     Real Life
                                                                 </a>
                                                             </h6>
@@ -163,14 +164,7 @@ function Header() {
                                     <li className="nav-item dropdown profile-dropdown ms-4">
                                         <div className="nav-link" role="button" onClick={handleShowProfileDrop}>
                                             {!isLoading ? (
-                                                <img
-                                                    src={
-                                                        userInfo && userInfo.images
-                                                            ? userInfo.images.url
-                                                            : defaultAvatar
-                                                    }
-                                                    alt="avatar"
-                                                />
+                                                <img src={userInfo && userInfo.images ? userInfo.images.url : defaultAvatar} alt="avatar" />
                                             ) : (
                                                 <Skeleton.Avatar active={true} size="large" shape="square" />
                                             )}
@@ -221,7 +215,11 @@ function Header() {
                             <div className="input-group search-input">
                                 <select className="default-select header-category-select">
                                     <option>Categoría</option>
-                                    <option>Photography </option>
+                                    {allGenere.map((genere, index) => (
+                                        <option key={index} value={genere}>
+                                            {genere}
+                                        </option>
+                                    ))}
                                 </select>
                                 <input type="text" className="form-control" placeholder="Buscar libros aquí" />
                                 <button className="btn" type="button">

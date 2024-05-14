@@ -5,11 +5,12 @@
 }
 .editor .editor-panel {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     align-items: center;
     padding: 10px 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
     background: #f5f5f5;
+    flex-wrap: wrap;
 }
 .editor .editor-panel .single-button {
     border: 1px solid rgba(0, 0, 0, 0.125);
@@ -35,19 +36,19 @@
 .editor .editor-body {
     padding: 20px;
 }
-.editor .editor-footer{
+.editor .editor-footer {
     position: relative;
     font-size: 13px;
     margin-top: 20px;
 }
-.editor .editor-footer p{
+.editor .editor-footer p {
     margin-bottom: 0;
     padding: 10px;
     text-align: right;
     font-weight: 600;
     color: #828282;
 }
-.editor .editor-footer b{
+.editor .editor-footer b {
     color: #1a1668;
 }
 
@@ -59,8 +60,7 @@
     pointer-events: none;
 }
 
-
-.emojies-button{
+.emojies-button {
     display: flex;
     gap: 10px;
     height: 40px;
@@ -70,23 +70,22 @@
     background: #fff;
     padding: 0 10px;
 }
-.emojies-button>div{
+.emojies-button > div {
     cursor: pointer;
-    transition: .3s;
+    transition: 0.3s;
     user-select: none;
 }
-.emojies-button>div:hover{
-    transform: scale(1.1)
+.emojies-button > div:hover {
+    transform: scale(1.1);
 }
 
-.editor-body ol li{
+.editor-body ol li {
     list-style: decimal !important;
 }
-.editor-body ul li{
+.editor-body ul li {
     list-style: disc !important;
 }
-.editor-body ul{
+.editor-body ul {
     list-style: disc !important;
     padding-left: 2rem !important;
 }
-

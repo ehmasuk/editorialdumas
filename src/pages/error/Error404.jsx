@@ -1,8 +1,19 @@
+import { useNavigate } from "react-router-dom";
 import Base from "../../layouts/Base";
 
 import './error.css'
 
 function Error404() {
+
+    const navigate = useNavigate()
+
+
+    setTimeout(()=>{
+        navigate('/')
+    },5000)
+
+
+
     return (
         <Base>
             {/* <div className="page-wraper">

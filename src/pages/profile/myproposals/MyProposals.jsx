@@ -1,10 +1,13 @@
-import { Empty, Skeleton } from "antd";
+import { Alert, Empty, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import ProfileLayout from "../ProfileLayout";
 import "./myproposals.css";
 
 import axios from "axios";
+import { BsSend } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { formatDate } from "../../../database/globalFunctions";
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function MyProposals() {
@@ -32,10 +35,19 @@ function MyProposals() {
 
     myProposals && console.log(myProposals);
 
+
     return (
         <ProfileLayout>
             <div className="shop-bx-title clearfix">
-                <h5 className="text-uppercase">My proposals</h5>
+                <div className="d-flex align-items-center justify-content-between">
+                    <h5 className="text-uppercase m-0">Tus propuestas</h5>
+                    <Link to="/profile/proposal">
+                        <button className="btn d-flex align-items-center justify-content-between btn-secondary btn-sm">
+                            {" "}
+                            Enviar propuesta <BsSend style={{ marginLeft: "5px" }} fontSize={15} />
+                        </button>
+                    </Link>
+                </div>
             </div>
             <div>
                 <div className="row">
@@ -45,16 +57,25 @@ function MyProposals() {
                                 <div key={index} className="col-md-6 mb-4">
                                     <div className="product-card">
                                         <div className="product-details">
-                                            <div className={`${proposal.status == 0 ? "" : "active"} badge`}>{proposal.status == 0 ? "Pending" : "Active"}</div>
-                                            <span className="product-catagory">{proposal.genre}</span>
+                                            {proposal.status == 1 && <Alert message="Felicitaciones" description="Su propuesta ha sido aceptada" type="success" showIcon className="mb-4" />}
+
+                                            {proposal.status == 0 && <div className="badge">Pending</div>}
+
+                                            <span className="product-catagory">{proposal?.genre}</span>
                                             <h4>
-                                                <a href>{proposal.title}</a>
+                                                <a href>{proposal?.title}</a>
                                             </h4>
-                                            <p>{proposal.description}</p>
-                                            <div className="product-bottom-details">
+                                            <p>{proposal?.description}</p>
+                                            <div className="product-bottom-details align-items-center">
                                                 <div className="d-flex align-items-center">
-                                                    <SlCalender style={{marginRight:'5px'}} /> <span>29,april</span>
+                                                    <SlCalender style={{ marginRight: "5px" }} /> <span>{formatDate(proposal?.created_at)}</span>
                                                 </div>
+                                                {proposal.status == 1 && (
+                                                    <Link to="/addfund" status={'haveProposal'}>
+                                                    <button style={{ background: "#52C41A", color: "#fff" }} className="btn btn-sm">
+                                                        Crea tu proyecto
+                                                    </button></Link>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -62,9 +83,7 @@ function MyProposals() {
                             );
                         })}
 
-                    {
-                        myProposals && myProposals.length === 0 && <Empty />
-                    }
+                    {myProposals && myProposals.length === 0 && <Empty />}
 
                     {isLoading && (
                         <>
