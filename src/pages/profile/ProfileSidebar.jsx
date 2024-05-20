@@ -52,17 +52,6 @@ function ProfileSidebar() {
                     </li>
 
 
-
-                    <li>
-                        <Link to="/profile/proposal" className={`${pathname === "/profile/proposal" && "active"}`}>
-                            <i>
-                                <BsSend />
-                            </i>
-                            <span>Enviar propuesta</span>
-                        </Link>
-                    </li>
-
-
                     <li>
                         <Link to="/profile/myproposals" className={`${pathname === "/profile/myproposals" && "active"}`}>
                             <i>

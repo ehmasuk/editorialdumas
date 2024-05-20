@@ -4,18 +4,19 @@ import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import { FaStar } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { booksData } from "../../database/booksData";
 import { Rate } from "antd";
 import { useRef } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import useGet from "../../hooks/useGet";
+const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
-function HomeBookSale({sectionTitle}) {
-
+function HomeBookSale({ sectionTitle }) {
+    const [booksData, isLoading] = useGet(apiUrl + "/user/book");
 
     const swiperRef = useRef();
 
@@ -53,37 +54,43 @@ function HomeBookSale({sectionTitle}) {
                         swiperRef.current = swiper;
                     }}
                 >
-                    {booksData.map((item, index) => {
-                        return (
-                            <SwiperSlide key={index}>
-                                <div key={index} className="swiper-slide" >
-                                    <div onClick={()=>toast('Estamos trabajando en ello, gracias por su interés',{icon: '📣',})} className="books-card style-3 wow fadeInUp" data-wow-delay="0.2s">
-                                        <div className="dz-media">
-                                            <img style={{ height: "320px", objectFit: "cover", width: "100%" }} src={item.img} alt="book" />
-                                        </div>
-                                        <div className="dz-content">
-                                            <h5 className="title" style={{minHeight:'45px'}}>
-                                                <a href="#">{item.title}</a>
-                                            </h5>
-                                            <ul className="dz-tags">
-                                                <li>
-                                                    <a href="#">de {item.authorName}</a>
-                                                </li>
-                                            </ul>
-                                            <div className="book-footer">
-                                                <div className="rate">
-                                                <Rate disabled allowHalf defaultValue={item.rating} style={{ color: "#FFA808", fontSize: "14px" }} />
-                                                </div>
-                                                <div className="price">
-                                                    <span className="price-num">{item.price}€</span>
+                    {booksData &&
+                        booksData?.map((item, index) => {
+                            return (
+                                <SwiperSlide key={index}>
+                                    <div key={index} className="swiper-slide">
+                                        <div
+                                            className="books-card style-3"
+                                            data-wow-delay="0.2s"
+                                        >
+                                            <div className="dz-media">
+                                                <Link to={`/book/${item?.id}`}>
+                                                    <img style={{ height: "320px", objectFit: "contain" }} src={item?.images.filter((img) => img.is_video === null)[0].url} alt="book" />
+                                                </Link>
+                                            </div>
+                                            <div className="dz-content">
+                                                <h5 className="title" style={{ minHeight: "45px" }}>
+                                                    <Link to={`/book/${item?.id}`}>{item?.title}</Link>
+                                                </h5>
+                                                <ul className="dz-tags">
+                                                    <li>
+                                                        <a href="#">de {item?.author_name}</a>
+                                                    </li>
+                                                </ul>
+                                                <div className="book-footer">
+                                                    <div className="rate">
+                                                        <Rate disabled allowHalf defaultValue={5} style={{ color: "#FFA808", fontSize: "14px" }} />
+                                                    </div>
+                                                    <div className="price">
+                                                        <span className="price-num">{item?.discount_price}€</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </SwiperSlide>
-                        );
-                    })}
+                                </SwiperSlide>
+                            );
+                        })}
                 </Swiper>
             </div>
         </section>

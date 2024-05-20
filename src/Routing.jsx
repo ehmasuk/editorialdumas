@@ -22,6 +22,10 @@ import RecoverPassLast from "./pages/recoverpassword/RecoverPassLast";
 import AllProjects from "./pages/allprojects/AllProjects";
 import SingleProject from "./pages/singleproject/SingleProject";
 import EditFund from "./pages/editfund/editfund";
+import AllAuthors from "./pages/allauthors/AllAuthors";
+import AuthorProfile from "./pages/authorprofile/AuthorProfile";
+import BookDetails from "./pages/bookdetails/BookDetails";
+import AllBooks from "./pages/allbooks/AllBooks";
 
 function Routing() {
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
@@ -101,6 +105,13 @@ function Routing() {
                 <Route path="/faq" element={<Faq />} />
                 <Route path="/allprojects" element={<AllProjects />} />
                 <Route path="/project/:projectid" element={<SingleProject />} />
+                <Route path="/authors" element={<AllAuthors />} />
+                <Route path="/author/:authorId" element={<AuthorProfile />} />
+                <Route path="/books" element={<AllBooks />} />
+                <Route path="/book/:bookId" element={<BookDetails />} />
+
+
+
 
                 <Route path="*" element={<Error404 />} />
                 <Route path="/recoverpass" element={<RecoverPass />} />

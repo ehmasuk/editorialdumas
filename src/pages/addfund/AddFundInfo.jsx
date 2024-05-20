@@ -11,11 +11,16 @@ const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
     const [des, setDes] = useState(null);
+    const [chapter, setChapter] = useState(null);
 
-    const dispatch = useDispatch();
+
 
     const handleBookDes = (data) => {
         setDes(data);
+    };
+
+    const handleBookChapter = (data) => {
+        setChapter(data);
     };
 
     const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
@@ -43,6 +48,7 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
 
         if (des) {
             formData.set("book_description", des);
+            formData.set("book_chapter", chapter);
             formData.set("book_id", dataFromGet.id);
             formData.set("project_id", dataFromGet.project_id);
             formData.set("project_name", dataFromGet.project_name);
@@ -52,7 +58,7 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
                 console.log(pair[0] + ", " + pair[1]);
             }
         } else {
-            toast.error("Please fillup all informations");
+            toast.error("Complete todas las informaciones");
         }
     };
 
@@ -126,6 +132,11 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
                                 <label className="bolden">Descripción del libro</label>
                                 <p className="tiny">Dé una breve descripción del libro que nos va a enviar</p>
                                 <TipTap getEditorData={handleBookDes} />
+                            </div>
+                            <div className="mb-4">
+                                <label className="bolden">Primer capítulo del libro</label>
+                                <p className="tiny">Si tiene el primer capítulo de los libros, proporcione para mantener el interés de los clientes, si no, déjelo vacío</p>
+                                <TipTap getEditorData={handleBookChapter} />
                             </div>
                             <div className="mb-4">
                                 <label className="bolden">Imagen de libro</label>

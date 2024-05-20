@@ -8,15 +8,19 @@ import ProgressLoader from "../../components/progressLoader/ProgressLoader";
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep }) {
-    const [des, setDes] = useState(null);
+
 
     const userId = JSON.parse(localStorage.getItem("isLogedin")).user.id;
 
-    const dispatch = useDispatch();
+
 
     const handleBookDes = (data) => {
-        // setDes(data);
         setAllData({ ...allData, book_description: data });
+    };
+
+
+    const handleBookChapter = (data) => {
+        setAllData({ ...allData, book_chapter: data });
     };
 
     const [preValues, setDefaultValues] = useState(null);
@@ -30,13 +34,14 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
                 title: prevContent?.title,
                 user_id: userId,
                 book_description: prevContent?.book_description,
+                book_chapter: prevContent?.book_chapter,
                 book_id: prevContent?.id,
                 project_id: dataFromGet?.project_id,
                 project_name: dataFromGet?.project_name,
             });
     }, [prevContent, dataFromGet]);
 
-    // preValues && console.log(preValues);
+
 
     const [progressPercentage, setProgressPercentage] = useState(0);
     const [isLoading, setIsLoading] = useState(null);
@@ -105,6 +110,8 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
         }
     };
 
+
+
     return (
         <div className="addfund">
             {isLoading && <ProgressLoader percentage={progressPercentage} />}
@@ -126,8 +133,12 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
                                 <div className="mb-4">
                                     <label className="bolden">Descripción del libro</label>
                                     <p className="tiny">Dé una breve descripción del libro que nos va a enviar</p>
-
                                     <TipTap defaultValue={preValues.book_description} getEditorData={handleBookDes} />
+                                </div>
+                                <div className="mb-4">
+                                    <label className="bolden">Primer capítulo del libro</label>
+                                    <p className="tiny">Si tiene el primer capítulo de los libros, proporcione para mantener el interés de los clientes, si no, déjelo vacío</p>
+                                    <TipTap defaultValue={preValues.book_chapter} getEditorData={handleBookChapter} />
                                 </div>
                                 <div className="mb-4">
                                     <div className="row">

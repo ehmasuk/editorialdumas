@@ -1,0 +1,46 @@
+.all-autores-wraper .single-user{
+    background-color: #FCF7E4;
+    padding: 30px;
+    border-radius: 30px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 230px;
+    margin: auto;
+}
+.all-autores-wraper .single-user{
+    background-color: #FCF7E4;
+    padding: 30px;
+    border-radius: 50px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 240px;
+    margin: auto;
+    transition: .5s;
+}
+.all-autores-wraper .single-user:hover{
+    background: #fff;
+    transform: scale(1.02);
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+}
+.all-autores-wraper .single-user img{
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    
+}
+.all-autores-wraper .single-user .name{
+    color: rgb(0 0 255);
+    font-weight: 600;
+    margin-top: 20px;
+    text-align: center;
+}
+.all-autores-wraper .single-user .projects{
+    color: #95a2ac;
+    font-weight: 600;
+    font-size: 0.9em;
+    margin-top: 10px;
+    text-align: center;
+}

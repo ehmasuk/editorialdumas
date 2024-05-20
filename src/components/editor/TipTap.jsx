@@ -77,7 +77,7 @@ function TipTap({ getEditorData, defaultValue, maxCharacter }) {
 
                 {/* alignments */}
 
-                <Tooltip title="Align text left" mouseEnterDelay={1}>
+                <Tooltip title="Alinear el texto que queda" mouseEnterDelay={1}>
                     <div
                         onClick={() => editor.chain().focus().setTextAlign("left").run()}
                         disabled={!editor.can().chain().focus().setTextAlign("left").run()}
@@ -86,7 +86,7 @@ function TipTap({ getEditorData, defaultValue, maxCharacter }) {
                         <CiAlignLeft />
                     </div>
                 </Tooltip>
-                <Tooltip title="Align text center" mouseEnterDelay={1}>
+                <Tooltip title="Alinear el centro de texto" mouseEnterDelay={1}>
                     <div
                         onClick={() => editor.chain().focus().setTextAlign("center").run()}
                         disabled={!editor.can().chain().focus().setTextAlign("center").run()}
@@ -95,7 +95,7 @@ function TipTap({ getEditorData, defaultValue, maxCharacter }) {
                         <CiAlignCenterH />
                     </div>
                 </Tooltip>
-                <Tooltip title="Align text right" mouseEnterDelay={1}>
+                <Tooltip title="Alinear el texto correcto" mouseEnterDelay={1}>
                     <div
                         onClick={() => editor.chain().focus().setTextAlign("right").run()}
                         disabled={!editor.can().chain().focus().setTextAlign("right").run()}
@@ -104,7 +104,7 @@ function TipTap({ getEditorData, defaultValue, maxCharacter }) {
                         <CiAlignRight />
                     </div>
                 </Tooltip>
-                <Tooltip title="Align text justify" mouseEnterDelay={1}>
+                <Tooltip title="Alinear el texto justificar" mouseEnterDelay={1}>
                     <div
                         onClick={() => editor.chain().focus().setTextAlign("justify").run()}
                         disabled={!editor.can().chain().focus().setTextAlign("justify").run()}

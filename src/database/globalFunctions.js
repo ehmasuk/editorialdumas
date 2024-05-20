@@ -8,4 +8,13 @@ const formatDate = (dateString) => {
     return formattedDate;
 };
 
-export { formatDate };
+const daysRemaining = (targetDate) => {
+    const oneDay = 24 * 60 * 60 * 1000;
+    const currentDate = new Date();
+    const endDate = new Date(targetDate);
+    const remainingTime = endDate.getTime() - currentDate.getTime();
+    const remainingDays = Math.ceil(remainingTime / oneDay);
+    return remainingDays;
+};
+
+export { formatDate,daysRemaining };

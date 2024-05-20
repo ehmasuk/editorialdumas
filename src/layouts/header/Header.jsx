@@ -2,13 +2,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
 
-import axios from "axios";
 import { IoSearch } from "react-icons/io5";
 import { LuLogIn } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
-import { hideLoader, showLoader } from "../../features/CombineSlice";
 
 import { Skeleton, Tooltip } from "antd";
 import { FaUserPlus } from "react-icons/fa6";
@@ -19,30 +17,29 @@ import defaultAvatar from "./../../assets/images/defaultAvatar.png";
 
 import { allGenere } from "../../database/globalDatas";
 
-const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
-
-
 function Header() {
     const dispatch = useDispatch();
 
-    const handleLogout = async () => {
-        dispatch(showLoader());
-        const user = localStorage.getItem("isLogedin");
-        const token = JSON.parse(user).token;
+    const handleLogout = () => {
+        // dispatch(showLoader());
+        // const user = localStorage.getItem("isLogedin");
+        // const token = JSON.parse(user).token;
 
-        try {
-            const res = await axios.post(`${apiUrl}/user/logout`, token, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            dispatch(authUnCheck());
-        } catch (error) {
-            console.log(error);
-        } finally {
-            dispatch(hideLoader());
-        }
+        dispatch(authUnCheck());
+        // try {
+        //     await axios.post(`${apiUrl}/user/logout`, token, {
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             Authorization: `Bearer ${token}`,
+        //         },
+        //     });
+        //     dispatch(authUnCheck());
+        // } catch (error) {
+        //     console.log(error);
+        // } finally {
+        //     dispatch(hideLoader());
+
+        // }
     };
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
@@ -170,6 +167,8 @@ function Header() {
                                             )}
 
                                             <div className="profile-info">
+                                                {isLoading && <Skeleton.Input active={true} size="small" />}
+
                                                 <h6 className="title">{userInfo?.name}</h6>
                                                 <span>{userInfo?.email}</span>
                                             </div>
@@ -304,12 +303,12 @@ function Header() {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/">
+                                            <Link to="/books">
                                                 <span>Libros</span>
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/">
+                                            <Link to="/authors">
                                                 <span>Autores</span>
                                             </Link>
                                         </li>

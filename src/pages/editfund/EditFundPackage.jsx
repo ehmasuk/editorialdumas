@@ -61,6 +61,7 @@ function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentS
                 user_id: prevContent?.user?.id,
                 book_id: prevContent?.id,
                 book_description: prevContent?.book_description,
+                book_chapter: prevContent?.book_chapter,
                 title: prevContent?.title,
             });
     }, [prevContent]);

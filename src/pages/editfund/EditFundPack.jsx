@@ -129,6 +129,7 @@ function EditFundPack({prevContent, dataFromGet,setCurrentStep}) {
             project_name: dataFromGet.project_name,
             title: dataFromGet.title,
             book_description: dataFromGet.book_description,
+            book_chapter: dataFromGet.book_chapter,
             target_date: dataFromGet.target_date,
             pack_title: [],
             pack_description: [],

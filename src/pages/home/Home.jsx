@@ -203,8 +203,8 @@ function Home() {
                 {/* Book Sale */}
                 <HomeBookSale sectionTitle="Novedades"/>
                 <HomeRecom />
-                <HomeBookSale sectionTitle="Lo más vendido"/>
-                <HomeBookSale sectionTitle="Próximos lanzamientos"/>
+                {/* <HomeBookSale sectionTitle="Lo más vendido"/>
+                <HomeBookSale sectionTitle="Próximos lanzamientos"/> */}
                 <HomeAllProjects sectionTitle="Libros en campaña"/>
 
                 {/* Testimonial2 */}

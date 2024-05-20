@@ -1,4 +1,4 @@
-import { Progress, Skeleton, Tabs, notification } from "antd";
+import { Empty, Progress, Skeleton, Tabs, notification } from "antd";
 import ReactPlayer from "react-player";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Base from "../../layouts/Base";
@@ -14,6 +14,7 @@ import ProjectAuthor from "./ProjectAuthor";
 import ProjectComments from "./ProjectComments";
 import ProjectMecanas from "./ProjectMecanas";
 import ProjectPacks from "./ProjectPacks";
+import useGet from "../../hooks/useGet";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -58,9 +59,12 @@ function SingleProject() {
         }
     };
 
+
     useEffect(() => {
         getData();
     }, []);
+
+
 
     const items = [
         {
@@ -75,16 +79,26 @@ function SingleProject() {
         },
         {
             key: "3",
+            label: "Lee un capítulo",
+            children: (
+                <div>
+                    {userproject?.book_chapter ? <h3 className="text-center mb-3">Primer capítulo</h3> : <Empty />}
+                    <div style={{ fontSize: "18px" }} className="project-el-libro" dangerouslySetInnerHTML={{ __html: userproject?.book_chapter }}></div>
+                </div>
+            ),
+        },
+        {
+            key: "4",
             label: "El autor",
             children: <ProjectAuthor userproject={userproject && userproject} />,
         },
         {
-            key: "4",
+            key: "5",
             label: "Mecenas",
             children: <ProjectMecanas userproject={userproject && userproject} />,
         },
         {
-            key: "5",
+            key: "6",
             label: "Comunidad",
             children: <ProjectComments getData={getData} userproject={userproject && userproject} />,
         },
@@ -117,7 +131,7 @@ function SingleProject() {
 
     const calculateCompletion = (currentAmount, targetAmount) => {
         var completionPercentage = (currentAmount / targetAmount) * 100;
-        return Math.floor(completionPercentage);
+        return Math.ceil(completionPercentage);
     };
 
     const totalAmountGathered = (donations) => {

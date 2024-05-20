@@ -1,17 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
-
 function useGet(url) {
     const [data, setData] = useState(null);
-    const [isLoadind, setIsLoadind] = useState(false);
+    const [isLoading, setIsLoadind] = useState(false);
     const [error, setError] = useState(null);
 
     const getData = async () => {
         setIsLoadind(true);
         try {
-            const res = await axios.get(apiUrl + url);
+            const res = await axios.get(url);
             setData(res.data);
         } catch (error) {
             setError(error.message);
@@ -25,7 +23,7 @@ function useGet(url) {
         getData();
     }, []);
 
-    return [data, error, isLoadind];
+    return [data, isLoading, error];
 }
 
 export default useGet;
