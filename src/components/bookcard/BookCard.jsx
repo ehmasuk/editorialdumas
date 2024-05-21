@@ -1,6 +1,12 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../features/CartSlice";
 
 function BookCard({ book }) {
+
+
+    const dispatch = useDispatch()
+
     return (
         <div className="col-md-3">
             <div className="books-card style-3" style={{ padding: "0 20px", background: "#fff" }}>
@@ -18,12 +24,12 @@ function BookCard({ book }) {
                             <Link to={`/book/${book?.id}`}>de {book?.author_name}</Link>
                         </li>
                     </ul>
-                    <div className="book-footer">
+                    {/* <div className="book-footer">
                         <div className="price" style={{ fontSize: "16px" }}>
                             <span className="price-num">{book?.discount_price}€</span>
                         </div>
-                        <button className="btn btn-sm btn-secondary">Add to cart</button>
-                    </div>
+                        <button onClick={()=>dispatch(addToCart(book))} className="btn btn-sm btn-secondary">Add to cart</button>
+                    </div> */}
                 </div>
             </div>
         </div>

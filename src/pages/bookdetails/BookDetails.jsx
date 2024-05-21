@@ -1,13 +1,32 @@
-import { Skeleton } from "antd";
+import { Rate, Skeleton, Tooltip } from "antd";
+import { BiSolidPurchaseTag } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { addToCart } from "../../features/CartSlice";
 import useGet from "../../hooks/useGet";
 import Base from "../../layouts/Base";
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
+
+import { formatDate } from "../../database/globalFunctions";
+import { addToWishlist } from "../../features/WishlistSlice";
+import HomeBookSale from "../../components/home/HomeBookSale";
+import ReviewsSection from "../../components/reviewsSection/ReviewsSection";
+
+
 function BookDetails() {
+
+    const [allbooks, isLoading] = useGet(apiUrl + "/user/book");
+
+
     const { bookId } = useParams();
 
-    const [data, isLoading] = useGet(apiUrl + "/user/book/" + bookId);
+    const [data, isLoadingAllBooks] = useGet(apiUrl + "/user/book/" + bookId);
 
+    const { wishlistItems } = useSelector((store) => store.WishlistSlice);
+
+    const isInWishlist = wishlistItems.some((e) => e.id === data?.id);
+
+    const dispatch = useDispatch();
 
     return (
         <Base>
@@ -24,52 +43,31 @@ function BookDetails() {
                                         <div className="dz-content" style={{ width: "100%" }}>
                                             <div className="dz-header">
                                                 <h3 className="title">{data?.title}</h3>
+
                                                 <div className="shop-item-rating">
-                                                    <h5>{data?.category?.title}</h5>
-                                                    {/* <div className="d-lg-flex d-sm-inline-flex d-flex align-items-center">
-                                                    <ul className="dz-rating">
-                                                        <li>
-                                                            <i className="flaticon-star text-yellow" />
-                                                        </li>
-                                                        <li>
-                                                            <i className="flaticon-star text-yellow" />
-                                                        </li>
-                                                        <li>
-                                                            <i className="flaticon-star text-yellow" />
-                                                        </li>
-                                                        <li>
-                                                            <i className="flaticon-star text-yellow" />
-                                                        </li>
-                                                        <li>
-                                                            <i className="flaticon-star text-muted" />
-                                                        </li>
-                                                    </ul>
-                                                    <h6 className="m-b0">4.0</h6>
-                                                </div> */}
-                                                    {/* <div className="social-area">
-                                                    <ul className="dz-social-icon style-3">
-                                                        <li>
-                                                            <a href="https://www.facebook.com/dexignzone" target="_blank" rel="noreferrer">
-                                                                <i className="fa-brands fa-facebook-f" />
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="https://twitter.com/dexignzones" target="_blank" rel="noreferrer">
-                                                                <i className="fa-brands fa-twitter" />
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="https://www.whatsapp.com/" target="_blank" rel="noreferrer">
-                                                                <i className="fa-brands fa-whatsapp" />
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="https://www.google.com/intl/en-GB/gmail/about/" target="_blank" rel="noreferrer">
-                                                                <i className="fa-solid fa-envelope" />
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div> */}
+                                                    <div className="d-lg-flex d-sm-inline-flex d-flex align-items-center">
+                                                        <Rate allowHalf defaultValue={5} style={{ color: "#EAA451", marginRight: "10px" }} disabled />
+                                                        <h5 className="m-b0">5.0</h5>
+                                                    </div>
+                                                    <div className="social-area">
+                                                        <ul className="dz-social-icon style-3">
+                                                            <li>
+                                                                <a href="https://www.facebook.com/profile.php?id=61558777782572" rel="link noreferrer" target="_blank">
+                                                                    <i className="fa-brands fa-facebook-f" />
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://twitter.com/editorialdumas" target="_blank" rel="noreferrer">
+                                                                    <i className="fa-brands fa-twitter" />
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="https://www.instagram.com/editorialdumas/" target="_blank" rel="noreferrer">
+                                                                    <i className="fa-brands fa-instagram" />
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className="dz-body">
@@ -77,37 +75,44 @@ function BookDetails() {
                                                     <ul className="book-info">
                                                         <li>
                                                             <div className="writer-info">
-                                                                {/* <img src="images/profile2.jpg" alt="book" /> */}
+                                                                {/* <img src={data?.user?.images?.url} alt="book" /> */}
                                                                 <div>
                                                                     <span>Escribe en</span>
                                                                     {data?.author_name}
                                                                 </div>
                                                             </div>
                                                         </li>
-                                                        {/* <li>
-                                                        <span>Publisher</span>Printarea Studios
-                                                    </li>
-                                                    <li>
-                                                        <span>Year</span>2019
-                                                    </li> */}
+                                                        <li>
+                                                            <span>Categoría</span>
+                                                            {data?.category?.title}
+                                                        </li>
+                                                        <li>
+                                                            <span>Publicado en editorial</span>
+                                                            {formatDate(data?.created_at)}
+                                                        </li>
                                                     </ul>
                                                 </div>
-                                                <div style={{ width: "100%" }} dangerouslySetInnerHTML={{ __html: data?.long_description }}></div>
+                                                <div style={{ width: "100%", textAlign: "justify" }} dangerouslySetInnerHTML={{ __html: data?.long_description }}></div>
                                                 <div className="book-footer">
                                                     <div className="price">
                                                         <h5>{data?.discount_price}€</h5>
                                                         {data?.strike_price && <p className="p-lr10">{data?.strike_price}</p>}
                                                     </div>
                                                     <div className="product-num">
-                                                        <a href="shop-cart.html" className="btn btn-primary btnhover2">
-                                                            <i className="fas fa-shopping-cart"></i> <span>Add to cart</span>
+                                                        <Tooltip title="Añadir a la lista de deseos">
+                                                            <div onClick={() => dispatch(addToWishlist(data))} style={{ marginRight: "10px" }} className="bookmark-btn style-1 d-none d-sm-block">
+                                                                <label className="form-check-label" htmlFor="flexCheckDefault1">
+                                                                    <i className="fas fa-heart" style={{ color: isInWishlist && "red" }} />
+                                                                </label>
+                                                            </div>
+                                                        </Tooltip>
+
+                                                        <a onClick={() => dispatch(addToCart(data))} style={{ marginRight: "10px" }} className="btn btn-primary btnhover2">
+                                                            <i className="fas fa-shopping-cart"></i> <span>Añadir a la cesta</span>
                                                         </a>
-                                                        <div className="bookmark-btn style-1 d-none d-sm-block">
-                                                            <input className="form-check-input" type="checkbox" id="flexCheckDefault1" />
-                                                            <label className="form-check-label" htmlFor="flexCheckDefault1">
-                                                                <i className="fas fa-heart" />
-                                                            </label>
-                                                        </div>
+                                                        <a href="#" className="btn btn-secondary btnhover2">
+                                                            <BiSolidPurchaseTag fontSize={20} /> <span>Comprar ahora</span>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,6 +120,8 @@ function BookDetails() {
                                     </div>
                                 </div>
                             </div>
+
+
                             <div className="row">
                                 <div className="col-xl-12">
                                     <div className="product-description tabs-site-button">
@@ -130,11 +137,11 @@ function BookDetails() {
                                                 <table className="table border book-overview">
                                                     <tbody>
                                                         <tr>
-                                                            <th>Book Title</th>
+                                                            <th>Titulo del libro</th>
                                                             <td>{data?.title}</td>
                                                         </tr>
                                                         <tr>
-                                                            <th>Author</th>
+                                                            <th>Autora</th>
                                                             <td>{data?.author_name}</td>
                                                         </tr>
                                                         {/* <tr>
@@ -142,11 +149,11 @@ function BookDetails() {
                                                         <td>121341381648 (ISBN13: 121341381648)</td>
                                                     </tr> */}
                                                         <tr>
-                                                            <th>Ediiton Language</th>
-                                                            <td>Spanish</td>
+                                                            <th>Lenguaje edianiton</th>
+                                                            <td>Española</td>
                                                         </tr>
                                                         <tr>
-                                                            <th>Book Format</th>
+                                                            <th>Formato de libro</th>
                                                             <td>pdf</td>
                                                         </tr>
                                                         {/* <tr>
@@ -249,6 +256,13 @@ function BookDetails() {
                                 </div>
                             </div> */}
                             </div>
+
+
+                            <ReviewsSection />
+                            <HomeBookSale allBooks={allbooks && allbooks} isLoading={isLoadingAllBooks} sectionTitle="Descubrir más"/>
+
+
+
                         </div>
                     )}
 

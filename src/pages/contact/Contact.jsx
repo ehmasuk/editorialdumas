@@ -43,7 +43,7 @@ function Contact() {
                                 <div className="contact-info">
                                     <div className="section-head text-white style-1">
                                         <h3 className="title text-white">Ponte en contacto</h3>
-                                        <p>Si tienes algún tipo de confusión o necesitas ayuda, por favor ponte en contacto.</p>
+                                        <p>¿Quieres publicar un libro? ¿Necesitas ayuda? Escríbenos. Responderemos en menos de 24 horas.</p>
                                     </div>
                                     <ul className="no-margin">
                                         <li className="icon-bx-wraper text-white left m-b30">

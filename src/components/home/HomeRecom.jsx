@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import "swiper/css";
 import useGet from "../../hooks/useGet";
+import { Skeleton } from "antd";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -50,14 +51,18 @@ function HomeRecom() {
                                                     {item?.title}
                                                 </h4>
                                             </Link>
-                                            <span className="price" style={{ textAlign: "left" }}>
+                                            {/* <span className="price" style={{ textAlign: "left" }}>
                                                 €{item?.discount_price}
-                                            </span>
+                                            </span> */}
                                         </div>
                                     </div>
                                 </SwiperSlide>
                             );
                         })}
+
+                        {
+                            !booksData && <Skeleton active/>
+                        }
                 </Swiper>
             </div>
         </section>

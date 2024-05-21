@@ -8,15 +8,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import { Rate } from "antd";
+import { Skeleton } from "antd";
 import { useRef } from "react";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import useGet from "../../hooks/useGet";
-const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
-function HomeBookSale({ sectionTitle }) {
-    const [booksData, isLoading] = useGet(apiUrl + "/user/book");
+
+function HomeBookSale({ allBooks, isLoading ,sectionTitle }) {
+
 
     const swiperRef = useRef();
 
@@ -35,6 +33,26 @@ function HomeBookSale({ sectionTitle }) {
                         </div>
                     </div>
                 </div>
+                {
+                    isLoading && <div className="row">
+                    <div className="col-md-3">
+                        <Skeleton.Image style={{width:'200px',height:'300px'}} className="mb-2" active />
+                        <Skeleton active/>
+                    </div>
+                    <div className="col-md-3">
+                        <Skeleton.Image style={{width:'200px',height:'300px'}} className="mb-2" active />
+                        <Skeleton active/>
+                    </div>
+                    <div className="col-md-3">
+                        <Skeleton.Image style={{width:'200px',height:'300px'}} className="mb-2" active />
+                        <Skeleton active/>
+                    </div>
+                    <div className="col-md-3">
+                        <Skeleton.Image style={{width:'200px',height:'300px'}} className="mb-2" active />
+                        <Skeleton active/>
+                    </div>
+                </div>
+                }
                 <Swiper
                     modules={[Autoplay]}
                     spaceBetween={50}
@@ -54,15 +72,17 @@ function HomeBookSale({ sectionTitle }) {
                         swiperRef.current = swiper;
                     }}
                 >
-                    {booksData &&
-                        booksData?.map((item, index) => {
+
+
+
+
+
+                    {allBooks &&
+                        allBooks?.map((item, index) => {
                             return (
                                 <SwiperSlide key={index}>
                                     <div key={index} className="swiper-slide">
-                                        <div
-                                            className="books-card style-3"
-                                            data-wow-delay="0.2s"
-                                        >
+                                        <div className="books-card style-3" data-wow-delay="0.2s">
                                             <div className="dz-media">
                                                 <Link to={`/book/${item?.id}`}>
                                                     <img style={{ height: "320px", objectFit: "contain" }} src={item?.images.filter((img) => img.is_video === null)[0].url} alt="book" />
@@ -77,14 +97,7 @@ function HomeBookSale({ sectionTitle }) {
                                                         <a href="#">de {item?.author_name}</a>
                                                     </li>
                                                 </ul>
-                                                <div className="book-footer">
-                                                    <div className="rate">
-                                                        <Rate disabled allowHalf defaultValue={5} style={{ color: "#FFA808", fontSize: "14px" }} />
-                                                    </div>
-                                                    <div className="price">
-                                                        <span className="price-num">{item?.discount_price}€</span>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -92,6 +105,7 @@ function HomeBookSale({ sectionTitle }) {
                             );
                         })}
                 </Swiper>
+
             </div>
         </section>
     );

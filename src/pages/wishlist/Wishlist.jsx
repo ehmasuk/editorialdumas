@@ -1,66 +1,68 @@
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { addToCart } from "../../features/CartSlice";
+import { removeFromWishlist } from "../../features/WishlistSlice";
 import Base from "../../layouts/Base";
 
 function Wishlist() {
+    const dispatch = useDispatch();
+
+    const { wishlistItems } = useSelector((store) => store.WishlistSlice);
+
+
+
     return (
         <Base>
             <div className="page-content">
-                <div className="dz-bnr-inr overlay-secondary-dark dz-bnr-inr-sm" style={{ backgroundImage: "url(images/background/bg3.jpg)" }}>
-                    <div className="container">
-                        <div className="dz-bnr-inr-entry">
-                            <h1>Wishlist</h1>
-                            <nav aria-label="breadcrumb" className="breadcrumb-row">
-                                <ul className="breadcrumb">
-                                    <li className="breadcrumb-item">
-                                        <a href="index.html"> Home</a>
-                                    </li>
-                                    <li className="breadcrumb-item">Wishlist</li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
                 <div className="content-inner-1">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-12">
-                                <div className="table-responsive">
-                                    <table className="table check-tbl">
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Product name</th>
-                                                <th>Unit Price</th>
-                                                <th>Quantity</th>
-                                                <th>Add to cart </th>
-                                                <th>Close</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td className="product-item-img">
-                                                    <img src="images/books/grid/book3.jpg" alt="" />
-                                                </td>
-                                                <td className="product-item-name">Prduct Item 1</td>
-                                                <td className="product-item-price">$28.00</td>
-                                                <td className="product-item-quantity">
-                                                    <div className="quantity btn-quantity style-1 me-3">
-                                                        <input id="demo_vertical2" type="text" defaultValue={1} name="demo_vertical2" />
-                                                    </div>
-                                                </td>
-                                                <td className="product-item-totle">
-                                                    <a href="shop-cart.html" className="btn btn-primary btnhover">
-                                                        Add To Cart
-                                                    </a>
-                                                </td>
-                                                <td className="product-item-close">
-                                                    <a role="button" className="ti-close">
-                                                        ×
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                {wishlistItems.length > 0 ? (
+                                    <div className="table-responsive">
+                                        <table className="table check-tbl">
+                                            <thead>
+                                                <tr>
+                                                    <th>Libro</th>
+                                                    <th>Nombre del libro</th>
+                                                    <th>Precio</th>
+                                                    <th>Añadir a la cesta</th>
+                                                    <th>Cerca</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {wishlistItems.length > 0 &&
+                                                    wishlistItems.map((item, index) => {
+                                                        return (
+                                                            <tr key={index}>
+                                                                <td className="product-item-img">
+                                                                    <Link to={"/book/" + item.id}>
+                                                                        <img src={item?.images.filter((img) => img.is_video === null)[0].url} alt="" />
+                                                                    </Link>
+                                                                </td>
+                                                                <td className="product-item-name">
+                                                                    <Link to={"/book/" + item.id}>{item.title}</Link>
+                                                                </td>
+                                                                <td className="product-item-price">{item?.discount_price}€</td>
+                                                                <td className="product-item-totle">
+                                                                    <a onClick={() => dispatch(addToCart(item))} className="btn btn-primary btnhover">
+                                                                        Añadir a la cesta
+                                                                    </a>
+                                                                </td>
+                                                                <td className="product-item-close">
+                                                                    <a role="button" onClick={() => dispatch(removeFromWishlist(item))} className="ti-close">
+                                                                        ×
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    })}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ) : (
+                                    <h5>Tu lista de deseos Esta vacía</h5>
+                                )}
                             </div>
                         </div>
                     </div>

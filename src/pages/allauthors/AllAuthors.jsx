@@ -25,7 +25,7 @@ function AllAuthors() {
                                             <div className="single-user">
                                                 <img src={author && author.images ? author.images.url : defaultAvatar} alt="avatar" />
                                                 <div className="name">{author?.name}</div>
-                                                <div className="projects">{author?.books?.length} projects</div>
+                                                <div className="projects">{author?.books?.filter((book) => book.title !== null || book.book_description !== null)?.length} proyectos</div>
                                             </div>
                                         </Link>
                                     </div>

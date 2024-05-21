@@ -1,0 +1,47 @@
+.reviews-head{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    flex-wrap: wrap;
+}
+.review-stat .single-stat{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: auto;
+    min-width: 400px;
+    max-width: 100%;
+}
+.review-stat .single-stat .rate-count{
+    min-width: 30px;
+}
+.review-stat .single-stat .ant-rate{
+    min-width: 110px;
+}
+.review-stat .single-stat ul{
+    line-height: 0;
+}
+.review-stat .single-stat li{
+    font-size: 15px;
+}
+
+.customers-review .given-review li{
+    font-size: 15px;
+}
+.customers-review .given-review ul{
+    line-height: 0;
+}
+.customers-review .given-review h5{
+    margin: 0;
+}
+.customers-review .given-review{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.customers-review .comment-replays{
+    margin-top: 20px;
+}
+

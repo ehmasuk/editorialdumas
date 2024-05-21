@@ -16,31 +16,19 @@ import { showLoginPopup } from "../../features/LoginPopupSlice";
 import defaultAvatar from "./../../assets/images/defaultAvatar.png";
 
 import { allGenere } from "../../database/globalDatas";
+import { removeFromCart } from "../../features/CartSlice";
 
 function Header() {
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-        // dispatch(showLoader());
-        // const user = localStorage.getItem("isLogedin");
-        // const token = JSON.parse(user).token;
 
         dispatch(authUnCheck());
-        // try {
-        //     await axios.post(`${apiUrl}/user/logout`, token, {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             Authorization: `Bearer ${token}`,
-        //         },
-        //     });
-        //     dispatch(authUnCheck());
-        // } catch (error) {
-        //     console.log(error);
-        // } finally {
-        //     dispatch(hideLoader());
 
-        // }
     };
+
+    const {cartItems,totalPrice} = useSelector((store) => store.CartSlice)
+    const {wishlistItems} = useSelector((store) => store.WishlistSlice)
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
 
@@ -83,13 +71,13 @@ function Header() {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/wishlist">
                                         <FaRegHeart color="#000" />
-                                        <span className="badge">0</span>
+                                        <span className="badge">{wishlistItems.length}</span>
                                     </Link>
                                 </li>
                                 <li className="nav-item" onClick={(e) => e.stopPropagation()}>
                                     <button type="button" className="nav-link box cart-btn" onClick={() => setCartisOpen(!cartisOpen)}>
                                         <RiShoppingCartLine color="#000" />
-                                        <span className="badge">0</span>
+                                        <span className="badge">{cartItems.length}</span>
                                     </button>
                                     <AnimatePresence>
                                         {cartisOpen && (
@@ -103,35 +91,56 @@ function Header() {
                                                 exit={{ height: 0 }}
                                                 className="dropdown-menu cart-list d-block"
                                             >
-                                                <li className="cart-item">
-                                                    <div className="media">
-                                                        <div className="media-left">
-                                                            <a href="#">
-                                                                <img alt="" className="media-object" src="https://picsum.photos/500/300?random=1" />
-                                                            </a>
-                                                        </div>
-                                                        <div className="media-body">
-                                                            <h6 className="dz-title">
-                                                                <a href="#" className="media-heading">
-                                                                    Real Life
-                                                                </a>
-                                                            </h6>
-                                                            <span className="dz-price">$28.00</span>
-                                                            <span className="item-close">×</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
 
-                                                <li className="cart-item text-center">
-                                                    <h6 className="text-secondary">Totle = $500</h6>
-                                                </li>
+                                                {
+                                                    cartItems.map((item,index)=>{
+                                                        return (
+                                                            <li key={index} className="cart-item">
+                                                                <div className="media">
+                                                                    <div className="media-left">
+                                                                        <Link to="/cart">
+                                                                            <img alt="" className="media-object" src={item?.images.filter((img) => img.is_video === null)[0].url} />
+                                                                        </Link>
+                                                                    </div>
+                                                                    <div className="media-body">
+                                                                        <h6 className="dz-title">
+                                                                            <Link to="/cart" className="media-heading">
+                                                                                {item.title.length>30 ? item.title.slice(0,30) + '...' : item.title}
+                                                                            </Link>
+                                                                        </h6>
+                                                                        <span className="dz-price">{item?.discount_price}€</span>
+                                                                        <span onClick={()=>dispatch(removeFromCart(item))} className="item-close">×</span>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        )
+                                                    })
+                                                }
+
+
+                                                {
+                                                    totalPrice>0 ? <li className="cart-item text-center">
+                                                        <h6 className="text-secondary">Total = {totalPrice}€</h6>
+                                                    </li>
+                                                    :
+                                                    <li className="cart-item text-center">
+                                                        <h6>No hay libros en el carrito</h6>
+                                                    </li>
+                                                    
+                                                }
+
+
+
                                                 <li className="text-center d-flex">
-                                                    <a href="shop-cart.html" className="btn btn-sm btn-primary me-2 btnhover w-100">
-                                                        View Cart
-                                                    </a>
-                                                    <a href="shop-checkout.html" className="btn btn-sm btn-outline-primary btnhover w-100">
-                                                        Checkout
-                                                    </a>
+                                                    <Link to="/cart" className="btn btn-sm btn-primary me-2 btnhover w-100">
+                                                        Verlo
+                                                    </Link>
+                                                    {
+                                                        totalPrice>0 && <Link href="shop-checkout.html" className="btn btn-sm btn-outline-primary btnhover w-100">
+                                                        Verificar
+                                                    </Link>
+                                                    }
+                                                    
                                                 </li>
                                             </motion.ul>
                                         )}
@@ -313,23 +322,6 @@ function Header() {
                                             </Link>
                                         </li>
 
-                                        {/* {!isLogedin && (
-                                            <>
-                                                <li>
-                                                    <Link to="/login">Entrar</Link>
-                                                </li>
-                                                <li>
-                                                    <Link to="/register">Regístrate</Link>
-                                                </li>
-                                            </>
-                                        )}
-                                        {isLogedin && (
-                                            <>
-                                                <li>
-                                                    <Link to="/profile">Perfil</Link>
-                                                </li>
-                                            </>
-                                        )} */}
                                     </ul>
                                 </motion.div>
                             )}
