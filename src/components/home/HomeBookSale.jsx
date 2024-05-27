@@ -97,7 +97,10 @@ function HomeBookSale({ allBooks, isLoading ,sectionTitle }) {
                                                         <a href="#">de {item?.author_name}</a>
                                                     </li>
                                                 </ul>
-                                                
+                                            </div>
+                                            <div className="add-cart-hover-options">
+                                                <button className="btn btn-outline-secondary">ver ficha</button>
+                                                <button className="btn btn-secondary mt-3">Añadir</button>
                                             </div>
                                         </div>
                                     </div>

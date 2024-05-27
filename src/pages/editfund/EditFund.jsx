@@ -9,6 +9,7 @@ import EditFundInfo from "./EditFundInfo.jsx";
 import EditFundPack from "./EditFundPack.jsx";
 import EditFundPackage from "./EditFundPackage.jsx";
 import PublishEditFund from "./PublishEditFund.jsx";
+import EditSellBooksFund from "./EditSellBooksFund.jsx";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
@@ -31,7 +32,7 @@ function EditFund() {
         try {
             const res = await axios.get(`${apiUrl}/user/project/${editId}/edit`);
             setPrevContent(res.data);
-            console.log(res.data);
+
         } catch (error) {
             console.log(error);
         } finally {
@@ -42,6 +43,12 @@ function EditFund() {
     useEffect(() => {
         getData();
     }, []);
+
+
+
+    prevContent && console.log(prevContent);
+
+
 
     const [currentStep, setCurrentStep] = useState(0);
 
@@ -62,6 +69,9 @@ function EditFund() {
                                 title: "Crear paquetes",
                             },
                             {
+                                title: "Vende más libros",
+                            },
+                            {
                                 title: "Publicar",
                             },
                         ]}
@@ -70,7 +80,8 @@ function EditFund() {
                         {currentStep === 0 && <EditFundPackage prevContent={prevContent} dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
                         {currentStep === 1 && <EditFundInfo getData={getData} prevContent={prevContent} dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
                         {currentStep === 2 && <EditFundPack prevContent={prevContent} dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
-                        {currentStep === 3 && <PublishEditFund />}
+                        {currentStep === 3 && <EditSellBooksFund prevContent={prevContent} dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} getPrevData={getData} setCurrentStep={setCurrentStep} />}
+                        {currentStep === 4 && <PublishEditFund />}
                     </div>
                 </div>
             )}

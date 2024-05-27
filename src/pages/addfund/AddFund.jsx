@@ -6,6 +6,7 @@ import ChooseFundPackage from "./ChooseFundPackage";
 import CreateFundPack from "./CreateFundPack";
 import "./addfund.css";
 import PublishFund from "./PublishFund";
+import SellBooksFund from "./SellBooksFund";
 
 function AddFund() {
     const [currentStep, setCurrentStep] = useState(0);
@@ -20,7 +21,9 @@ function AddFund() {
     }, []);
 
 
-    
+    useEffect(()=>{
+        console.log(dataFromGet);
+    },[dataFromGet])
 
     return (
         <Base>
@@ -38,15 +41,19 @@ function AddFund() {
                             title: "Crear paquetes",
                         },
                         {
+                            title: "Vende más libros",
+                        },
+                        {
                             title: "Publicar",
-                        }
+                        },
                     ]}
                 />
                 <div className="fund-wraper">
                     {currentStep === 0 && <ChooseFundPackage dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
                     {currentStep === 1 && <AddFundInfo dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
                     {currentStep === 2 && <CreateFundPack dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
-                    {currentStep === 3 && <PublishFund />}
+                    {currentStep === 3 && <SellBooksFund dataFromGet={dataFromGet} setDataFromGet={setDataFromGet} setCurrentStep={setCurrentStep} />}
+                    {currentStep === 4 && <PublishFund />}
                 </div>
             </div>
         </Base>

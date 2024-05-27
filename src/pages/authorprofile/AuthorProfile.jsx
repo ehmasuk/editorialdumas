@@ -19,8 +19,10 @@ function AuthorProfile() {
     const [data, isLoading, error] = useGet(apiUrl + "/user/writer/" + authorId);
 
     useEffect(() => {
-        error && navigate("/");
-    }, []);
+        error && navigate("/authors");
+    }, [error]);
+
+    data && console.log(data);
 
     return (
         <Base>

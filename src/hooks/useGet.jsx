@@ -23,7 +23,7 @@ function useGet(url) {
         getData();
     }, []);
 
-    return [data, isLoading, error];
+    return [data, isLoading, error, getData];
 }
 
 export default useGet;

@@ -184,9 +184,16 @@ function SingleProject() {
                                     <button className="btn btn-primary btnhover donate-btn mb-2" onClick={() => setShowPackagePopup(!showPackagePopup)}>
                                         Hazte Mecenas
                                     </button>
-                                    <p style={{ color: "#000" }}>
-                                        Con el apoyo de <b>{userproject?.donations?.length} mecenas</b>
-                                    </p>
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        <p style={{ color: "#000" }}>
+                                            Con el apoyo de <b>{userproject?.donations?.length} mecenas</b>
+                                        </p>
+                                        <p style={{ color: "#000" }}>
+                                            <a href="#">
+                                                Comprara
+                                            </a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

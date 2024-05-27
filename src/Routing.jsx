@@ -28,7 +28,12 @@ import BookDetails from "./pages/bookdetails/BookDetails";
 import AllBooks from "./pages/allbooks/AllBooks";
 import Cart from "./pages/cart/Cart";
 
+
+
 function Routing() {
+
+
+
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
 
     return (
@@ -112,6 +117,8 @@ function Routing() {
                 <Route path="/book/:bookId" element={<BookDetails />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/wishlist" element={<Wishlist />} />
+
+
 
 
 

@@ -1,4 +1,4 @@
-import { Alert, Empty, Skeleton } from "antd";
+import { Alert, Badge, Empty, Skeleton } from "antd";
 import { useEffect, useState } from "react";
 import { SlCalender } from "react-icons/sl";
 import ProfileLayout from "../ProfileLayout";
@@ -35,7 +35,6 @@ function MyProposals() {
 
     myProposals && console.log(myProposals);
 
-
     return (
         <ProfileLayout>
             <div className="shop-bx-title clearfix">
@@ -56,25 +55,25 @@ function MyProposals() {
                             return (
                                 <div key={index} className="col-md-6 mb-4">
                                     <div className="product-card">
+                                        {proposal.status == 0 && <Badge.Ribbon text="Pending" color="#1A1668" />}
                                         <div className="product-details">
                                             {proposal.status == 1 && <Alert message="Felicitaciones" description="Su propuesta ha sido aceptada" type="success" showIcon className="mb-4" />}
-
-                                            {proposal.status == 0 && <div className="badge">Pending</div>}
 
                                             <span className="product-catagory">{proposal?.genre}</span>
                                             <h4>
                                                 <a href>{proposal?.title}</a>
                                             </h4>
                                             <p>{proposal?.description}</p>
-                                            <div className="product-bottom-details align-items-center">
+                                            <div className="product-bottom-details d-flex justify-content-between">
                                                 <div className="d-flex align-items-center">
                                                     <SlCalender style={{ marginRight: "5px" }} /> <span>{formatDate(proposal?.created_at)}</span>
                                                 </div>
                                                 {proposal.status == 1 && (
-                                                    <Link to="/addfund" status={'haveProposal'}>
-                                                    <button style={{ background: "#52C41A", color: "#fff" }} className="btn btn-sm">
-                                                        Crea tu proyecto
-                                                    </button></Link>
+                                                    <Link to="/addfund" status={"haveProposal"}>
+                                                        <button style={{ background: "#52C41A", color: "#fff" }} className="btn btn-sm">
+                                                            Crea tu proyecto
+                                                        </button>
+                                                    </Link>
                                                 )}
                                             </div>
                                         </div>

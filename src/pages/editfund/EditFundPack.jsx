@@ -131,6 +131,7 @@ function EditFundPack({prevContent, dataFromGet,setCurrentStep}) {
             book_description: dataFromGet.book_description,
             book_chapter: dataFromGet.book_chapter,
             target_date: dataFromGet.target_date,
+            sell_book: dataFromGet.sell_book,
             pack_title: [],
             pack_description: [],
             pack_amount: []
@@ -139,7 +140,7 @@ function EditFundPack({prevContent, dataFromGet,setCurrentStep}) {
 
         try{
             const res = await axios.post(`${apiUrl}/user/project`, convertedData);
-            console.log(res);
+            // console.log(res);
             setCurrentStep(3)
         }catch (error) {
             console.log(error);

@@ -13,46 +13,67 @@ const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 const packPoints = [
     [
-        "Acceso a un curso de escritura por un año.",
-        "6 consultas para escribir una novela enfocada en el cine",
-        "Maquetación de la obra",
-        "Publicación en Amazon e internacionalmente",
-        "Edición y corrección de pruebas del trabajo",
-        "Creación de portada",
-        "Creación de tráiler del libro",
-    ],
-    ["Maquetación de la obra", "Publicación en Amazon e internacionalmente", "Edición y corrección de pruebas del trabajo", "Creación de portada", "Creación de tráiler del libro", "Creación de blog"],
-    [
-        "Maquetación de la obra",
-        "Publicación en Amazon e internacionalmente",
-        "Edición y corrección de pruebas del trabajo",
-        "Creación de portada",
-        "Creación de tráiler del libro",
-        "Creación de blog",
-        "5 copias del autor",
-        "ISBN nacional",
-        "Creación de perfiles en Facebook, Instagram",
-        "Envío de correo electrónico a 20,000 usuarios",
+        "Creación de email marketing 1 envío/mes",
+        "Posicionamiento SEO 4 artículos/mes",
+        "SEO del blog",
+        "20 publicaciones/mes redes FB instagram",
+        "Publicidad en redes FB/TIKTOK",
+        "Publicidad en Amazon",
+        "Creamos tu branding",
+        "Manejamos tu reputación online",
+        "Incremento de ventas 5 – 10%",
+        "Utilizaremos el dinero para crear tu marca",
+        "Servicio mínimo por 3 meses",
     ],
     [
-        "Maquetación de la obra",
-        "Publicación en Amazon e internacionalmente",
-        "Edición y corrección de pruebas del trabajo",
-        "Creación de portada",
-        "Creación de tráiler del libro",
-        "Creación de blog",
-        "5 copias del autor",
-        "ISBN nacional",
-        "Creación de perfiles en Facebook, Instagram",
-        "Envío de correo electrónico a 40,000 usuarios",
-        "Presentación en Madrid",
-        "Aparición en periódicos digitales",
+        "Creación de email marketing 1 envío/mes",
+        "Posicionamiento SEO 4 artículos/mes",
+        "SEO del blog",
+        "20 publicaciones/mes redes FB instagram",
+        "Publicidad en redes FB/TIKTOK",
+        "Publicidad en Amazon",
+        "Creamos tu branding",
+        "Manejamos tu reputación online",
+        "Incremento de ventas 5 – 10%",
+        "Utilizaremos el dinero para crear tu marca",
+        "Servicio mínimo por 3 meses",
+    ],
+    [
+        "Creación de email marketing 1 envío/mes",
+        "Posicionamiento SEO 4 artículos/mes",
+        "SEO del blog",
+        "20 publicaciones/mes redes FB instagram",
+        "Publicidad en redes FB/TIKTOK",
+        "Publicidad en Amazon",
+        "Creamos tu branding",
+        "Manejamos tu reputación online",
+        "Incremento de ventas 5 – 10%",
+        "Utilizaremos el dinero para crear tu marca",
+        "Servicio mínimo por 3 meses",
+    ],
+    [
+        "Creación de email marketing 1 envío/mes",
+        "Posicionamiento SEO 4 artículos/mes",
+        "SEO del blog",
+        "20 publicaciones/mes redes FB instagram",
+        "Publicidad en redes FB/TIKTOK",
+        "Publicidad en Amazon",
+        "Creamos tu branding",
+        "Manejamos tu reputación online",
+        "Incremento de ventas 5 – 10%",
+        "Utilizaremos el dinero para crear tu marca",
+        "Servicio mínimo por 3 meses",
     ],
 ];
+const packMonths = [3,6,9,12]
+const packPrices = [1500,3000,4500,6000]
 
-function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentStep }) {
+function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurrentStep,getPrevData }) {
 
-    const packPrices = [699,799,899,1699]
+
+    useEffect(()=>{
+        getPrevData()
+    },[])
 
     const [userData, setUserData] = useState(null);
 
@@ -68,23 +89,23 @@ function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentS
                 title: prevContent?.title,
                 sell_book: prevContent?.sell_book,
             });
-    }, [prevContent]);
 
-    
+    },[prevContent]);
 
+    prevContent && console.log(prevContent);
 
     const handleChange = (e) => {
         if (e.target.value == packPrices[0]) {
-            setUserData({ ...userData, project_id: e.target.value, project_name: `Writing and Publishing of a Novel ${packPrices[0]}€` });
+            setUserData({ ...userData,  sell_book: packPrices[0] });
         }
         if (e.target.value == packPrices[1]) {
-            setUserData({ ...userData, project_id: e.target.value, project_name: `Basic Publication ${packPrices[1]}€` });
+            setUserData({ ...userData,  sell_book: packPrices[1] });
         }
         if (e.target.value == packPrices[2]) {
-            setUserData({ ...userData, project_id: e.target.value, project_name: `Medium Reach Publication ${packPrices[2]}€` });
+            setUserData({ ...userData,  sell_book: packPrices[2] });
         }
         if (e.target.value == packPrices[3]) {
-            setUserData({ ...userData, project_id: e.target.value, project_name: `Extended Reach Publication ${packPrices[3]}€` });
+            setUserData({ ...userData,  sell_book: packPrices[3] });
         }
     };
 
@@ -96,7 +117,7 @@ function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentS
         try {
             const res = await axios.post(`${apiUrl}/user/project`, userData);
             setDataFromGet(res.data);
-            setCurrentStep(1);
+            setCurrentStep(4);
         } catch (error) {
             console.log(error);
             toast.error("Algo salió mal, por favor inténtalo de nuevo más tarde");
@@ -115,7 +136,7 @@ function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentS
             <hr />
             {userData && (
                 <>
-                    <Radio.Group className="w-100 fund-package-select" onChange={handleChange} value={Number(userData?.project_id)}>
+                    <Radio.Group className="w-100 fund-package-select" onChange={handleChange} value={Number(userData?.sell_book)}>
                         <div className="row">
                             <div className="col-md-3">
                                 <Radio value={packPrices[0]} className="pack-radio-1">
@@ -237,4 +258,7 @@ function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentS
     );
 }
 
-export default EditFundPackage;
+
+
+
+export default EditSellBooksFund

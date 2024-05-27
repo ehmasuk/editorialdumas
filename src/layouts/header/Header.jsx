@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
 
 import { IoSearch } from "react-icons/io5";
 import { LuLogIn } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
 
 import { Skeleton, Tooltip } from "antd";
@@ -19,16 +19,20 @@ import { allGenere } from "../../database/globalDatas";
 import { removeFromCart } from "../../features/CartSlice";
 
 function Header() {
+    const location = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [location]);
+
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-
         dispatch(authUnCheck());
-
     };
 
-    const {cartItems,totalPrice} = useSelector((store) => store.CartSlice)
-    const {wishlistItems} = useSelector((store) => store.WishlistSlice)
+    const { cartItems, totalPrice } = useSelector((store) => store.CartSlice);
+    const { wishlistItems } = useSelector((store) => store.WishlistSlice);
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
 
@@ -65,6 +69,7 @@ function Header() {
                             </div>
                         </Link>
                     </div>
+
                     <div className="extra-nav">
                         <div className="extra-cell">
                             <ul className="navbar-nav header-right">
@@ -91,56 +96,50 @@ function Header() {
                                                 exit={{ height: 0 }}
                                                 className="dropdown-menu cart-list d-block"
                                             >
-
-                                                {
-                                                    cartItems.map((item,index)=>{
-                                                        return (
-                                                            <li key={index} className="cart-item">
-                                                                <div className="media">
-                                                                    <div className="media-left">
-                                                                        <Link to="/cart">
-                                                                            <img alt="" className="media-object" src={item?.images.filter((img) => img.is_video === null)[0].url} />
-                                                                        </Link>
-                                                                    </div>
-                                                                    <div className="media-body">
-                                                                        <h6 className="dz-title">
-                                                                            <Link to="/cart" className="media-heading">
-                                                                                {item.title.length>30 ? item.title.slice(0,30) + '...' : item.title}
-                                                                            </Link>
-                                                                        </h6>
-                                                                        <span className="dz-price">{item?.discount_price}€</span>
-                                                                        <span onClick={()=>dispatch(removeFromCart(item))} className="item-close">×</span>
-                                                                    </div>
+                                                {cartItems.map((item, index) => {
+                                                    return (
+                                                        <li key={index} className="cart-item">
+                                                            <div className="media">
+                                                                <div className="media-left">
+                                                                    <Link to="/cart">
+                                                                        <img alt="" className="media-object" src={item?.images.filter((img) => img.is_video === null)[0].url} />
+                                                                    </Link>
                                                                 </div>
-                                                            </li>
-                                                        )
-                                                    })
-                                                }
+                                                                <div className="media-body">
+                                                                    <h6 className="dz-title">
+                                                                        <Link to="/cart" className="media-heading">
+                                                                            {item.title.length > 30 ? item.title.slice(0, 30) + "..." : item.title}
+                                                                        </Link>
+                                                                    </h6>
+                                                                    <span className="dz-price">{item?.discount_price}€</span>
+                                                                    <span onClick={() => dispatch(removeFromCart(item))} className="item-close">
+                                                                        ×
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    );
+                                                })}
 
-
-                                                {
-                                                    totalPrice>0 ? <li className="cart-item text-center">
+                                                {totalPrice > 0 ? (
+                                                    <li className="cart-item text-center">
                                                         <h6 className="text-secondary">Total = {totalPrice}€</h6>
                                                     </li>
-                                                    :
+                                                ) : (
                                                     <li className="cart-item text-center">
                                                         <h6>No hay libros en el carrito</h6>
                                                     </li>
-                                                    
-                                                }
-
-
+                                                )}
 
                                                 <li className="text-center d-flex">
                                                     <Link to="/cart" className="btn btn-sm btn-primary me-2 btnhover w-100">
                                                         Verlo
                                                     </Link>
-                                                    {
-                                                        totalPrice>0 && <Link href="shop-checkout.html" className="btn btn-sm btn-outline-primary btnhover w-100">
-                                                        Verificar
-                                                    </Link>
-                                                    }
-                                                    
+                                                    {totalPrice > 0 && (
+                                                        <Link href="shop-checkout.html" className="btn btn-sm btn-outline-primary btnhover w-100">
+                                                            Verificar
+                                                        </Link>
+                                                    )}
                                                 </li>
                                             </motion.ul>
                                         )}
@@ -321,7 +320,6 @@ function Header() {
                                                 <span>Autores</span>
                                             </Link>
                                         </li>
-
                                     </ul>
                                 </motion.div>
                             )}

@@ -17,7 +17,6 @@ function HomeTestimonial() {
                     <div className="section-head book-align">
                         <div>
                             <h2 className="title mb-0">Testimonials</h2>
-                            <p className="m-b0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
                         </div>
                         <div className="pagination-align style-1">
                             <div className="testimonial-button-prev swiper-button-prev">
@@ -29,7 +28,7 @@ function HomeTestimonial() {
                         </div>
                     </div>
                 </div>
-                <div className="testimonial-swiper">
+                <div className="testimonial-swiper p-0">
                     <Swiper
                         modules={[Autoplay]}
                         spaceBetween={50}

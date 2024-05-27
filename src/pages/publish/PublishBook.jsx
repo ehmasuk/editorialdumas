@@ -12,121 +12,122 @@ import faq3 from "./../../assets/images/faq3.png";
 import faq4 from "./../../assets/images/faq4.png";
 import faq5 from "./../../assets/images/faq5.png";
 
-const faqContents = [
-    {
-        key: "1",
-        label: "¿Cómo se evalúa mi proyecto?",
-        children: (
-            <p>
-                Nuestro equipo realiza un análisis colectivo de todos los proyectos recibidos. No operamos a través de un misterioso comité editorial; en su lugar, contamos con un foro interno
-                denominado La Colmena. Aquí, los especialistas de nuestro equipo evalúan cada proyecto desde su perspectiva profesional y aportan sus opiniones. Es crucial que completes el formulario
-                de manera exhaustiva, ya que esto nos ayuda a comprender mejor tu proyecto.
-            </p>
-        ),
-    },
-    {
-        key: "2",
-        label: "¿Quién revisa mi manuscrito?",
-        children: (
-            <p>
-                Todos los proyectos que recibimos son examinados por nuestro equipo. En esta etapa inicial, revisamos el manuscrito o la idea, así como tu perfil y tu comunidad. No nos adentramos en
-                la lectura completa del manuscrito en esta fase; preferimos conocerte, escucharte y que compartas la visión e ilusión detrás del proyecto. La revisión detallada del manuscrito comienza
-                una vez que finalizas la campaña de crowdfunding y contamos con los recursos necesarios para que nuestros profesionales editoriales comiencen su trabajo.
-            </p>
-        ),
-    },
-    {
-        key: "3",
-        label: "¿Qué aspectos valoramos en un proyecto?",
-        children: (
-            <p>
-                Nuestra misión es ayudarte a convertir tu proyecto en un libro. Dado nuestro método de financiación, consideramos al autor y su comunidad, así como el potencial de la idea y la calidad
-                del contenido. Completar el formulario de manera precisa es crucial, ya que nos permite comprender mejor tu proyecto, conocer tus motivaciones y evaluar su viabilidad dentro de nuestro
-                enfoque de financiamiento.
-            </p>
-        ),
-    },
-    {
-        key: "4",
-        label: "¿Cuánto tiempo se tarda en recibir una respuesta?",
-        children: (
-            <p>
-                Todos los proyectos recibidos son revisados por nuestro equipo. Esto implica tomarnos el tiempo necesario para analizar la información proporcionada, revisar el manuscrito o la idea, y
-                examinar tu perfil y tu comunidad. A pesar del volumen de proyectos, nos comprometemos a comunicarnos contigo en menos de una semana. Una vez más, completar el formulario de manera
-                detallada es esencial para una comprensión completa de tu proyecto.
-            </p>
-        ),
-    },
-    {
-        key: "5",
-        label: "¿Cuál es nuestro papel en el proceso?",
-        children: (
-            <p>
-                Nuestra principal función es acompañarte en todas las etapas de tu proyecto editorial. Te asignamos un profesional especializado que responde a tus consultas, te brinda orientación
-                para tener éxito en tu campaña de crowdfunding, te guía a través del proceso de edición y te ayuda a llegar a una audiencia más amplia una vez que el libro está publicado. Además, te
-                proporcionamos acceso a nuestra plataforma especializada y a tu panel de autor personalizado.
-            </p>
-        ),
-    },
-    {
-        key: "6",
-        label: "¿Cuál es la diferencia entre editorial Dumas y otras editoriales y plataformas de crowdfunding?",
-        children: (
-            <p>
-                Nos destacamos como una plataforma editorial especializada que combina el crowdfunding con la publicación del libro. A través de nuestro enfoque, ayudamos a financiar y luego publicar
-                tu libro. Somos únicos en este sentido, ya que proporcionamos un servicio integral desde la financiación hasta la publicación.
-            </p>
-        ),
-    },
-    {
-        key: "7",
-        label: "¿Cuál es la diferencia entre la editorial Dumas y otras editoriales?",
-        children: (
-            <p>
-                Somos una plataforma editorial especializada que se distingue de las editoriales tradicionales y las plataformas de crowdfunding convencionales. Nuestro enfoque único combina lo mejor
-                de ambos mundos para ayudarte a convertir tu proyecto en un libro. Nuestra principal diferencia radica en nuestra capacidad para ayudar a los autores a financiar sus proyectos con el
-                apoyo de su comunidad.
-            </p>
-        ),
-    },
-    {
-        key: "8",
-        label: "¿Qué tipo de libros publicamos?",
-        children: (
-            <p>
-                Publicamos una amplia variedad de géneros editoriales, desde poesía hasta ficción de todo tipo, ensayos, reportajes, fotografía, cuentos ilustrados y divulgación, entre otros. No hay
-                límites impuestos a tu creatividad.
-            </p>
-        ),
-    },
-    {
-        key: "9",
-        label: "¿Cuál es el perfil de nuestros autores?",
-        children: (
-            <p>
-                Nuestra comunidad de autores abarca desde figuras reconocidas hasta autores noveles. Contamos con una diversidad de perfiles que incluyen proyectos personales, profesionales
-                especializados, deportistas destacados, personas mayores con historias que contar y líderes en causas sociales, entre otros.
-            </p>
-        ),
-    },
-    {
-        key: "10",
-        label: "¿Es necesario tener el manuscrito terminado?",
-        children: (
-            <p>
-                No es necesario. Nuestro objetivo es ayudarte a convertir tu proyecto en un libro, por lo que es posible que solo tengas una idea o unas primeras páginas. Compartiremos nuestra opinión
-                y experiencia contigo para apoyarte en la creación del mejor libro posible. Por eso es crucial que completes el formulario, ya que nos proporciona una comprensión más profunda de tu
-                proyecto.
-            </p>
-        ),
-    },
-];
+
 
 function PublishBook() {
     const dispatch = useDispatch();
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
-    const { loginPopupIsOpen } = useSelector((store) => store.LoginPopupSlice);
+    const faqContents = [
+        {
+            key: "1",
+            label: "¿Cómo se evalúa mi proyecto?",
+            children: (
+                <p>
+                    Nuestro equipo realiza un análisis colectivo de todos los proyectos recibidos. No operamos a través de un misterioso comité editorial; en su lugar, contamos con un foro interno
+                    denominado La Colmena. Aquí, los especialistas de nuestro equipo evalúan cada proyecto desde su perspectiva profesional y aportan sus opiniones. Es crucial que completes el formulario
+                    de manera exhaustiva, ya que esto nos ayuda a comprender mejor tu proyecto.
+                </p>
+            ),
+        },
+        {
+            key: "2",
+            label: "¿Quién revisa mi manuscrito?",
+            children: (
+                <p>
+                    Todos los proyectos que recibimos son examinados por nuestro equipo. En esta etapa inicial, revisamos el manuscrito o la idea, así como tu perfil y tu comunidad. No nos adentramos en
+                    la lectura completa del manuscrito en esta fase; preferimos conocerte, escucharte y que compartas la visión e ilusión detrás del proyecto. La revisión detallada del manuscrito comienza
+                    una vez que finalizas la campaña de crowdfunding y contamos con los recursos necesarios para que nuestros profesionales editoriales comiencen su trabajo.
+                </p>
+            ),
+        },
+        {
+            key: "3",
+            label: "¿Qué aspectos valoramos en un proyecto?",
+            children: (
+                <p>
+                    Nuestra misión es ayudarte a convertir tu proyecto en un libro. Dado nuestro método de financiación, consideramos al autor y su comunidad, así como el potencial de la idea y la calidad
+                    del contenido. <Link to={isLogedin ? '/profile/myproposals' : '/register'}>Completar el formulario</Link> de manera precisa es crucial, ya que nos permite comprender mejor tu proyecto, conocer tus motivaciones y evaluar su viabilidad dentro de nuestro
+                    enfoque de financiamiento.
+                </p>
+            ),
+        },
+        {
+            key: "4",
+            label: "¿Cuánto tiempo se tarda en recibir una respuesta?",
+            children: (
+                <p>
+                    Todos los proyectos recibidos son revisados por nuestro equipo. Esto implica tomarnos el tiempo necesario para analizar la información proporcionada, revisar el manuscrito o la idea, y
+                    examinar tu perfil y tu comunidad. A pesar del volumen de proyectos, nos comprometemos a comunicarnos contigo en menos de una semana. Una vez más, <Link to={isLogedin ? '/profile/myproposals' : '/register'}>completar el formulario</Link> de manera
+                    detallada es esencial para una comprensión completa de tu proyecto.
+                </p>
+            ),
+        },
+        {
+            key: "5",
+            label: "¿Cuál es nuestro papel en el proceso?",
+            children: (
+                <p>
+                    Nuestra principal función es acompañarte en todas las etapas de tu proyecto editorial. Te asignamos un profesional especializado que responde a tus consultas, te brinda orientación
+                    para tener éxito en tu campaña de crowdfunding, te guía a través del proceso de edición y te ayuda a llegar a una audiencia más amplia una vez que el libro está publicado. Además, te
+                    proporcionamos acceso a nuestra plataforma especializada y a tu panel de autor personalizado.
+                </p>
+            ),
+        },
+        {
+            key: "6",
+            label: "¿Cuál es la diferencia entre editorial Dumas y otras editoriales y plataformas de crowdfunding?",
+            children: (
+                <div className="div">
+                    <p>Destacamos por ser una plataforma editorial centrada en los autores. Potenciamos su marca, generamos una comunidad de lectores y creamos estrategias efectivas para maximizar la venta de sus libros a nivel nacional e internacional.</p>
+                    <p>Elegimos las obras por su calidad y combinamos el crowdfunding con la publicación de libros. A través de nuestro enfoque, ayudamos a financiar y luego publicar tu libro. Somos únicos porque proporcionamos un servicio integral desde la financiación hasta la publicación y difusión de la obra.</p>
+                </div>
+    
+            ),
+        },
+        {
+            key: "7",
+            label: "¿Cuál es la diferencia entre la editorial Dumas y otras editoriales?",
+            children: (
+                <p>
+                    Somos una plataforma editorial especializada que se distingue de las editoriales tradicionales y las plataformas de crowdfunding convencionales. Nuestro enfoque único combina lo mejor
+                    de ambos mundos para ayudarte a convertir tu proyecto en un libro. Nuestra principal diferencia radica en nuestra capacidad para ayudar a los autores a financiar sus proyectos con el
+                    apoyo de su comunidad.
+                </p>
+            ),
+        },
+        {
+            key: "8",
+            label: "¿Qué tipo de libros publicamos?",
+            children: (
+                <p>
+                    Publicamos una amplia variedad de géneros editoriales, desde poesía hasta ficción de todo tipo, ensayos, reportajes, fotografía, cuentos ilustrados y divulgación, entre otros. No hay
+                    límites impuestos a tu creatividad.
+                </p>
+            ),
+        },
+        {
+            key: "9",
+            label: "¿Cuál es el perfil de nuestros autores?",
+            children: (
+                <p>
+                    Nuestra comunidad de autores abarca desde figuras reconocidas hasta autores noveles. Contamos con una diversidad de perfiles que incluyen proyectos personales, profesionales
+                    especializados, deportistas destacados, personas mayores con historias que contar y líderes en causas sociales, entre otros.
+                </p>
+            ),
+        },
+        {
+            key: "10",
+            label: "¿Es necesario tener el manuscrito terminado?",
+            children: (
+                <p>
+                    No es necesario. Nuestro objetivo es ayudarte a convertir tu proyecto en un libro, por lo que es posible que solo tengas una idea o unas primeras páginas. Compartiremos nuestra opinión
+                    y experiencia contigo para apoyarte en la creación del mejor libro posible. Por eso es crucial que completes el formulario, ya que nos proporciona una comprensión más profunda de tu
+                    proyecto.
+                </p>
+            ),
+        },
+    ];
 
     return (
         <Base>

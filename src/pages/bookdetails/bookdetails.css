@@ -1,0 +1,194 @@
+.book-details-payment-wrap{
+    padding: 0 30px;
+    border-left: 1px solid hsl(0deg 0% 50% / 31%);
+}
+.book-details-payment-wrap .offer-info{
+    background: #dd1c1c;
+    color: #fff;
+    font-size: 13px;
+    display: inline-block;
+    padding: 0 5px;
+    font-weight: 600;
+    margin-left: 10px;
+}
+.book-details-payment-wrap .offer-box{
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.book-details-payment-wrap .book-format-options{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+.book-details-payment-wrap .book-format-options .format-option{
+    border: 1px solid #b1b3b3;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    margin: 20px 0;
+    cursor: pointer;
+    position: relative;
+}
+.book-details-payment-wrap .book-format-options .format-option:hover{
+    color: #EAA451;
+    border: 1px solid #EAA451;
+}
+
+.book-details-payment-wrap .book-format-options .active{
+    color: #EAA451;
+    border: 1px solid #EAA451;
+}
+.book-details-payment-wrap .book-format-options .active::before{
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f058";
+    position: absolute;
+    right: -8px;
+    top: -2px;
+    font-size: 15px;
+    background: #fff;
+    line-height: 0;
+
+}
+.book-details-payment-wrap .book-format-options .format-option p{
+    margin: 0;
+}
+
+.book-details-payment-wrap .carry-options{
+    display: flex;
+    align-items:center;
+    gap: 5px;
+    font-size: 14px;
+    justify-content: center;
+}
+
+.details-book-category{
+    background: #1A1668;
+    color: #fff;
+    font-size: 14px;
+    display: inline-block;
+    padding: 0 10px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.book-details-wraper .book-cover-img{
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 5px 8px 0 rgba(0, 0, 0, .14), 0 1px 14px 0 rgba(0, 0, 0, .12);
+    width: 100%;
+    max-width: 400px;
+}
+
+.book-details-wraper .book-description{
+    width: 100%;
+    text-align: justify;
+    margin-top: 10px;
+}
+
+.book-details-wraper .bottom-actions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+.book-details-wraper .bottom-actions div{
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #1A1668;
+    text-transform: uppercase;
+}
+.book-details-wraper .bottom-actions div svg{
+    margin-right: 3px;
+    margin-top: -4px;
+}
+.book-details-wraper .bottom-actions>div:hover{
+    background-color: #1a166814;
+}
+
+.book-details-wraper .read-book-btn{
+    text-transform: uppercase;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #1A1668;
+    border: 1px solid #1A1668;
+    display: inline-block;
+    margin-top:10px;
+    background: #b3afff0c;
+    transition: .3s;
+    min-width: 230px;
+}
+.book-details-wraper .read-book-btn:hover{
+    background: #b3afff53;
+}
+.book-details-wraper .read-book-btn svg{
+    margin-right: 3px;
+    margin-top: -3px;
+}
+.book-details-author{
+    font-size: 12px;
+}
+.book-details-author .info{
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 20px
+}
+.book-details-author .value{
+    color: #000000de;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+.book-details-author .author-des{
+    font-size: 16px;
+    color: #000;
+    text-align: justify;
+}
+.book-details-author .author-link{
+    display: flex;
+    gap: 5px;
+    font-size: 16px;
+    color: #1A1668;
+    font-weight: 600;
+    text-decoration: underline;
+    align-items: center;
+}
+.book-details-author .author-subs{
+    padding: 0 20px;
+    border-left: 1px solid #8080804f;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.book-details-author .author-subs p{
+    font-size: 22px;
+    text-align: center;
+    color: #000;
+}
+
+.book-details-author .author-subs .btn{
+    width: 100%;
+    font-size: 16px;
+}
+
+.ant-divider:before,.ant-divider:after{
+    background-color: #8080804f;
+}
+
+.book-details-video .ant-modal-content{
+    padding: 0;
+    border-radius: 0;
+}
+
+.book-details-chapter .ant-modal-content{
+    padding: 10px;
+    border-radius: 0;
+}

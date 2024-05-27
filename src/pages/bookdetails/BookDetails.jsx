@@ -1,5 +1,4 @@
-import { Rate, Skeleton, Tooltip } from "antd";
-import { BiSolidPurchaseTag } from "react-icons/bi";
+import { Divider, Modal, Popover, Rate, Skeleton, Tooltip } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addToCart } from "../../features/CartSlice";
@@ -7,20 +6,30 @@ import useGet from "../../hooks/useGet";
 import Base from "../../layouts/Base";
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
-import { formatDate } from "../../database/globalFunctions";
-import { addToWishlist } from "../../features/WishlistSlice";
+import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
+import { FaAngleRight } from "react-icons/fa6";
+import { GoHeart, GoHeartFill } from "react-icons/go";
+import { IoIosShareAlt } from "react-icons/io";
+import { IoInformationCircle, IoPlayCircleOutline } from "react-icons/io5";
+import { LiaReadme } from "react-icons/lia";
+import { TbTruckDelivery } from "react-icons/tb";
 import HomeBookSale from "../../components/home/HomeBookSale";
 import ReviewsSection from "../../components/reviewsSection/ReviewsSection";
+import { addToWishlist, removeFromWishlist } from "../../features/WishlistSlice";
 
+import ReactPlayer from "react-player";
+import NewsLatter from "../../components/newsletter/NewsLatter";
+import "./bookdetails.css";
+
+import { formatDate } from "../../database/globalFunctions";
 
 function BookDetails() {
-
     const [allbooks, isLoading] = useGet(apiUrl + "/user/book");
-
 
     const { bookId } = useParams();
 
-    const [data, isLoadingAllBooks] = useGet(apiUrl + "/user/book/" + bookId);
+    const [data, isLoadingAllBooks, error, getData] = useGet(apiUrl + "/user/book/" + bookId);
 
     const { wishlistItems } = useSelector((store) => store.WishlistSlice);
 
@@ -28,251 +37,332 @@ function BookDetails() {
 
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        getData();
+        setSeeMore(true);
+    }, [bookId]);
+
+    const [seeMore, setSeeMore] = useState(true);
+
+    useEffect(() => {
+        data && setSelectedPrice(data?.discount_price);
+    }, [data]);
+
+    const [selectedPrice, setSelectedPrice] = useState(null);
+
+    const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+    const showVideoModal = () => {
+        setIsVideoModalOpen(true);
+    };
+
+    const handleVideoCancel = () => {
+        setIsVideoModalOpen(false);
+        document.querySelector(".book-details-video video").pause();
+    };
+
+    data && console.log(data);
+
+    const [isChapterModalOpen, setIsChapterModalOpen] = useState(false);
+    const currentYear = new Date().getFullYear();
+
+    data && console.log(data?.long_description.length);
+
     return (
         <Base>
-            <div className="page-content bg-grey">
+            <Helmet>
+                <meta name="title" content={data?.meta_title} />
+                <meta name="description" content={data?.meta_description} />
+                <meta name="keywords" content={data?.meta_keywords} />
+            </Helmet>
+
+            <div className="page-content">
                 <section className="content-inner-1">
                     {data && (
                         <div className="container">
-                            <div className="row book-grid-row style-4 m-b60">
+                            <div className="row book-grid-row book-details-wraper style-4 m-b60">
                                 <div className="col">
-                                    <div className="dz-box">
-                                        <div className="dz-media">
-                                            <img style={{ maxWidth: "400px" }} src={data?.images.filter((img) => img.is_video === null)[0].url} alt="book" />
-                                        </div>
-                                        <div className="dz-content" style={{ width: "100%" }}>
-                                            <div className="dz-header">
-                                                <h3 className="title">{data?.title}</h3>
-
-                                                <div className="shop-item-rating">
-                                                    <div className="d-lg-flex d-sm-inline-flex d-flex align-items-center">
-                                                        <Rate allowHalf defaultValue={5} style={{ color: "#EAA451", marginRight: "10px" }} disabled />
-                                                        <h5 className="m-b0">5.0</h5>
-                                                    </div>
-                                                    <div className="social-area">
-                                                        <ul className="dz-social-icon style-3">
-                                                            <li>
-                                                                <a href="https://www.facebook.com/profile.php?id=61558777782572" rel="link noreferrer" target="_blank">
-                                                                    <i className="fa-brands fa-facebook-f" />
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="https://twitter.com/editorialdumas" target="_blank" rel="noreferrer">
-                                                                    <i className="fa-brands fa-twitter" />
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="https://www.instagram.com/editorialdumas/" target="_blank" rel="noreferrer">
-                                                                    <i className="fa-brands fa-instagram" />
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="dz-body">
-                                                <div className="book-detail">
-                                                    <ul className="book-info">
-                                                        <li>
-                                                            <div className="writer-info">
-                                                                {/* <img src={data?.user?.images?.url} alt="book" /> */}
-                                                                <div>
-                                                                    <span>Escribe en</span>
-                                                                    {data?.author_name}
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <span>Categoría</span>
-                                                            {data?.category?.title}
-                                                        </li>
-                                                        <li>
-                                                            <span>Publicado en editorial</span>
-                                                            {formatDate(data?.created_at)}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div style={{ width: "100%", textAlign: "justify" }} dangerouslySetInnerHTML={{ __html: data?.long_description }}></div>
-                                                <div className="book-footer">
-                                                    <div className="price">
-                                                        <h5>{data?.discount_price}€</h5>
-                                                        {data?.strike_price && <p className="p-lr10">{data?.strike_price}</p>}
-                                                    </div>
-                                                    <div className="product-num">
-                                                        <Tooltip title="Añadir a la lista de deseos">
-                                                            <div onClick={() => dispatch(addToWishlist(data))} style={{ marginRight: "10px" }} className="bookmark-btn style-1 d-none d-sm-block">
-                                                                <label className="form-check-label" htmlFor="flexCheckDefault1">
-                                                                    <i className="fas fa-heart" style={{ color: isInWishlist && "red" }} />
-                                                                </label>
-                                                            </div>
-                                                        </Tooltip>
-
-                                                        <a onClick={() => dispatch(addToCart(data))} style={{ marginRight: "10px" }} className="btn btn-primary btnhover2">
-                                                            <i className="fas fa-shopping-cart"></i> <span>Añadir a la cesta</span>
-                                                        </a>
-                                                        <a href="#" className="btn btn-secondary btnhover2">
-                                                            <BiSolidPurchaseTag fontSize={20} /> <span>Comprar ahora</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div className="row">
-                                <div className="col-xl-12">
-                                    <div className="product-description tabs-site-button">
-                                        <ul className="nav nav-tabs">
-                                            <li>
-                                                <a data-bs-toggle="tab" href="#graphic-design-1" className="active">
-                                                    Detalles el producto
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div className="tab-content">
-                                            <div id="graphic-design-1" className="tab-pane show active">
-                                                <table className="table border book-overview">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>Titulo del libro</th>
-                                                            <td>{data?.title}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Autora</th>
-                                                            <td>{data?.author_name}</td>
-                                                        </tr>
-                                                        {/* <tr>
-                                                        <th>ISBN</th>
-                                                        <td>121341381648 (ISBN13: 121341381648)</td>
-                                                    </tr> */}
-                                                        <tr>
-                                                            <th>Lenguaje edianiton</th>
-                                                            <td>Española</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Formato de libro</th>
-                                                            <td>pdf</td>
-                                                        </tr>
-                                                        {/* <tr>
-                                                        <th>Date Published</th>
-                                                        <td>August 10th 2019</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Publisher</th>
-                                                        <td>Wepress Inc.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Topic</th>
-                                                        <td>360</td>
-                                                    </tr> */}
-                                                        {/* <tr className="tags">
-                                                        <th>Tags</th>
-                                                        <td>
-                                                            <a href="#" className="badge">
-                                                                Drama
-                                                            </a>
-                                                        </td>
-                                                    </tr> */}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {/* <div className="col-xl-4 mt-5 mt-xl-0">
-                                <div className="widget">
-                                    <h4 className="widget-title">Related Books</h4>
                                     <div className="row">
-                                        <div className="col-xl-12 col-lg-6">
-                                            <div className="dz-shop-card style-5">
-                                                <div className="dz-media">
-                                                    <img src="images/books/grid/book15.jpg" alt />
+                                        <div className="col-md-3 text-center">
+                                            <img className="book-cover-img" style={{ maxWidth: "100%" }} src={data?.images.filter((img) => img.is_video === null)[0].url} alt="book" />
+                                            {data?.images?.filter((img) => img.is_video === "2")[0]?.url && (
+                                                <div className="read-book-btn" onClick={() => showVideoModal()}>
+                                                    <IoPlayCircleOutline fontSize={25} color="#1A1668" /> Ver video
                                                 </div>
-                                                <div className="dz-content">
-                                                    <h5 className="subtitle">Terrible Madness</h5>
-                                                    <ul className="dz-tags">
-                                                        <li>THRILLE,</li>
-                                                        <li>DRAMA,</li>
-                                                        <li>HORROR</li>
-                                                    </ul>
-                                                    <div className="price">
-                                                        <span className="price-num">$45.4</span>
-                                                        <del>$98.4</del>
-                                                    </div>
-                                                    <a href="shop-cart.html" className="btn btn-outline-primary btn-sm btnhover2">
-                                                        <i className="flaticon-shopping-cart-1 me-2" /> Add to cart
+                                            )}
+
+                                            {data?.images?.filter((img) => img.is_video === "3")[0]?.url && (
+                                                <div className="read-book-btn" style={{ marginBottom: "30px" }} onClick={() => setIsChapterModalOpen(true)}>
+                                                    <LiaReadme fontSize={25} color="#1A1668" /> Leer primeras páginas
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="col-md-5">
+                                            <h3 className="title">{data?.title}</h3>
+                                            <h4 style={{ fontWeight: "400" }}>{data?.author_name}</h4>
+                                            <div className="d-lg-flex d-sm-inline-flex d-flex align-items-center">
+                                                <Rate allowHalf defaultValue={5} style={{ color: "#EAA451", marginRight: "10px" }} disabled />
+                                                <p style={{ color: "#1A1668" }} className="m-b0">
+                                                    (6){" "}
+                                                    <a href="#" style={{ color: "#1A1668" }}>
+                                                        Escribe tu opinión
                                                     </a>
+                                                </p>
+                                            </div>
+                                            <div className="details-book-category">{data?.category?.title}</div>
+                                            <div
+                                                className={`book-description ${seeMore && data?.long_description?.length > 500 && "see-more"}`}
+                                                dangerouslySetInnerHTML={{ __html: data?.long_description }}
+                                            ></div>
+                                            {data?.long_description?.length > 500 && (
+                                                <p className="see-more-btn" onClick={() => setSeeMore(!seeMore)}>
+                                                    Ver {seeMore ? "más" : "menos"}
+                                                </p>
+                                            )}
+                                        </div>
+                                        <div className="col-md-4">
+                                            <div className="book-details-payment-wrap">
+                                                <div className="offer-box">
+                                                    {data?.discount_amount && <del>{data?.discount_amount}€</del>}
+                                                    {data?.discount_percentage && <div className="offer-info">- {data?.discount_percentage}% de dto. exclusivo web</div>}
+                                                </div>
+
+                                                <div className="d-flex align-items-center justify-content-between">
+                                                    <h2>{selectedPrice}€</h2>
+                                                    <h5>Envio gratis</h5>
+                                                </div>
+                                                <a className="btn btn-secondary btn-sm btnhover2 w-100">
+                                                    <i className="fas fa-money-check-alt" style={{ marginRight: "10px" }}></i> <span>Compra este libro ahora</span>
+                                                </a>
+
+                                                <div className="book-format-options">
+                                                    <div onClick={() => setSelectedPrice(data?.discount_price)} className={`format-option ${selectedPrice == data?.discount_price && "active"}`}>
+                                                        <p>Tapa blanda</p>
+                                                        <span>{data?.discount_price}€</span>
+                                                    </div>
+                                                    <div onClick={() => setSelectedPrice(data?.strike_price)} className={`format-option ${selectedPrice == data?.strike_price && "active"}`}>
+                                                        <p>eBook</p>
+                                                        <span>{data?.strike_price}€</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="carry-options">
+                                                    <TbTruckDelivery fontSize={35} color="#1A1668" />
+                                                    <b style={{ color: "#1A1668" }}>Entrega aproximada en</b>
+                                                    <span>3 días</span>
+                                                    <Tooltip title="Recibirá su producto dentro de los 3 días hábiles">
+                                                        <IoInformationCircle fontSize={20} color="#1A1668" />
+                                                    </Tooltip>
+                                                </div>
+
+                                                <div className="bottom-actions">
+                                                    {!isInWishlist && (
+                                                        <div onClick={() => dispatch(addToWishlist(data))}>
+                                                            <GoHeart fontSize={20} color="#1A1668" />
+                                                            Guardar
+                                                        </div>
+                                                    )}
+                                                    {isInWishlist && (
+                                                        <div onClick={() => dispatch(removeFromWishlist(data))}>
+                                                            <GoHeartFill fontSize={20} color="#1A1668" /> Guardado
+                                                        </div>
+                                                    )}
+
+                                                    <div>
+                                                        <Popover content={'hi'} title="Compartir en:">
+                                                            <IoIosShareAlt fontSize={20} color="#1A1668" /> COMPARTIR
+                                                        </Popover>
+                                                    </div>
+                                                </div>
+                                                <a onClick={() => dispatch(addToCart(data))} style={{ marginTop: "10px" }} className="btn btn-primary btn-sm btnhover2 w-100">
+                                                    <i className="fas fa-shopping-cart" style={{ marginRight: "10px" }}></i> <span>Añadir</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="book-details-author pb-5">
+                                <div>
+                                    <Divider>
+                                        <h4 className="m-0">Ficha técnica</h4>
+                                    </Divider>
+                                    <div className="row justify-content-around py-3">
+                                        <div className="col-md-6" style={{ borderRight: "1px solid #8080804f" }}>
+                                            <div style={{ maxWidth: "400px", margin: "auto" }}>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Titulo del libro:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">{data?.title}</div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Autoría:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">{data?.author_name}</div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Nº de páginas:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">{data?.no_of_pages || '--'}</div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Editorial:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">Editorial Dumas</div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Idioma:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">Español</div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Encuadernación:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">Editorial Dumas</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="col-xl-12 col-lg-6">
-                                            <div className="dz-shop-card style-5">
-                                                <div className="dz-media">
-                                                    <img src="images/books/grid/book3.jpg" alt />
-                                                </div>
-                                                <div className="dz-content">
-                                                    <h5 className="subtitle">Battle Drive</h5>
-                                                    <ul className="dz-tags">
-                                                        <li>THRILLE,</li>
-                                                        <li>DRAMA,</li>
-                                                        <li>HORROR</li>
-                                                    </ul>
-                                                    <div className="price">
-                                                        <span className="price-num">$45.4</span>
-                                                        <del>$98.4</del>
+                                        <div className="col-md-6">
+                                            <div style={{ maxWidth: "400px", margin: "auto" }}>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">ISBN:</div>
                                                     </div>
-                                                    <a href="shop-cart.html" className="btn btn-outline-primary btn-sm btnhover2">
-                                                        <i className="flaticon-shopping-cart-1 me-2" /> Add to cart
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-12 col-lg-6">
-                                            <div className="dz-shop-card style-5">
-                                                <div className="dz-media">
-                                                    <img src="images/books/grid/book5.jpg" alt />
-                                                </div>
-                                                <div className="dz-content">
-                                                    <h5 className="subtitle">Terrible Madness</h5>
-                                                    <ul className="dz-tags">
-                                                        <li>THRILLE,</li>
-                                                        <li>DRAMA,</li>
-                                                        <li>HORROR</li>
-                                                    </ul>
-                                                    <div className="price">
-                                                        <span className="price-num">$45.4</span>
-                                                        <del>$98.4</del>
+                                                    <div className="col-6">
+                                                        <div className="value">{data?.ISBN || '--'}</div>
                                                     </div>
-                                                    <a href="#" className="btn btn-outline-primary btn-sm btnhover2">
-                                                        <i className="fas fa-shopping-cart me-2" /> Add to cart
-                                                    </a>
+                                                </div>
+
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Año de edición:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">{currentYear}</div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Plaza de edición:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">Editorial Dumas</div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Ilustrador:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">Editorial Dumas</div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Fecha de lanzamiento:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">{formatDate(data?.created_at)}</div>
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-6">
+                                                        <div className="info">Alto:</div>
+                                                    </div>
+                                                    <div className="col-6">
+                                                        <div className="value">{data?.alto || '--'}</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div> */}
-                            </div>
 
+                                <div>
+                                    <Divider>
+                                        <h4 className="m-0">Escrito por...</h4>
+                                    </Divider>
+                                    <div className="row py-3" style={{ background: "#F3F4F6" }}>
+                                        <div className="col-md-8">
+                                            <div className="row">
+                                                {data?.user?.images?.url && (
+                                                    <div className="col-md-3">
+                                                        <img src={data?.user?.images?.url} alt="" />
+                                                    </div>
+                                                )}
+                                                <div className="col-md-9">
+                                                    <h4>{data?.author_name}</h4>
+                                                    <p className="author-des">{data?.user?.description}</p>
+                                                    <a className="author-link" href="#">
+                                                        Ver ficha del author <FaAngleRight fontSize={20} />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-4">
+                                            <div className="author-subs">
+                                                <div>
+                                                    <p>Recibe nuestras novedades en libros en tu email</p>
+                                                    <button className="btn btn-primary btn-sm">Subscribe us</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                             <ReviewsSection />
-                            <HomeBookSale allBooks={allbooks && allbooks} isLoading={isLoadingAllBooks} sectionTitle="Descubrir más"/>
-
-
-
+                            <HomeBookSale allBooks={allbooks && allbooks} isLoading={isLoadingAllBooks} sectionTitle="Descubrir más" />
                         </div>
                     )}
 
                     {isLoading && (
                         <div className="container">
-                            <Skeleton active rows={10} />
+                            <div className="row">
+                                <div className="col-md-8">
+                                    <Skeleton active rows={10} />
+                                </div>
+                                <div className="col-md-4">
+                                    <Skeleton active rows={10} />
+                                </div>
+                            </div>
+                            <Skeleton active rows={50} />
+                            <Skeleton active rows={50} />
+                            <Skeleton active rows={50} />
+                            <Skeleton active rows={50} />
                         </div>
                     )}
                 </section>
             </div>
+
+            <NewsLatter />
+
+            <Modal className="book-details-video" footer={null} centered open={isVideoModalOpen} onCancel={handleVideoCancel} width={800}>
+                <ReactPlayer playing={true} width="100%" controls={true} url={data?.images?.filter((img) => img.is_video === "2")[0]?.url} />
+            </Modal>
+
+            <Modal className="book-details-chapter" footer={null} centered open={isChapterModalOpen} onCancel={() => setIsChapterModalOpen(false)} width="90%">
+                <iframe src={data?.images?.filter((img) => img.is_video === "3")[0]?.url + "#toolbar=0&navpanes=0"} type="application/pdf" style={{ height: "90vh" }} width="100%"></iframe>
+            </Modal>
         </Base>
     );
 }

@@ -7,8 +7,11 @@ import ScrollTop from "./components/ScrollTop";
 import { getUserData, resetUserInfo } from "./features/UserInfoSlice";
 import MetaPixel from "./externaltags/MetaPixel";
 
+
 function App() {
     const dispatch = useDispatch();
+
+
 
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
 
@@ -20,6 +23,8 @@ function App() {
             dispatch(resetUserInfo());
         }
     }, [isLogedin]);
+
+
 
     return (
         <main>

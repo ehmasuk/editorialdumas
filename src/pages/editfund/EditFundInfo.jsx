@@ -38,6 +38,7 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
                 book_id: prevContent?.id,
                 project_id: dataFromGet?.project_id,
                 project_name: dataFromGet?.project_name,
+                sell_book: prevContent?.sell_book,
             });
     }, [prevContent, dataFromGet]);
 
@@ -60,7 +61,7 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
         setIsLoading(true);
         try {
             const res = await axios.post(`${apiUrl}/user/project`, formData, config);
-            console.log(res);
+            // console.log(res);
             setDataFromGet(res.data);
         } catch (error) {
             console.log(error);
@@ -105,9 +106,9 @@ function EditFundInfo({ prevContent, dataFromGet, setDataFromGet, setCurrentStep
 
         postData(formData);
 
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ", " + pair[1]);
-        }
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ", " + pair[1]);
+        // }
     };
 
 
