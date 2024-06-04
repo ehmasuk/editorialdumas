@@ -12,7 +12,7 @@ function PublishFund() {
 
     return (
         <div style={{minHeight:'70vh'}}>
-            <Result status="success" title="¡Ya hemos terminado, tu proyecto ha sido publicado!" />
+            <Result status="success" title="Gracias. El proyecto ha sido enviado al project manager. ¡Buena suerte!" />
         </div>
     );
 }

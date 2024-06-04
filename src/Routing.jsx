@@ -27,6 +27,7 @@ import AuthorProfile from "./pages/authorprofile/AuthorProfile";
 import BookDetails from "./pages/bookdetails/BookDetails";
 import AllBooks from "./pages/allbooks/AllBooks";
 import Cart from "./pages/cart/Cart";
+import ProfileTutorials from "./pages/profile/tutorials/ProfileTutorials";
 
 
 
@@ -62,6 +63,14 @@ function Routing() {
                     element={
                         <PrivateRoute isLogedin={isLogedin}>
                             <MyProposals />
+                        </PrivateRoute>
+                    }
+                />
+                <Route
+                    path="/profile/tutorials"
+                    element={
+                        <PrivateRoute isLogedin={isLogedin}>
+                            <ProfileTutorials />
                         </PrivateRoute>
                     }
                 />

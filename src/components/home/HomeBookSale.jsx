@@ -81,11 +81,11 @@ function HomeBookSale({ allBooks, isLoading ,sectionTitle }) {
                         allBooks?.map((item, index) => {
                             return (
                                 <SwiperSlide key={index}>
-                                    <div key={index} className="swiper-slide">
-                                        <div className="books-card style-3" data-wow-delay="0.2s">
+                                    <div key={index} className="swiper-slide" onClick={()=>window.scrollTo(0,0)}>
+                                        <div className="books-card style-3">
                                             <div className="dz-media">
                                                 <Link to={`/book/${item?.id}`}>
-                                                    <img style={{ height: "320px", objectFit: "contain" }} src={item?.images.filter((img) => img.is_video === null)[0].url} alt="book" />
+                                                    <img style={{ height: "320px", objectFit: "contain",background:'#EEF4FF' }} src={item?.images.filter((img) => img.is_video === null)[0].url} alt="book" />
                                                 </Link>
                                             </div>
                                             <div className="dz-content">

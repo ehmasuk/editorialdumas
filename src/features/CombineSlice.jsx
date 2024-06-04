@@ -4,6 +4,7 @@ const CombineSlice = createSlice({
     name: "combineslice",
     initialState: {
         loaderIsOpen: false,
+        confettiIsOpen : false,
     },
     reducers: {
         showLoader: (state) => {
@@ -12,9 +13,12 @@ const CombineSlice = createSlice({
         hideLoader: (state) => {
             state.loaderIsOpen = false;
         },
+        blastConfetti: (state) => {
+            state.confettiIsOpen = true;
+        },
     },
 });
 
-export const { showLoader, hideLoader } = CombineSlice.actions;
+export const { showLoader, hideLoader, blastConfetti } = CombineSlice.actions;
 
 export default CombineSlice.reducer;

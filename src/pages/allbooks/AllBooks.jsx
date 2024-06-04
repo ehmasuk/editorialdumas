@@ -16,7 +16,7 @@ function AllBooks() {
                 <section className="content-inner border-bottom">
                     <div className="container">
                         <div className="d-flex justify-content-between align-items-center">
-                            <h4 className="title">Books</h4>
+                            <h4 className="title">Libros</h4>
                         </div>
                         <div className="filter-area m-b30">
                             <div className="grid-area">

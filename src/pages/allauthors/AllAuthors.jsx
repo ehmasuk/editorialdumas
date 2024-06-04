@@ -12,6 +12,8 @@ const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 function AllAuthors() {
     const [data, isLoading] = useGet(apiUrl + "/user/writer");
 
+    data && console.log(data);
+
     return (
         <Base>
             <div className="all-autores-wraper">
@@ -25,7 +27,7 @@ function AllAuthors() {
                                             <div className="single-user">
                                                 <img src={author && author.images ? author.images.url : defaultAvatar} alt="avatar" />
                                                 <div className="name">{author?.name}</div>
-                                                <div className="projects">{author?.books?.filter((book) => book.title !== null || book.book_description !== null)?.length} proyectos</div>
+                                                <div className="projects">{author?.books?.filter((book) => book.status == "1")?.length} proyectos</div>
                                             </div>
                                         </Link>
                                     </div>

@@ -63,19 +63,19 @@ const packPoints = [
         "Servicio mínimo por 3 meses",
     ],
 ];
-const packMonths = [3,6,9,12]
-const packPrices = [1500,3000,4500,6000]
+const packMonths = [3, 6, 9, 12];
+const packPrices = [1500, 3000, 4500, 6000];
 
 function SellBooksFund({ dataFromGet, setDataFromGet, setCurrentStep }) {
     const [selectedPackage, setSelectedPackage] = useState(null);
-    const [userData, setUserData] = useState({ 
+    const [userData, setUserData] = useState({
         user_id: dataFromGet.user_id,
         book_id: dataFromGet.id,
         project_id: dataFromGet.project_id,
         project_name: dataFromGet.project_name,
         title: dataFromGet.title,
         book_description: dataFromGet.book_description,
-        sell_book:null,
+        sell_book: null,
     });
     const handleChange = (e) => {
         setSelectedPackage(e.target.value);
@@ -106,12 +106,12 @@ function SellBooksFund({ dataFromGet, setDataFromGet, setCurrentStep }) {
                 setCurrentStep(4);
             } catch (error) {
                 console.log(error);
-                toast.error("Something went wrong, please try again later");
+                toast.error("Algo salió mal, inténtelo de nuevo más tarde");
             } finally {
                 dispatch(hideLoader());
             }
         } else {
-            toast.error("No package selected");
+            toast.error("No se selecciona el paquete");
         }
     };
 
@@ -120,17 +120,15 @@ function SellBooksFund({ dataFromGet, setDataFromGet, setCurrentStep }) {
             <h5>Vende más libros, manejamos tu marca y conseguimos lectores</h5>
             <hr />
 
-
             <Radio.Group className="w-100 fund-package-select" onChange={handleChange}>
                 <div className="row">
                     <div className="col-md-3">
                         <Radio value={packPrices[0]} className="pack-radio-1">
                             <div className="package-card">
                                 <div className="header">
-                                    <p className="title">Inicial</p>
+                                    <p className="title">3 meses de publicidad</p>
                                     <p className="price">{packPrices[0]}€</p>
                                 </div>
-                                <p className="desc">Escritura y publicación de una novela</p>
                                 <ul className="lists">
                                     {packPoints[0].map((point, index) => {
                                         return (
@@ -147,13 +145,12 @@ function SellBooksFund({ dataFromGet, setDataFromGet, setCurrentStep }) {
 
                     <div className="col-md-3">
                         <Radio value={packPrices[1]} className="pack-radio-2">
-                            <Badge.Ribbon text="Mejor vendido" color="orange">
+                            <Badge.Ribbon text="Más vendido" color="orange">
                                 <div className="package-card">
                                     <div className="header">
-                                        <p className="title">Básico</p>
+                                        <p className="title">6 meses de publicidad</p>
                                         <p className="price">{packPrices[1]}€</p>
                                     </div>
-                                    <p className="desc">Publicación básica</p>
                                     <ul className="lists">
                                         {packPoints[1].map((point, index) => {
                                             return (
@@ -173,10 +170,9 @@ function SellBooksFund({ dataFromGet, setDataFromGet, setCurrentStep }) {
                             <Badge.Ribbon text="Popular" color="pink">
                                 <div className="package-card">
                                     <div className="header">
-                                        <p className="title">Avanzado</p>
+                                        <p className="title">9 meses de publicidad</p>
                                         <p className="price">{packPrices[2]}€</p>
                                     </div>
-                                    <p className="desc">Publicación de alcance medio</p>
                                     <ul className="lists">
                                         {packPoints[2].map((point, index) => {
                                             return (
@@ -195,10 +191,11 @@ function SellBooksFund({ dataFromGet, setDataFromGet, setCurrentStep }) {
                         <Radio value={packPrices[3]} className="pack-radio-4">
                             <div className="package-card">
                                 <div className="header">
-                                    <p className="title">Profesional</p>
+                                    <p className="title">
+                                        1 año <br /> de publicidad
+                                    </p>
                                     <p className="price">{packPrices[3]}€</p>
                                 </div>
-                                <p className="desc">Publicación de alcance ampliado</p>
                                 <ul className="lists">
                                     {packPoints[3].map((point, index) => {
                                         return (
@@ -224,5 +221,4 @@ function SellBooksFund({ dataFromGet, setDataFromGet, setCurrentStep }) {
     );
 }
 
-
-export default SellBooksFund
+export default SellBooksFund;

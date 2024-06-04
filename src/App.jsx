@@ -1,19 +1,17 @@
 import { useEffect } from "react";
-import { Helmet } from "react-helmet";
+import ConfettiExplosion from "react-confetti-explosion";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import Routing from "./Routing";
 import ScrollTop from "./components/ScrollTop";
-import { getUserData, resetUserInfo } from "./features/UserInfoSlice";
 import MetaPixel from "./externaltags/MetaPixel";
-
+import { getUserData, resetUserInfo } from "./features/UserInfoSlice";
 
 function App() {
     const dispatch = useDispatch();
 
-
-
     const { isLogedin } = useSelector((store) => store.AuthCheckerSlice);
+    const { confettiIsOpen } = useSelector((store) => store.CombineSlice);
 
     useEffect(() => {
         if (isLogedin) {
@@ -24,11 +22,9 @@ function App() {
         }
     }, [isLogedin]);
 
-
-
     return (
         <main>
-            <MetaPixel/>
+            <MetaPixel />
             <Toaster
                 position="top-center"
                 toastOptions={{
@@ -40,6 +36,8 @@ function App() {
                     },
                 }}
             />
+            <div style={{ position: "absolute", left: "50%", top: "100px" }}>{confettiIsOpen && <ConfettiExplosion duration={5000} particleSize={10} zIndex={9999} />}</div>
+
             <Routing />
 
             <ScrollTop />

@@ -16,13 +16,14 @@ function AuthorProfile() {
 
     const navigate = useNavigate();
 
-    const [data, isLoading, error] = useGet(apiUrl + "/user/writer/" + authorId);
+
+    const [data, isLoading, error] = useGet(apiUrl + "/user/writer/" + authorId );
 
     useEffect(() => {
         error && navigate("/authors");
     }, [error]);
 
-    data && console.log(data);
+
 
     return (
         <Base>
@@ -37,11 +38,9 @@ function AuthorProfile() {
                                             <img src={data && data.images ? data.images.url : defaultAvatar} width={130} className="rounded mb-2 img-thumbnail" alt="avatar" />
                                         ) : (
                                             <div className="bg-white">
-
-                                            <Skeleton.Avatar style={{width:'130px',height:'130px'}} active={true} size="large" shape="square" />
+                                                <Skeleton.Avatar style={{ width: "130px", height: "130px" }} active={true} size="large" shape="square" />
                                             </div>
                                         )}
-
                                     </div>
                                     <div className="media-body mb-4 text-white">
                                         <h4 className="mt-0 mb-0 text-light">{data?.name}</h4>
@@ -62,7 +61,7 @@ function AuthorProfile() {
                                         </small>
                                     </li>
                                     <li className="list-inline-item">
-                                        <h5 className="font-weight-bold mb-0 d-block">{data?.books?.filter((book) => book.title !== null || book.book_description !== null)?.length}</h5>
+                                        <h5 className="font-weight-bold mb-0 d-block">{data?.books?.filter((book) => book.status == "1")?.length}</h5>
                                         <small>
                                             <HiOutlineReceiptRefund style={{ marginRight: "5px", fontSize: "16px" }} />
                                             Proyectos
@@ -73,7 +72,7 @@ function AuthorProfile() {
                             <div className="px-4 py-3">
                                 <h5 className="mb-3">Acerca de</h5>
                                 <div className="p-4 rounded" style={{ background: "#EEF4FF" }}>
-                                    {data?.description || "Vacía"}
+                                    <div dangerouslySetInnerHTML={{ __html: data?.description || "Vacía" }}></div>
                                 </div>
                             </div>
                             <div className="py-4 px-4">
@@ -82,7 +81,7 @@ function AuthorProfile() {
                                 </div>
                                 <div className="all-projects row">
                                     {data?.books
-                                        ?.filter((book) => book.title !== null || book.book_description !== null)
+                                        ?.filter((book) => book.status == "1")
                                         ?.map((project, index) => {
                                             return (
                                                 <div key={index} className="col-md-6 mb-5">

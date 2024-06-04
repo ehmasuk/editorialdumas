@@ -192,3 +192,12 @@
     padding: 10px;
     border-radius: 0;
 }
+
+.book-details-share-icons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.book-details-share-icons svg:hover{
+    opacity: 0.8;
+}

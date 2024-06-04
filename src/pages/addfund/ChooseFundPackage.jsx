@@ -49,8 +49,7 @@ const packPoints = [
     ],
 ];
 
-
-const packPrices = [699,799,899,1699]
+const packPrices = [699, 799, 899, 1699];
 
 function ChooseFundPackage({ dataFromGet, setDataFromGet, setCurrentStep }) {
     const [selectedPackage, setSelectedPackage] = useState(null);
@@ -100,7 +99,6 @@ function ChooseFundPackage({ dataFromGet, setDataFromGet, setCurrentStep }) {
             <h5>Seleccione el paquete perfecto para su libro y haga clic en Siguiente</h5>
             <hr />
 
-
             <Radio.Group className="w-100 fund-package-select" onChange={handleChange}>
                 <div className="row">
                     <div className="col-md-3">
@@ -127,7 +125,7 @@ function ChooseFundPackage({ dataFromGet, setDataFromGet, setCurrentStep }) {
 
                     <div className="col-md-3">
                         <Radio value={packPrices[1]} className="pack-radio-2">
-                            <Badge.Ribbon text="Mejor vendido" color="orange">
+                            <Badge.Ribbon text="Más vendido" color="orange">
                                 <div className="package-card">
                                     <div className="header">
                                         <p className="title">Básico</p>

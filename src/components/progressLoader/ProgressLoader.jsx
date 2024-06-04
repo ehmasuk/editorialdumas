@@ -9,7 +9,9 @@ function ProgressLoader({ percentage }) {
                     <span>EDITORIAL</span>
                     <span>EDITORIAL</span>
                 </div>
+                
                 <Progress strokeColor="#ff8a00" percent={percentage} />
+                
             </div>
         </div>
     );

@@ -1,13 +1,16 @@
-import { Skeleton, Tooltip } from "antd";
+import { Button, Skeleton, Tooltip } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { GoQuestion } from "react-icons/go";
 import { useDispatch } from "react-redux";
+import TipTap from "../../components/editor/TipTap";
 import { hideLoader, showLoader } from "../../features/CombineSlice";
 import { getUserData } from "../../features/UserInfoSlice";
 import ProfileLayout from "./ProfileLayout";
-
+import { Link } from "react-router-dom";
+import { BsDownload } from "react-icons/bs";
+import { RiDownload2Fill } from "react-icons/ri";
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function Profile() {
@@ -42,6 +45,7 @@ function Profile() {
 
     const handleChange = (e) => {
         const name = e.target.name;
+
         setUpdatedData({ ...updatedData, [name]: e.target.value });
         setIsNotUpdateAble(false);
         console.log(updatedData);
@@ -65,11 +69,11 @@ function Profile() {
         try {
             const res = await axios.post(`${apiUrl}/user/updateinfo`, formData);
             console.log(res);
-            toast.success("Profile information updated");
+            toast.success("Información de perfil actualizada");
             dispatch(getUserData(userId));
         } catch (error) {
             console.log(error);
-            toast.error("Something went wrong, please try again later");
+            toast.error("Algo salió mal, inténtelo de nuevo más tarde");
         } finally {
             dispatch(hideLoader());
         }
@@ -84,6 +88,11 @@ function Profile() {
             setIsNotUpdateAble(false);
         }
     }, [file]);
+
+    const handleBiography = (biographytext) => {
+        setUpdatedData({ ...updatedData, description: biographytext });
+        setIsNotUpdateAble(false);
+    };
 
     return (
         <ProfileLayout>
@@ -125,19 +134,15 @@ function Profile() {
                                 <div className="mb-3">
                                     <label htmlFor="exampleFormControlTextarea" className="form-label">
                                         Descripción:{" "}
-                                        <Tooltip title="Cuéntanos un poco sobre tu biografía para conocerte mejor">
-                                            <GoQuestion fontSize={16} style={{ marginTop: "-2px" }} />
+                                        <Tooltip title="Descarga un modelo que puedes utilizar">
+                                            <a download href="https://editorialdumas.com/download/profileTutorial/el_libro_Crowdfunding-exitosoc%C3%B3mo-hacerlo.docx">
+                                            <Button type="primary" icon={<RiDownload2Fill fontSize={16} style={{ marginTop: "-4px" }} />} size="small" />
+                                            </a>
                                         </Tooltip>
                                     </label>
-                                    <textarea
-                                        name="description"
-                                        onChange={handleChange}
-                                        className="form-control"
-                                        id="exampleFormControlTextarea"
-                                        rows={5}
-                                        defaultValue={userData.description}
-                                        placeholder="Tu biografía"
-                                    />
+
+
+                                    <TipTap defaultValue={userData.description} getEditorData={handleBiography} />
                                 </div>
                             </div>
                         </div>

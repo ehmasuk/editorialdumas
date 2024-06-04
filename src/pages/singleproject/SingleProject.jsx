@@ -1,32 +1,35 @@
-import { Empty, Progress, Skeleton, Tabs, notification } from "antd";
+import { Empty, Popover, Progress, Skeleton, Tabs, notification } from "antd";
 import ReactPlayer from "react-player";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Base from "../../layouts/Base";
 import "./singleproject.css";
 
-import axios from "axios";
+import Paragraph from "antd/es/typography/Paragraph";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import ConfettiExplosion from "react-confetti-explosion";
+import { BsTwitterX } from "react-icons/bs";
+import { FaFacebook, FaLinkedin, FaWhatsapp } from "react-icons/fa6";
+import { IoIosShareAlt } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import { popupInner, popupWraper } from "../../database/globalCss";
+import { daysRemaining } from "../../database/globalFunctions";
+import { blastConfetti } from "../../features/CombineSlice";
+import useGet from "../../hooks/useGet";
 import ProjectAuthor from "./ProjectAuthor";
 import ProjectComments from "./ProjectComments";
 import ProjectMecanas from "./ProjectMecanas";
 import ProjectPacks from "./ProjectPacks";
-import useGet from "../../hooks/useGet";
 
 const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 function SingleProject() {
     const { projectid } = useParams();
-
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const [searchParams, setSearchParams] = useSearchParams();
-
     const [antNotification, contextHolder] = notification.useNotification();
-
     useEffect(() => {
         if (searchParams.get("payment")) {
             setTimeout(() => {
@@ -35,36 +38,33 @@ function SingleProject() {
                     description: "Gracias por tu contribución. Agradecemos su apoyo",
                     placement: "top",
                 });
-                setIsExploding(true);
+                dispatch(blastConfetti());
             }, 1000);
-
             setSearchParams({});
         }
     }, []);
 
-    const [userproject, setUserProject] = useState(null);
-    const [isLoading, setIsLoading] = useState(null);
+    // const [userproject, setUserProject] = useState(null);
+    // const [isLoading, setIsLoading] = useState(null);
 
-    const getData = async () => {
-        setIsLoading(true);
-        try {
-            const res = await axios.get(`${apiUrl}/user/crowfund_projects/${projectid}`);
-            console.log(res.data);
-            setUserProject(res.data);
-        } catch (error) {
-            console.log(error);
-            navigate("/page-not-found");
-        } finally {
-            setIsLoading(false);
-        }
+    // const getData = async () => {
+    //     setIsLoading(true);
+    //     try {
+    //         const res = await axios.get(`${apiUrl}/user/crowfund_projects/${projectid}`);
+    //         console.log(res.data);
+    //         setUserProject(res.data);
+    //     } catch (error) {
+    //         console.log(error);
+    //         navigate("/page-not-found");
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
+    const onError = () => {
+        navigate("/page-not-found");
     };
-
-
-    useEffect(() => {
-        getData();
-    }, []);
-
-
+    const [userproject, isLoading, , getData] = useGet(`${apiUrl}/user/crowfund_projects/${projectid}`, null, onError);
 
     const items = [
         {
@@ -83,6 +83,7 @@ function SingleProject() {
             children: (
                 <div>
                     {userproject?.book_chapter ? <h3 className="text-center mb-3">Primer capítulo</h3> : <Empty />}
+
                     <div style={{ fontSize: "18px" }} className="project-el-libro" dangerouslySetInnerHTML={{ __html: userproject?.book_chapter }}></div>
                 </div>
             ),
@@ -103,18 +104,6 @@ function SingleProject() {
             children: <ProjectComments getData={getData} userproject={userproject && userproject} />,
         },
     ];
-
-    const remainingDays = (targetDate) => {
-        const givenDate = new Date(targetDate);
-        const today = new Date();
-        const differenceInMs = givenDate - today;
-        const remainingDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
-        return remainingDays;
-    };
-
-    const handleTabChange = (e) => {
-        setSearchParams({ tab: e });
-    };
 
     const [showPackagePopup, setShowPackagePopup] = useState(null);
 
@@ -147,12 +136,35 @@ function SingleProject() {
         return result.toFixed(2);
     };
 
-    const [isExploding, setIsExploding] = useState(false);
+    const shareOptions = (
+        <div className="book-details-share-icons">
+            <FacebookShareButton url={`https://editorialdumas.com/project/${userproject?.id}`}>
+                <FaFacebook fontSize={25} style={{ color: "#0866FF" }} />
+            </FacebookShareButton>
+
+            <LinkedinShareButton url={`https://editorialdumas.com/project/${userproject?.id}`}>
+                <FaLinkedin fontSize={25} style={{ color: "#0A66C2" }} />
+            </LinkedinShareButton>
+            <WhatsappShareButton url={`https://editorialdumas.com/project/${userproject?.id}`}>
+                <FaWhatsapp fontSize={25} style={{ color: "#26C943" }} />
+            </WhatsappShareButton>
+
+            <TwitterShareButton url={`https://editorialdumas.com/project/${userproject?.id}`}>
+                <BsTwitterX fontSize={20} style={{ color: "#000" }} />
+            </TwitterShareButton>
+            <Paragraph
+                style={{ fontSize: "23px", margin: 0 }}
+                copyable={{
+                    text: `https://editorialdumas.com/project/${userproject?.id}`,
+                    tooltips: ["Copiar enlace", "Copiada"],
+                }}
+            ></Paragraph>
+        </div>
+    );
 
     return (
         <Base>
             {contextHolder}
-            <div style={{ position: "absolute", left: "50%", top: "100px" }}>{isExploding && <ConfettiExplosion duration={5000} particleSize={10} zIndex={9999} />}</div>
 
             <div>
                 {userproject && (
@@ -178,27 +190,33 @@ function SingleProject() {
                                             Objetivo de <b style={{ color: "#1A1668" }}>{`${userproject?.project_id}€`}</b>
                                         </p>
                                         <p>
-                                            Quedan <b style={{ color: "#1A1668" }}>{remainingDays(userproject?.target_date)} días</b>
+                                            Quedan <b style={{ color: "#1A1668" }}>{daysRemaining(userproject?.target_date)} días</b>
                                         </p>
                                     </div>
                                     <button className="btn btn-primary btnhover donate-btn mb-2" onClick={() => setShowPackagePopup(!showPackagePopup)}>
                                         Hazte Mecenas
                                     </button>
                                     <div className="d-flex align-items-center justify-content-between">
-                                        <p style={{ color: "#000" }}>
+                                        <p style={{ color: "#000", margin: 0 }}>
                                             Con el apoyo de <b>{userproject?.donations?.length} mecenas</b>
                                         </p>
-                                        <p style={{ color: "#000" }}>
-                                            <a href="#">
-                                                Comprara
-                                            </a>
-                                        </p>
+                                        <div role="button">
+                                            <Popover content={shareOptions} title="Compartir en:" style={{ width: "fit-content" }}>
+                                                <IoIosShareAlt fontSize={20} color="#1A1668" /> COMPARTIR
+                                            </Popover>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="container" style={{ paddingBottom: "100px" }}>
-                            <Tabs onChange={handleTabChange} defaultActiveKey={searchParams.get("tab") || 1} animated={{ inkBar: true, tabPane: true }} centered={true} items={items} />
+                            <Tabs
+                                onChange={(e) => setSearchParams({ tab: e })}
+                                defaultActiveKey={searchParams.get("tab") || 1}
+                                animated={{ inkBar: true, tabPane: true }}
+                                centered={true}
+                                items={items}
+                            />
                         </div>
                     </>
                 )}

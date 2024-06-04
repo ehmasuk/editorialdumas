@@ -105,7 +105,7 @@ function HomeAllProjects({ sectionTitle }) {
                                     <div key={index} className="swiper-slide">
                                         <div className="books-card style-3 wow fadeInUp" data-wow-delay="0.2s">
                                             <div className="dz-media">
-                                                <img style={{ height: "350px", objectFit: "contain" }} src={project?.images.filter((img) => img.is_video === null)[0].url} alt="book" />
+                                                <img style={{ height: "350px", objectFit: "contain",background:'#EEF4FF' }} src={project?.images.filter((img) => img.is_video === null)[0].url} alt="book" />
                                             </div>
                                             <div className="dz-content">
                                                 <h5 className="title" style={{ minHeight: "45px" }}>

@@ -1,6 +1,6 @@
 import { Divider, Modal, Popover, Rate, Skeleton, Tooltip } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { addToCart } from "../../features/CartSlice";
 import useGet from "../../hooks/useGet";
 import Base from "../../layouts/Base";
@@ -8,7 +8,7 @@ const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { FaAngleRight } from "react-icons/fa6";
+import { FaAngleRight, FaFacebook } from "react-icons/fa6";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { IoIosShareAlt } from "react-icons/io";
 import { IoInformationCircle, IoPlayCircleOutline } from "react-icons/io5";
@@ -22,6 +22,10 @@ import ReactPlayer from "react-player";
 import NewsLatter from "../../components/newsletter/NewsLatter";
 import "./bookdetails.css";
 
+import Paragraph from "antd/es/typography/Paragraph";
+import { BsTwitterX } from "react-icons/bs";
+import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import { formatDate } from "../../database/globalFunctions";
 
 function BookDetails() {
@@ -65,7 +69,38 @@ function BookDetails() {
     const [isChapterModalOpen, setIsChapterModalOpen] = useState(false);
     const currentYear = new Date().getFullYear();
 
-    data && console.log(data?.long_description.length);
+    const shareOptions = (
+        <div className="book-details-share-icons">
+            <FacebookShareButton url={`https://editorialdumas.com/book/${data?.id}`}>
+                <FaFacebook fontSize={25} style={{ color: "#0866FF" }} />
+            </FacebookShareButton>
+
+            <LinkedinShareButton url={`https://editorialdumas.com/book/${data?.id}`}>
+                <FaLinkedin fontSize={25} style={{ color: "#0A66C2" }} />
+            </LinkedinShareButton>
+            <WhatsappShareButton url={`https://editorialdumas.com/book/${data?.id}`}>
+                <FaWhatsapp fontSize={25} style={{ color: "#26C943" }} />
+            </WhatsappShareButton>
+
+            <TwitterShareButton url={`https://editorialdumas.com/book/${data?.id}`}>
+                <BsTwitterX fontSize={20} style={{ color: "#000" }} />
+            </TwitterShareButton>
+            <Paragraph
+                style={{ fontSize: "23px", margin: 0 }}
+                copyable={{
+                    text: `https://editorialdumas.com/book/${data?.id}`,
+                    tooltips: ["Copiar enlace", "Copiada"],
+                }}
+            ></Paragraph>
+        </div>
+    );
+
+
+    const calculateAverageRating = (reviews) => {
+        if (reviews?.length === 0) return 0;
+        const totalRating = reviews?.reduce((sum, review) => sum + parseFloat(review.rating), 0);
+        return (totalRating / reviews?.length).toFixed(1);
+    };
 
     return (
         <Base>
@@ -100,12 +135,10 @@ function BookDetails() {
                                             <h3 className="title">{data?.title}</h3>
                                             <h4 style={{ fontWeight: "400" }}>{data?.author_name}</h4>
                                             <div className="d-lg-flex d-sm-inline-flex d-flex align-items-center">
-                                                <Rate allowHalf defaultValue={5} style={{ color: "#EAA451", marginRight: "10px" }} disabled />
+                                                <h4 className="mr-2 mb-0">{calculateAverageRating(data?.reviews)}</h4>
+                                                <Rate allowHalf value={calculateAverageRating(data?.reviews)} style={{ color: "#EAA451", marginRight: "10px" }} disabled />
                                                 <p style={{ color: "#1A1668" }} className="m-b0">
-                                                    (6){" "}
-                                                    <a href="#" style={{ color: "#1A1668" }}>
-                                                        Escribe tu opinión
-                                                    </a>
+                                                    ({data?.reviews?.length}) opiniones
                                                 </p>
                                             </div>
                                             <div className="details-book-category">{data?.category?.title}</div>
@@ -168,7 +201,7 @@ function BookDetails() {
                                                     )}
 
                                                     <div>
-                                                        <Popover content={'hi'} title="Compartir en:">
+                                                        <Popover content={shareOptions} title="Compartir en:" style={{ width: "fit-content" }}>
                                                             <IoIosShareAlt fontSize={20} color="#1A1668" /> COMPARTIR
                                                         </Popover>
                                                     </div>
@@ -212,7 +245,7 @@ function BookDetails() {
                                                         <div className="info">Nº de páginas:</div>
                                                     </div>
                                                     <div className="col-6">
-                                                        <div className="value">{data?.no_of_pages || '--'}</div>
+                                                        <div className="value">{data?.no_of_pages || "--"}</div>
                                                     </div>
                                                 </div>
                                                 <div className="row">
@@ -248,7 +281,7 @@ function BookDetails() {
                                                         <div className="info">ISBN:</div>
                                                     </div>
                                                     <div className="col-6">
-                                                        <div className="value">{data?.ISBN || '--'}</div>
+                                                        <div className="value">{data?.ISBN || "--"}</div>
                                                     </div>
                                                 </div>
 
@@ -289,7 +322,7 @@ function BookDetails() {
                                                         <div className="info">Alto:</div>
                                                     </div>
                                                     <div className="col-6">
-                                                        <div className="value">{data?.alto || '--'}</div>
+                                                        <div className="value">{data?.alto || "--"}</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -312,17 +345,19 @@ function BookDetails() {
                                                 <div className="col-md-9">
                                                     <h4>{data?.author_name}</h4>
                                                     <p className="author-des">{data?.user?.description}</p>
-                                                    <a className="author-link" href="#">
+                                                    <Link className="author-link" to={`/author/${data?.user?.id}`}>
                                                         Ver ficha del author <FaAngleRight fontSize={20} />
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-md-4">
                                             <div className="author-subs">
                                                 <div>
-                                                    <p>Recibe nuestras novedades en libros en tu email</p>
-                                                    <button className="btn btn-primary btn-sm">Subscribe us</button>
+                                                    <p>Recibe las novedades de la editorial en tu email</p>
+                                                    <a href="#newsletter-section">
+                                                        <button className="btn btn-primary btn-sm">Suscríbete al boletín</button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -330,7 +365,7 @@ function BookDetails() {
                                 </div>
                             </div>
 
-                            <ReviewsSection />
+                            <ReviewsSection bookId={data?.id} allReviews={data?.reviews} reFetch={getData && getData} />
                             <HomeBookSale allBooks={allbooks && allbooks} isLoading={isLoadingAllBooks} sectionTitle="Descubrir más" />
                         </div>
                     )}
@@ -354,7 +389,9 @@ function BookDetails() {
                 </section>
             </div>
 
-            <NewsLatter />
+            <div id="newsletter-section">
+                <NewsLatter />
+            </div>
 
             <Modal className="book-details-video" footer={null} centered open={isVideoModalOpen} onCancel={handleVideoCancel} width={800}>
                 <ReactPlayer playing={true} width="100%" controls={true} url={data?.images?.filter((img) => img.is_video === "2")[0]?.url} />

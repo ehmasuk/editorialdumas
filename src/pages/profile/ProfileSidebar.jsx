@@ -68,7 +68,7 @@ function ProfileSidebar() {
                             <i>
                                 <FaRegChartBar />
                             </i>
-                            <span>Mis fondos</span>
+                            <span>Mi proyecto</span>
                         </Link>
                     </li>
 

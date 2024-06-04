@@ -8,7 +8,7 @@ function ProjectAuthor({ userproject }) {
                     <section>
                         <div className="container">
                             <div className="row">
-                                <div className="col-xl-4 col-lg-5 m-b30">
+                                {/* <div className="col-xl-4 col-lg-5 m-b30">
                                     <div className="sticky-top">
                                         <div className="shop-account">
                                             <div className="account-detail text-center">
@@ -25,13 +25,13 @@ function ProjectAuthor({ userproject }) {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-xl-8 col-lg-7 m-b30">
+                                </div> */}
+                                <div className="col-xl-12 col-lg-12 m-b30">
                                     <div className="shop-bx shop-profile">
-                                        <div className="shop-bx-title clearfix">
+                                        {/* <div className="shop-bx-title clearfix">
                                             <h5 className="text-uppercase">LA AUTORA</h5>
-                                        </div>
-                                        <div style={{ fontSize: "18px", lineHeight: 2, textAlign: "justify" }}>{userproject?.user?.description || "No se encuentra información"}</div>
+                                        </div> */}
+                                        <div style={{ fontSize: "18px", lineHeight: 2, textAlign: "justify", }}>{ <div dangerouslySetInnerHTML={{ __html: userproject?.user?.description }}></div> || "No se encuentra información"}</div>
                                     </div>
                                 </div>
                             </div>

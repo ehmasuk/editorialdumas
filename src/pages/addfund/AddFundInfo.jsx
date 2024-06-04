@@ -1,9 +1,10 @@
+import { Button, Tooltip } from "antd";
 import axios from "axios";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { RiDownload2Fill } from "react-icons/ri";
 import TipTap from "../../components/editor/TipTap";
 import ProgressLoader from "../../components/progressLoader/ProgressLoader";
 
@@ -12,8 +13,6 @@ const apiUrl = import.meta.env.VITE_REACT_APP_DEFAULT_API_ROUTE;
 function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
     const [des, setDes] = useState(null);
     const [chapter, setChapter] = useState(null);
-
-
 
     const handleBookDes = (data) => {
         setDes(data);
@@ -33,8 +32,6 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
 
     const [progressPercentage, setProgressPercentage] = useState(0);
     const [isLoading, setIsLoading] = useState(null);
-
-
 
     const handleFormSubmit = (data) => {
         const formData = new FormData();
@@ -84,12 +81,6 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
         }
     };
 
-
-
-
-
-
-
     return (
         <div className="addfund">
             {isLoading && <ProgressLoader percentage={progressPercentage} />}
@@ -98,13 +89,22 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
                 <div className="fund-form">
                     <h4 className="mb-3">Información básica sobre tu libro</h4>
                     <div className="mb-5">
-                        <p className="basic">En este punto te pedimos que completes la información sobre tu libro. Cuanto más detallado sea, más fácil será para nuestro equipo evaluarlo.</p>
+                        <div className="basic">
+                            Completa la información sobre tu libro. Esta plantilla te ayudará a rellenar la información{" "}
+                            <Tooltip title="Descarga un modelo que puedes utilizar">
+                                <a download href="https://editorialdumas.com/download/profileTutorial/el_libro_Crowdfunding-exitosoc%C3%B3mo-hacerlo.docx" target="_blank" rel="noreferrer">
+                                    <Button type="primary" icon={<RiDownload2Fill fontSize={16} style={{ marginTop: "-4px" }} />} size="small">
+                                        Descargar
+                                    </Button>
+                                </a>
+                            </Tooltip>
+                        </div>
                     </div>
                     <form onSubmit={handleSubmit(handleFormSubmit)}>
                         <div className="mt-5">
                             <div className="mb-4">
                                 <label className="bolden">Titulo del libro</label>
-                                <p className="tiny">Este título es provisional, puedes cambiarlo más adelante si lo deseas.</p>
+                                <p className="tiny">Agrega el título provisional del libro, después podrás cambiarlo</p>
                                 <input
                                     name="title"
                                     {...register("title", {
@@ -130,17 +130,22 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
                             </div>
                             <div className="mb-4">
                                 <label className="bolden">Descripción del libro</label>
-                                <p className="tiny">Dé una breve descripción del libro que nos va a enviar</p>
+                                <p className="tiny">Describe el libro, no olvides que puedes auxiliarte en la plantilla anterior.</p>
                                 <TipTap getEditorData={handleBookDes} />
                             </div>
                             <div className="mb-4">
                                 <label className="bolden">Primer capítulo del libro</label>
-                                <p className="tiny">Si tiene el primer capítulo de los libros, proporcione para mantener el interés de los clientes, si no, déjelo vacío</p>
+                                <p className="tiny">Por favor suba el primer capítulo de la obra o el primer folio.</p>
                                 <TipTap getEditorData={handleBookChapter} />
                             </div>
                             <div className="mb-4">
                                 <label className="bolden">Imagen de libro</label>
-                                <p className="tiny">Sube tu imagen de portada de tu libro</p>
+                                <div className="tiny mb-3">
+                                    Sube la portada provisional o una imagen. En caso de que no tengas una portada utiliza una plantilla de {" "}
+                                    <a href="https://www.canva.com/" target="_blank" rel="noreferrer">
+                                        Canvas.
+                                    </a>
+                                </div>
 
                                 <input
                                     accept=".png,.jpg,.jpeg"
@@ -167,7 +172,16 @@ function AddFundInfo({ dataFromGet, setDataFromGet, setCurrentStep }) {
                             </div>
                             <div className="mb-4">
                                 <label className="bolden">Video de libro</label>
-                                <p className="tiny">Sube tu video para la publicación del libro</p>
+                                <div className="tiny mb-3">
+                                    Puedes auxiliarte en esta plantilla. {" "}
+                                    <Tooltip title="Descarga un modelo que puedes utilizar">
+                                        <a download href="https://editorialdumas.com/download/profileTutorial/Video-y-propuesta.docx" target="_blank" rel="noreferrer">
+                                            <Button type="primary" icon={<RiDownload2Fill fontSize={16} style={{ marginTop: "-4px" }} />} size="small">
+                                                Descargar
+                                            </Button>
+                                        </a>
+                                    </Tooltip>
+                                </div>
                                 <input
                                     accept=".mp4,.mov,.avi,.wmv,.webm,.flv"
                                     type="file"

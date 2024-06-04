@@ -117,16 +117,16 @@
     z-index: 99;
 }
 .fund-package-select .pack-radio-1 .ant-radio{
-    left: 103px;
+    left: 250px;
 }
 .fund-package-select .pack-radio-2 .ant-radio{
-    left: 105px;
+    left: 250px;
 }
 .fund-package-select .pack-radio-3 .ant-radio{
-    left: 138px;
+    left: 250px;
 }
 .fund-package-select .pack-radio-4 .ant-radio{
-    left: 160px;
+    left: 250px;
 }
 .fund-package-select .ant-radio-wrapper{
     position: relative;

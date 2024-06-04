@@ -41,7 +41,7 @@ function Proposal() {
         formData.append("user_id", userId);
 
         try {
-            const res = await axios.post(`${apiUrl}/user/proposal`, formData, {
+            await axios.post(`${apiUrl}/user/proposal`, formData, {
                 Accept: "multipart/form-data",
             });
             navigate("/thankyou/sendporposal");

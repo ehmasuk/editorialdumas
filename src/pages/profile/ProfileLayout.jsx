@@ -9,6 +9,7 @@ import { FaRegChartBar } from "react-icons/fa";
 import { FaWpforms } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { authUnCheck } from "../../features/AuthCheckerSlice";
+import { IoVideocamOutline } from "react-icons/io5";
 
 function ProfileLayout({ children }) {
     const { pathname } = useLocation();
@@ -46,11 +47,21 @@ function ProfileLayout({ children }) {
         {
             label: (
                 <Link to="/profile/myfunds">
-                    <span>Mis fondos</span>
+                    <span>Mi proyecto</span>
                 </Link>
             ),
             key: "/profile/myfunds",
             icon: <FaRegChartBar />,
+        },
+        {
+            label: (
+                <Link to="/profile/tutorials">
+                    <span>Tutoriales</span>
+                </Link>
+            ),
+            key: "/profile/tutorials",
+            icon: <IoVideocamOutline />
+            ,
         },
     ];
 

@@ -1,21 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function useGet(url) {
+function useGet(url,onSuccess,onError) {
     const [data, setData] = useState(null);
-    const [isLoading, setIsLoadind] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const getData = async () => {
-        setIsLoadind(true);
+        setIsLoading(true);
         try {
             const res = await axios.get(url);
             setData(res.data);
+            onSuccess && onSuccess()
         } catch (error) {
             setError(error.message);
             console.log(error);
+            onError && onError()
         } finally {
-            setIsLoadind(false);
+            setIsLoading(false);
         }
     };
 

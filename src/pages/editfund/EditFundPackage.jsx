@@ -51,8 +51,7 @@ const packPoints = [
 ];
 
 function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentStep }) {
-
-    const packPrices = [699,799,899,1699]
+    const packPrices = [699, 799, 899, 1699];
 
     const [userData, setUserData] = useState(null);
 
@@ -69,9 +68,6 @@ function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentS
                 sell_book: prevContent?.sell_book,
             });
     }, [prevContent]);
-
-    
-
 
     const handleChange = (e) => {
         if (e.target.value == packPrices[0]) {
@@ -105,10 +101,6 @@ function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentS
         }
     };
 
-
-
-
-
     return (
         <div style={{ marginTop: "20px" }}>
             <h5>Seleccione el paquete perfecto para su libro y haga clic en Siguiente</h5>
@@ -141,7 +133,7 @@ function EditFundPackage({ prevContent, dataFromGet, setDataFromGet, setCurrentS
 
                             <div className="col-md-3">
                                 <Radio value={packPrices[1]} className="pack-radio-2">
-                                    <Badge.Ribbon text="Mejor vendido" color="orange">
+                                    <Badge.Ribbon text="Más vendido" color="orange">
                                         <div className="package-card">
                                             <div className="header">
                                                 <p className="title">Básico</p>

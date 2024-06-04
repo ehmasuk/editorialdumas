@@ -19,11 +19,7 @@ import { allGenere } from "../../database/globalDatas";
 import { removeFromCart } from "../../features/CartSlice";
 
 function Header() {
-    const location = useLocation();
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [location]);
 
     const dispatch = useDispatch();
 

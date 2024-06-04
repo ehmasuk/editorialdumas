@@ -26,7 +26,7 @@ function Wishlist() {
                                                     <th>Libro</th>
                                                     <th>Nombre del libro</th>
                                                     <th>Precio</th>
-                                                    <th>Añadir a la cesta</th>
+                                                    <th>Añadir</th>
                                                     <th>Cerca</th>
                                                 </tr>
                                             </thead>
@@ -46,7 +46,7 @@ function Wishlist() {
                                                                 <td className="product-item-price">{item?.discount_price}€</td>
                                                                 <td className="product-item-totle">
                                                                     <a onClick={() => dispatch(addToCart(item))} className="btn btn-primary btnhover">
-                                                                        Añadir a la cesta
+                                                                        Añadir
                                                                     </a>
                                                                 </td>
                                                                 <td className="product-item-close">

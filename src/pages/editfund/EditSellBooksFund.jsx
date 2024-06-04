@@ -65,15 +65,13 @@ const packPoints = [
         "Servicio mínimo por 3 meses",
     ],
 ];
-const packMonths = [3,6,9,12]
-const packPrices = [1500,3000,4500,6000]
+const packMonths = [3, 6, 9, 12];
+const packPrices = [1500, 3000, 4500, 6000];
 
-function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurrentStep,getPrevData }) {
-
-
-    useEffect(()=>{
-        getPrevData()
-    },[])
+function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurrentStep, getPrevData }) {
+    useEffect(() => {
+        getPrevData();
+    }, []);
 
     const [userData, setUserData] = useState(null);
 
@@ -89,23 +87,22 @@ function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurren
                 title: prevContent?.title,
                 sell_book: prevContent?.sell_book,
             });
-
-    },[prevContent]);
+    }, [prevContent]);
 
     prevContent && console.log(prevContent);
 
     const handleChange = (e) => {
         if (e.target.value == packPrices[0]) {
-            setUserData({ ...userData,  sell_book: packPrices[0] });
+            setUserData({ ...userData, sell_book: packPrices[0] });
         }
         if (e.target.value == packPrices[1]) {
-            setUserData({ ...userData,  sell_book: packPrices[1] });
+            setUserData({ ...userData, sell_book: packPrices[1] });
         }
         if (e.target.value == packPrices[2]) {
-            setUserData({ ...userData,  sell_book: packPrices[2] });
+            setUserData({ ...userData, sell_book: packPrices[2] });
         }
         if (e.target.value == packPrices[3]) {
-            setUserData({ ...userData,  sell_book: packPrices[3] });
+            setUserData({ ...userData, sell_book: packPrices[3] });
         }
     };
 
@@ -126,10 +123,6 @@ function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurren
         }
     };
 
-
-
-
-
     return (
         <div style={{ marginTop: "20px" }}>
             <h5>Seleccione el paquete perfecto para su libro y haga clic en Siguiente</h5>
@@ -142,10 +135,9 @@ function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurren
                                 <Radio value={packPrices[0]} className="pack-radio-1">
                                     <div className="package-card">
                                         <div className="header">
-                                            <p className="title">Inicial</p>
+                                            <p className="title">3 meses de publicidad</p>
                                             <p className="price">{packPrices[0]}€</p>
                                         </div>
-                                        <p className="desc">Escritura y publicación de una novela</p>
                                         <ul className="lists">
                                             {packPoints[0].map((point, index) => {
                                                 return (
@@ -162,13 +154,12 @@ function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurren
 
                             <div className="col-md-3">
                                 <Radio value={packPrices[1]} className="pack-radio-2">
-                                    <Badge.Ribbon text="Mejor vendido" color="orange">
+                                    <Badge.Ribbon text="Más vendido" color="orange">
                                         <div className="package-card">
                                             <div className="header">
-                                                <p className="title">Básico</p>
+                                                <p className="title">6 meses de publicidad</p>
                                                 <p className="price">{packPrices[1]}€</p>
                                             </div>
-                                            <p className="desc">Publicación básica</p>
                                             <ul className="lists">
                                                 {packPoints[1].map((point, index) => {
                                                     return (
@@ -188,10 +179,9 @@ function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurren
                                     <Badge.Ribbon text="Popular" color="pink">
                                         <div className="package-card">
                                             <div className="header">
-                                                <p className="title">Avanzado</p>
+                                                <p className="title">9 meses de publicidad</p>
                                                 <p className="price">{packPrices[2]}€</p>
                                             </div>
-                                            <p className="desc">Publicación de alcance medio</p>
                                             <ul className="lists">
                                                 {packPoints[2].map((point, index) => {
                                                     return (
@@ -210,10 +200,11 @@ function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurren
                                 <Radio value={packPrices[3]} className="pack-radio-4">
                                     <div className="package-card">
                                         <div className="header">
-                                            <p className="title">Profesional</p>
+                                            <p className="title">
+                                                1 año <br /> de publicidad
+                                            </p>
                                             <p className="price">{packPrices[3]}€</p>
                                         </div>
-                                        <p className="desc">Publicación de alcance ampliado</p>
                                         <ul className="lists">
                                             {packPoints[3].map((point, index) => {
                                                 return (
@@ -258,7 +249,4 @@ function EditSellBooksFund({ prevContent, dataFromGet, setDataFromGet, setCurren
     );
 }
 
-
-
-
-export default EditSellBooksFund
+export default EditSellBooksFund;

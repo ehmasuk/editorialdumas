@@ -15359,7 +15359,7 @@ section {
 @media only screen and (max-width: 767px) {
     .section-head h2,
     .section-head .h2 {
-        font-size: 1.625rem;
+        font-size: 1.225rem;
     }
 }
 .section-head h3,
@@ -33936,7 +33936,9 @@ footer.footer-dark .footer-category .toggle-items ul li a {
 footer.footer-dark .footer-category .toggle-items ul li a:hover {
     color: var(--secondary);
 }
-
+.profile-tutorial-dots button{
+    background:#1A1668 !important;
+}
 .widget_getintuch ul li {
     position: relative;
     margin-bottom: 15px;
@@ -33944,6 +33946,12 @@ footer.footer-dark .footer-category .toggle-items ul li a:hover {
     min-height: 35px;
     display: flex;
     align-items: center;
+}
+.mr-1{
+    margin-right:5px;
+}
+.mr-2{
+    margin-right:10px;
 }
 @media only screen and (max-width: 1280px) {
     .widget_getintuch ul li {
@@ -34107,6 +34115,9 @@ footer.footer-dark .footer-category .toggle-items ul li a:hover {
 @media only screen and (max-width: 767px) {
     .footer-category .toggle-items ul li {
         padding: 5px 0;
+    }
+    .pagination-align{
+        display: none;
     }
 }
 .footer-category .toggle-items ul li a {
